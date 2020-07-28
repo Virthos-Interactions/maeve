@@ -1,0 +1,284 @@
+.config-link {
+   padding: 10px;
+   grid-template-columns: 1fr 100px;
+   margin-left: 70px;
+   margin-top: 5px;
+}
+
+.config-link .background {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+}
+
+.config-link:first-child {
+   margin-top: 30px;
+}
+
+.config-link.active{
+   background-color: white;
+   border-top-left-radius: 8px;
+   border-bottom-left-radius: 8px;
+
+}
+
+.config-link svg {
+   margin-right: 2vw;
+}
+
+.config-link a {
+   color: black;
+   text-decoration: none;
+   width: 100px;
+}
+
+.config-link.active a {
+   font-weight: bold;
+}
+
+.config {
+   display: grid;
+   grid-template-columns: 300px 1fr;
+   width: 100%;
+   max-width: 1100px;
+   margin: 0 auto;
+}
+
+.content {
+   background-color: white;
+   padding: 20px;
+   max-width: 700px;
+   margin-right: 20px;
+}
+
+.content .form-edit-user header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   margin-bottom: 25px;
+}
+
+.form-edit-user {
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+}
+
+.content .form-edit-user header h3 {
+   font-size: 27px;
+}
+
+.content .form-edit-user header .button button {
+   background-color: #cecece;
+   border: none;
+   margin-left: 5px;
+   color: gray;
+   padding: 8px;
+   width: 100px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 200ms;
+}
+
+.content .form-edit-user header .button button:hover {
+   filter: brightness(90%);
+}
+
+.input img {
+   width: 100px;
+   height: 100px;
+   border-radius: 100%;
+   border: 1px solid black;
+}
+
+.input label {
+   display: block;
+   margin-top: 10px;
+}
+
+.input .user-photo {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 6px;
+   max-width: 200px;
+}
+
+.input .user-photo button {
+   background-color: #cecece;
+   border: none;
+   margin-left: 10px;
+   color: black;
+   padding: 8px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 200ms;
+}
+
+.input .user-photo button:hover {
+   filter: brightness(90%);
+}
+
+.input-group {
+   display: grid;
+   grid-template-columns: 200px 200px;
+   grid-gap: 0px;
+   margin-top: 15px;
+}
+
+.input-group label {
+   display: block;
+}
+
+.input-group input {
+   border: 1px solid #cecece;
+   padding: 6px;
+   margin-top: 10px;
+   border-radius: 8px;
+}
+
+.input {
+   margin-top: 15px;
+}
+
+.input input {
+   border: 1px solid #cecece;
+   padding: 6px;
+   margin-top: 10px;
+   border-radius: 8px;
+   width: 80%;
+}
+
+.change-password {
+   margin-top: 25px;
+}
+
+.change-password button {
+   background-color: #cecece;
+   border: none;
+   margin-left: 10px;
+   color: black;
+   padding: 8px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 200ms;
+   margin-left: 0;
+}
+
+.change-password button:hover {
+   filter: brightness(90%);   
+}
+
+.input textarea {
+   margin-top: 10px;
+   width: 70%;
+   border: 1px solid #cecece;
+   resize: none;
+   height: 70px;
+   border-radius: 8px;
+   font-size: 16px;
+   line-height: 26px;
+}
+
+.details header{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px;
+}
+
+.details h3 {
+   font-size: 27px;
+}
+
+.details header button {
+   background-color: #3867d6;
+   border: none;
+   margin-left: 5px;
+   color: white;
+   padding: 8px;
+   width: 100px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 200ms;
+}
+
+.details header button:hover {
+   filter: brightness(90%);
+}
+
+.detail {
+   margin-top: 10px;
+}
+
+.detail details summary{
+   border: 1px solid #cecece;
+   padding: 8px;
+}
+
+.detail header {
+   padding: 0;  
+   align-items: center;
+   justify-content: space-between;
+}
+
+.detail header div {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 60px;
+}
+
+.detail header svg {
+   cursor: pointer;
+   margin-top: 0;
+}
+
+.detail details .current-detail {
+   background-color: #cecece;
+   padding: 30px;
+}
+
+.detail p{
+   margin-bottom: 10px;
+}
+
+.current-detail.services header {
+   border-bottom: 1px solid gray;
+   margin-bottom: 10px;
+   padding-bottom: 20px;
+
+}
+
+form .service-settings {
+   border-bottom: 1px solid gray;
+   margin: 20px 0;  
+   padding: 20px 0;
+}
+
+form .service-settings input {
+   color: black;
+   border: 1px solid #cecece;
+   padding: 6px;
+   margin-top: 10px;
+   border-radius: 8px;
+   background-color: #aaaa;
+   margin: 0 5px;
+
+}
+
+.service-settings.client-details {
+   border: none;
+   margin-bottom:0 ;
+}
+
+.service-settings.client-details div {
+   color: black;
+   border: 1px solid #cecece;
+   padding: 6px;
+   margin-top: 10px;
+   background-color: #aaaa;
+   margin: 0 5px;
+   margin: 10px 0;
+}
