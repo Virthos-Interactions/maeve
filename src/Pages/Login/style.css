@@ -1,0 +1,91 @@
+.container {
+   height: 100vh;
+   background-image: url('../../assets/loginBackground.svg');
+   padding: 30px;
+   width: 100%;
+}
+
+section {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+h1 {
+   font-size: 32px;
+   letter-spacing: 2px;
+   margin: 20px 0;
+   color: black;
+   text-align: center;
+}
+
+.form-wrapper {
+   margin: auto;
+   padding: 35px;
+   background-color: #fff;
+   -o-box-shadow: 0 1px 4px 0 rgba(0,0,0,.25);
+   box-shadow: 0 1px 4px 0 rgba(0,0,0,.25);
+   border-radius: 4px;
+   font-size: 14px;
+   max-width: 94%;
+}
+
+.form-section img {
+   width: 200px;
+   height: auto;
+   margin-top: 8vh;
+   margin-bottom: 5vh;
+}
+
+form .icon {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+form .icon svg {
+   margin-right: 12px;
+}
+
+form.form-login {
+   background-color: white;
+   padding: 10px;
+   border-radius: 8px;
+}
+
+form .input-block {
+   margin-bottom: 30px;
+   display: flex;
+}
+
+.text-center {
+   text-align: center;
+}
+
+form .btn-login {
+   background-color: #b71540;
+   color: #fff;
+}
+
+form .btn-login:hover {
+   filter: brightness(90%);
+   color: #000;
+}
+
+section.form-section a {
+   display: flex;
+   align-items: center;
+   text-decoration: none;
+   font-size: 18px;
+   color: black;
+   font-weight: bold;
+   transition: 200ms;
+}
+
+section.form-section a:hover {
+}
+
+section.form-section a svg {
+   margin-right: 3px;
+}

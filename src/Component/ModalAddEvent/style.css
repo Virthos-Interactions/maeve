@@ -1,0 +1,132 @@
+.create-event {
+   position: absolute;
+   right: 25vw;
+   top: 15vh;
+   padding: 30px;
+   width: 600px;
+   background-color: white;
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+   border-radius: 8px;
+}
+
+.create-event .create-event-content {
+   position: relative;
+}
+
+.create-event .create-event-content .input-title input {
+   width: 84%;
+   padding: 10px 5px;
+   border: none;
+   border-bottom: 2px solid #cecece;
+   font-size: 22px;
+}
+
+.create-event .create-event-content .input-title svg {
+   position: absolute;
+   top: 0;
+   right: 0;
+   cursor: pointer;
+   transition: 400ms;
+}
+
+.create-event .create-event-content .input-title svg:hover {
+   filter: brightness(90%);
+}
+
+.create-event .event-date,
+.create-event .input-time {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+}
+
+.create-event .input-time svg {
+   margin-right: 10px;
+}
+
+.create-event .event-date svg {
+   margin-right: 20px;
+}
+
+.create-event .event-date input,
+.create-event .input-time input{
+   border: none;
+   background-color: #cecece;
+   font-size: 16px;
+   width: 60px;
+   text-align: center;
+}
+
+.create-event .event-date p,
+.create-event .input-time p {
+   margin: 10px;
+   font-size: 16px;
+}
+
+.create-event .event-details p {
+   margin-top: 10px;
+}
+
+.input-customer-name {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+}
+
+.input-customer-name svg {
+   margin-right: 20px;
+}
+
+.input-customer-name input {
+   border: none;
+   background-color: #Cecece;
+   width: 77%;
+   padding: 5px;
+   color: black;
+   font-size: 17px;
+}
+
+.event-note {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 20px; 
+}
+
+.event-note svg {
+   margin-right: 20px;
+}
+
+.event-note textarea {
+   width: 77%;
+   min-height: 110px;
+   border: none;
+   background-color: #cecece;
+   resize: none;
+   font-size: 17px;
+   line-height: 27px;
+   padding: 10px;
+}
+
+.create-event .btn-save-event {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.create-event form button {
+   color: white;
+   border: none;
+   background-color: #3498db;
+   padding: 8px;
+   cursor: pointer;
+   width: 80px;
+   border-radius: 5px;
+}
+
+.create-container {
+   margin-left: 10px;
+}
