@@ -1,5 +1,5 @@
 #!/bin/sh
-ssh -tt -o StrictHostKeyChecking=no ec2-user@52.67.11.156 << EOF
+ssh -tt -o StrictHostKeyChecking=no ec2-user@54.233.127.10 << EOF
  cd /home/ec2-user/maeve
  git pull
  npm install
