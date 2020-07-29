@@ -4,6 +4,9 @@ OLÁ
 
 PORT: 3004
 
+To Start:
+pm2 start node_modules/react-scripts/scripts/start.js 
+
 In the project directory, you can run:
 
 ### `yarn start`
