@@ -12,6 +12,7 @@ import NextEvents from '../../Component/NextEvents';
 import CalendarComponent from '../../Component/CalendarComponent';
 import ModalEventDetail from '../../Component/ModalEventDetail';
 import ModalAddEvent from '../../Component/ModalAddEvent';
+import Chatbox from '../../Component/Chatbox/index';
 
 
 
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
    paper: {
       color: theme.palette.text.secondary,
    },
+   calendar: {
+      color: theme.palette.text.secondary,
+      padding: '0px 10px' 
+   },
    bullet: {
       display: 'inline-block',
       margin: '0 2px',
@@ -54,8 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
 
-
-
    const classes = useStyles();
 
    const [currentEmployee, setCurrentEmployee] = useState('');
@@ -65,42 +68,53 @@ export default function Dashboard() {
    const [events, setEvents] = useState([
       {
          title: 'Corte Feminino',
-         start: new Date(2020, 6, 28, 18),
-         end: new Date(2020, 6, 28, 19),
+         start: new Date(2020, 6, 31, 18),
+         end: new Date(2020, 6, 31, 19),
          id: 1,
          customer: 'Gabriela Santos',
          note: 'Cortar rápido'
       },
       {
          title: 'Corte Masculino',
-         start: new Date(2020, 6, 28, 19, 30),
-         end: new Date(2020, 6, 28, 20, 30),
+         start: new Date(2020, 6, 31, 19, 30),
+         end: new Date(2020, 6, 31, 20, 30),
          id: 2,
          customer: 'Raphael Capeto',
          note: 'Cortar o mais rápido que puder'
       },
       {
          title: 'Corte Infantil',
-         start: new Date(2020, 6, 28, 21, 30),
-         end: new Date(2020, 6, 28, 22),
+         start: new Date(2020, 6, 31, 21, 30),
+         end: new Date(2020, 6, 31, 22),
          id: 3,
          customer: 'Jonathan Souza'
-      }
+      },
+      {
+         title: 'Corte Infantil-Masculino',
+         start: new Date(2020, 6, 31, 22, 30),
+         end: new Date(2020, 6, 31, 23),
+         id: 4,
+         customer: 'Exemplo'
+      },
 
    ]);
    const [eventDetail, setEventDetail] = useState(null);
    const [showModalEventCreate, setShowModalEventCreate] = useState(false);
    const [addEventWithDetail, setAddEventWithDetail] = useState(null);
+   const [showChatbox, setShowChatbox] = useState(false);
 
    useEffect(() => {
       async function getEmployees() {
-         const response = await api.get('employee/parterId');
-         
-         console.log(response.data);
+         const response = await api.get(`employee/partnerId`);
+
+         console.log(response.data.result);
+         setEmployees(response.data.result);
+
       }
 
       getEmployees();
-   }, [currentEmployee]);
+
+   }, []);
 
 
    const history = useHistory();
@@ -148,13 +162,28 @@ export default function Dashboard() {
             </div>
             <div className="header-config">
                <select name="employees" onChange={changeEployee}>
-                  <option value="Raphael">Raphael</option>
-                  <option value="Gabriel">Gabriel</option>
+                  {employees.map(employee => (
+                     <option 
+                        value={employee._id} 
+                        key={employee._id}
+                     >
+                       {employee.firstName} {employee.lastName} 
+                     </option>
+                  ))}
+                 
                </select>
-               <FaComment size={30} color="#b71540" />
-               <img src={noUser} alt="Imagem do Usuário" className="user-image"
-                  onClick={() => setShowModalConfig(!showModalConfig)}
+               <FaComment size={28} color="#b71540" 
+                  onClick={() => setShowChatbox(!showChatbox)}
                />
+
+               <div className="header-image" >
+                  <img src={noUser} alt="Imagem do Usuário" className="user-image"/>
+                  <div className="opacity"
+                     onClick={() => setShowModalConfig(!showModalConfig)}
+                  ></div>
+               </div>
+
+               
             </div>
          </header>
 
@@ -174,6 +203,15 @@ export default function Dashboard() {
                </div>
             }
 
+            {showChatbox && 
+            
+               <div className="black-mask">
+                  <Chatbox 
+                     onClose={() => setShowChatbox(false)}
+                  />
+               </div>
+            }
+
             {showModalEventDetail &&
                <div className="black-mask">
                   <ModalEventDetail
@@ -187,7 +225,7 @@ export default function Dashboard() {
             <div className={classes.root}>
                <Grid container spacing={2}>
                   <Grid item xs={3}>
-                     <Grid item xs={12} style={{ paddingTop: 10 }} >
+                     <Grid item xs={12} style={{ paddingTop: 0 }} >
                         <Paper className={classes.paper}>
                            <CardHeader
                               title="Próximos Eventos"
@@ -209,8 +247,8 @@ export default function Dashboard() {
                      </Grid>
                   </Grid>
 
-                  <Grid item xs={9} style={{ paddingTop: 14 }}>
-                     <Paper className={classes.paper}>
+                  <Grid item xs={9} style={{ paddingTop: 4 }}>
+                     <Paper className={classes.calendar}>
                         <CalendarComponent
                            data={events}
                            newEvent={handleSelect}

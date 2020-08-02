@@ -1,16 +1,26 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import api from '../../../services/api';
 import { FaTrash } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
-
 import Header from '../../../Component/Header';
 import '../style.css';
-import { useHistory } from 'react-router-dom';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 
-export default function Employees() {
-   const history = useHistory();
+export default function Customers() {
+   const [customers, setCustomers] = useState([]);
+
+   useEffect(() => {
+      async function getCustomers() {
+         const response = await api.get(`customer/partnerId`);
+
+         console.log(response.data.result);
+
+         setCustomers(response.data.result);
+      }  
+      getCustomers();
+
+   }, []);
 
    return(
       <div>

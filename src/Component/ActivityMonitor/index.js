@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 import './style.css';
 
-export default function ActivityMonitor({ data }) {
+export default function ActivityMonitor() {
+
+   const [activities, setActivities] = useState([]);
+
+   useEffect(() => {
+      async function loadActivities() {
+         const response = await api.get(`activities/partnerId`);
+         
+         console.log(response.data);
+      }
+      loadActivities();
+   }, []);
+
    return (
       <div className="activity-monitor">
          <div className="activities">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
 import './style.css';
-import logo from '../../assets/agendadorVirthos.svg';
+import logo from '../../assets/virthosLogo.png';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -31,6 +31,7 @@ export default function Login() {
    return (
       <div className="container">
          <section className="form-section">
+            <p>Agendador</p>
             <img src={logo} alt="Logo" />
             <div className="form-wrapper">
                <form className="form-login" onSubmit={handleSubmit} method="POST">

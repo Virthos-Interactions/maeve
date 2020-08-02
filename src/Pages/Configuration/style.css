@@ -44,6 +44,10 @@
    margin: 0 auto;
 }
 
+.config p {
+   font-size: 14px;
+}
+
 .content {
    background-color: white;
    padding: 20px;
@@ -176,6 +180,7 @@
    border: 1px solid #cecece;
    resize: none;
    height: 70px;
+   padding: 10px;
    border-radius: 8px;
    font-size: 16px;
    line-height: 26px;
@@ -263,9 +268,16 @@ form .service-settings input {
    padding: 6px;
    margin-top: 10px;
    border-radius: 8px;
+   width: 50px;
    background-color: #aaaa;
    margin: 0 5px;
+   text-align: center;
 
+}
+
+#price {
+   text-align: left;
+   width: 70px;
 }
 
 .service-settings.client-details {
@@ -282,3 +294,130 @@ form .service-settings input {
    margin: 0 5px;
    margin: 10px 0;
 }
+
+.switch {
+   position: relative;
+   display: inline-block;
+   width: 50px;
+   height: 25px;
+ }
+ 
+.switch input {
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+ .slider {
+   position: absolute;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #ccc;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+
+
+ .slider:before {
+   position: absolute;
+   content: "";
+   height: 18px;
+   width: 18px;
+   left: 4px;
+   bottom: 4px;
+   border-radius: 8px;
+   background-color: white;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+ 
+ input:checked + .slider {
+   background-color: #b71540;
+ }
+ 
+ input:focus + .slider {
+   box-shadow: 0 0 1px #b71540;
+ }
+ 
+ input:checked + .slider:before {
+   -webkit-transform: translateX(26px);
+   -ms-transform: translateX(26px);
+   transform: translateX(26px);
+ }
+ 
+ .slider.round {
+   border-radius: 34px;
+ }
+
+ 
+ .detail h4 {
+    font-size: 20px;
+ }
+
+ .detail.detail-config {
+   border-bottom: 1px solid #cecece;
+   margin: 10px 20px;
+}
+
+ .detail .config {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    max-width: 250px;
+    padding: 8px 0;
+ }
+
+ .detail .config p{
+   margin-top: 10px;
+ }
+
+ .detail.detail-config .hour-minute {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+ }
+
+ .detail.detail-config .hour-minute p {
+    margin-top: 10px;
+    font-size: 14px;
+ }
+
+ .detail.detail-config .hour-minute input {
+    background-color: #cecece;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+ }
+ 
+ .detail.detail-config .detail-info {
+    padding: 10px;
+ }
+ 
+ .detail.detail-config .detail-info button {
+    border: none;
+    background-color: #cecece;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: 200ms;
+ }
+
+ .detail.detail-config .detail-info button:hover {
+    filter: brightness(90%);
+ }
+
+ .detail.detail-config .detail-info p {
+    font-size: 14px;
+ }
+
+ .detail.detail-config:last-child {
+    border: none;
+ }

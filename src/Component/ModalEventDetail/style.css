@@ -1,6 +1,6 @@
 .modal-detail-event {
    position: absolute;
-   right: 30%;
+   right: 35%;
    top: 25%;
    padding: 30px;
    width: 400px;
@@ -8,6 +8,24 @@
    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
    border-radius: 8px;
    border-left: 6px solid #3867d6;
+}
+
+@media(max-width: 1300px) {
+   .modal-detail-event {
+      right: 35%;
+   }
+}
+
+@media(max-width: 980px) {
+   .modal-detail-event {
+      right: 30%;
+   }
+}
+
+@media(max-width: 780px) {
+   .modal-detail-event {
+      right: 25%;
+   }
 }
 
 .modal-detail-event header {
@@ -78,6 +96,7 @@
 .event-hour p {
    margin: 10px;
    font-size: 16px;
+   margin-bottom: -3px;
 }
 
 .event-customer-name .input {

@@ -20,6 +20,7 @@ export default function NextEvents({ data }) {
       if( event.end >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
          return event;
       }
+
    });
    return(
       <div className="next-events">
@@ -28,7 +29,7 @@ export default function NextEvents({ data }) {
 
             if(currentEvent === 1) {
                return(
-                  <div className="current-event">
+                  <div className="current-event" key={event.customer}>
                      <div className="event-all-content">
                         <div className="time-and-client-name">
                            <h4>{getHours(event.start)}</h4>
@@ -47,7 +48,7 @@ export default function NextEvents({ data }) {
             }
 
             return(
-               <div className="other-event">
+               <div className="other-event" key={event.customer}>
                   <div className="event-all-content">
                      <h3>{getHours(event.start)}</h3>
                      <p>{event.customer}</p>

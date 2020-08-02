@@ -1,16 +1,25 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import api from '../../../services/api';
 import { FaTrash } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
 import Header from '../../../Component/Header';
 import '../style.css';
-import { useHistory } from 'react-router-dom';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 
 export default function Employees() {
-   const history = useHistory();
+   const [employees, setEmployees] = useState([]);
 
+   useEffect(() => {
+      async function getEmployess() {
+         const response = await api.get(`employee/partnerId`);
+
+         setEmployees(response.data.result);
+      }
+      getEmployess();
+
+   }, []);
+   
    return(
       <div>
          <Header />
@@ -24,48 +33,28 @@ export default function Employees() {
                      <button>Adicionar</button>
                   </header>
 
-                  <div className="detail">
-                     <details>
-                        <summary>Raphael Capeto</summary>
-
-                        <div className="current-detail">
-                           <header>
-                              <p>Raphael Capeto</p>
-                              <div>
-                                 <BsPencilSquare size={18} color="#131313" />
-                                 <FaTrash size={18} color="#131313" />
-                              </div>
-                           </header>
-                           <p>Cargo</p>
-                           <p>Horário de Atendimento: 00:00 às 00:00</p>
-                           <p>dados</p>
-
-                        </div>
-                     </details>
-                  </div>
-
-
-                  <div className="detail">
-                     <details>
-                        <summary>Pedro Araujo</summary>
-
-                        <div className="current-detail">
-                           <header>
-                              <p>Pedro Araujo</p>
-                              <div>
-                                 <BsPencilSquare size={18} color="#131313" />
-                                 <FaTrash size={18} color="#131313" />
-                              </div>
-                           </header>
-                           <p>Cargo</p>
-                           <p>Horário de Atendimento: 00:00 às 00:00</p>
-                           <p>dados</p>
-
-                        </div>
-                     </details>
-                  </div>
-
-
+                  {employees.map(employee => (
+                     <div className="detail" key={employee._id}>
+                        <details>
+                           <summary>{employee.firstName} {employee.lastName}</summary>
+                           <div className="current-detail">
+                              <header>
+                                 <p>{employee.firstName} {employee.lastName}</p>
+                                 <div>
+                                    <BsPencilSquare size={18} color="#131313" />
+                                    <FaTrash size={18} color="#131313" />
+                                 </div>
+                              </header>
+                              <p>
+                                 Horário de Atendimento: {employee.jobTimeList[0].jobStartHour} às {employee.jobTimeList[0].jobEndHour}
+                              </p>
+                              <p>{employee.email}</p>
+                              <p><strong>Whatsapp:</strong> {employee.whatsNotificationNumber}</p>
+   
+                           </div>
+                      </details>
+                   </div>  
+                  ))}
                </div>
             </div>
          </div>

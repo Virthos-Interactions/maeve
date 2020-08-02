@@ -31,12 +31,14 @@
    padding: 0 10px;
    text-align: left; 
 }
+
 .rbc-toolbar  {
    justify-content: space-between!important;
    flex-direction: row!important;
    display: flex!important;
    margin-bottom: .5rem!important;
    margin: 4px 20px;
+   padding: 5px;
 }
 
 .rbc-toolbar button {
@@ -82,7 +84,6 @@
 .rbc-toolbar button.add-button {
    color: white;
    background-color: #3498db;
-   margin-bottom: 10px;
    border: none;
    border-radius: 3px;
    display: flex;
@@ -92,6 +93,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   
 }
 
 .rbc-toolbar button.add-button:hover {

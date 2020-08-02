@@ -1,21 +1,30 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Header from '../../../Component/Header';
 import '../style.css';
 import noUser from '../../../assets/default-user-image-365x365.png';
-import { useHistory } from 'react-router-dom';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 export default function MyAccount() {
-   const history = useHistory();
+   const [currentImage, setCurrentImage] = useState('');
 
    const inputFile = useRef();
 
    function getFile(e) {
+      let file = null;
 
+      if(e.target.files.length > 0) {
+         file = e.target.files[0];
+      }
+
+      setCurrentImage(URL.createObjectURL(file));
    }
 
    function openChooseFile() {
       inputFile.current.click();
+   }
+
+   function handleSubmit(e) {
+      e.preventDefault();
    }
 
    return(
@@ -26,7 +35,7 @@ export default function MyAccount() {
             <ModalConfigSettings myAccount />
 
             <div className="content">
-               <form className="form-edit-user">
+               <form className="form-edit-user" onSubmit={handleSubmit}>
                   <header>
                      <h3>Minha Conta</h3>
                      <div className="button">
@@ -39,11 +48,12 @@ export default function MyAccount() {
                      <label>Foto</label>
 
                      <div className="user-photo">
-                        <img src={noUser} alt="Imagem do Usuário"/>
+                        <img src={currentImage ? currentImage : noUser} alt="Imagem do Usuário"/>
                         <button onClick={openChooseFile}>Alterar</button>
                         <input type="file" style={{ display: 'none' }}
                            name="user-photo"
                            ref={inputFile}
+                           onChange={getFile}
                         />
                      </div>
                   </div>

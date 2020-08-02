@@ -34,8 +34,15 @@ h1 {
 .form-section img {
    width: 200px;
    height: auto;
-   margin-top: 8vh;
+   margin-top: 2vh;
    margin-bottom: 5vh;
+}
+
+.form-section p {
+   font-size: 60px;
+   font-family: Helvetica, sans-serif;
+   font-weight: normal;
+   margin-top: 5vh;
 }
 
 form .icon {
