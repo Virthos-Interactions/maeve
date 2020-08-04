@@ -33,13 +33,47 @@ export default function Services() {
                      <button>Adicionar</button>
                   </header>
 
+                  <div className="detail">
+
                   {services.map(service => (
-                     <div key={service._id}>
-                        teste
-                     </div>
+                     <details key={service._id}>
+                        <summary>{service.name}</summary>
+
+                        <div className="current-detail services">
+                           <header>
+                              <p>{service.description}</p>
+                              <div>
+                                 <BsPencilSquare size={18} color="#131313" />
+                                 <FaTrash size={18} color="#131313" />
+                              </div>
+                           </header>
+
+                           <form>
+                              <div className="service-settings">
+                                 <label>Pré-definir preço: R$</label>
+                                 <input type="text" id="price" maxLength="8"/>
+                              </div>
+
+                              <div className="service-settings">
+                                 <label>Pré-definir Duração:</label>
+                                 <input type="text" maxLength="2"/>
+                                 <label>:</label>
+                                 <input type="text" maxLength="2"/>
+                              </div>
+
+                              <div className="service-settings client-details">
+                                 <p>Determinar detalhes com o cliente</p>
+                                 {service.durationQuestionList && service.durationQuestionList.map(question => {
+                                    return(
+                                       <div key={question}>{question}</div>
+                                    );
+                                 })}
+                              </div>
+                           </form>
+                        </div>
+                     </details>
                   ))}
 
-                  <div className="detail">
                      <details>
                         <summary>Corte Feminino</summary>
 

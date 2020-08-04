@@ -5,6 +5,7 @@ import { BsPencilSquare } from 'react-icons/bs';
 import Header from '../../../Component/Header';
 import '../style.css';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
+import { formatDate } from '../../../Utils';
 
 
 export default function Customers() {
@@ -14,9 +15,8 @@ export default function Customers() {
       async function getCustomers() {
          const response = await api.get(`customer/partnerId`);
 
-         console.log(response.data.result);
-
-         setCustomers(response.data.result);
+         console.log(response.data.result[0].customers);
+         setCustomers(response.data.result[0].customers);
       }  
       getCustomers();
 
@@ -35,6 +35,26 @@ export default function Customers() {
                   </header>
 
                   <div className="detail">
+
+                     {customers.map(customer => (
+                        <details key={customer._id}>
+                           <summary>{customer.firstName} {customer.lastName}</summary>
+
+                           <div className="current-detail">
+                              <header>
+                                 <p>{customer.firstName} {customer.lastName}</p>
+                                 <div>
+                                    <BsPencilSquare size={18} color="#131313" />
+                                    <FaTrash size={18} color="#131313" />
+                                 </div>
+                              </header>
+                              <p><strong>E-mail:</strong> {customer.email}</p>
+                              <p><strong>Número:</strong> {customer.mobileNumber}</p>
+                              <p><strong>Aniversário:</strong> {formatDate(customer.birthday)}</p>
+
+                           </div>
+                        </details>
+                     ))}
                      <details>
                         <summary>Raphael Capeto</summary>
 

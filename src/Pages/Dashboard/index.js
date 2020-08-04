@@ -68,31 +68,31 @@ export default function Dashboard() {
    const [events, setEvents] = useState([
       {
          title: 'Corte Feminino',
-         start: new Date(2020, 6, 31, 18),
-         end: new Date(2020, 6, 31, 19),
+         start: new Date(2020, 7, 3, 18),
+         end: new Date(2020, 7, 3, 19),
          id: 1,
          customer: 'Gabriela Santos',
          note: 'Cortar rápido'
       },
       {
          title: 'Corte Masculino',
-         start: new Date(2020, 6, 31, 19, 30),
-         end: new Date(2020, 6, 31, 20, 30),
+         start: new Date(2020, 7, 3, 19, 30),
+         end: new Date(2020, 7, 3, 20, 30),
          id: 2,
          customer: 'Raphael Capeto',
          note: 'Cortar o mais rápido que puder'
       },
       {
          title: 'Corte Infantil',
-         start: new Date(2020, 6, 31, 21, 30),
-         end: new Date(2020, 6, 31, 22),
+         start: new Date(2020, 7, 3, 21, 30),
+         end: new Date(2020, 7, 3, 22),
          id: 3,
          customer: 'Jonathan Souza'
       },
       {
          title: 'Corte Infantil-Masculino',
-         start: new Date(2020, 6, 31, 22, 30),
-         end: new Date(2020, 6, 31, 23),
+         start: new Date(2020, 7, 3, 22, 30),
+         end: new Date(2020, 7, 3, 23),
          id: 4,
          customer: 'Exemplo'
       },
@@ -107,14 +107,13 @@ export default function Dashboard() {
       async function getEmployees() {
          const response = await api.get(`employee/partnerId`);
 
-         console.log(response.data.result);
          setEmployees(response.data.result);
 
       }
 
       getEmployees();
 
-   }, []);
+   }, [currentEmployee]);
 
 
    const history = useHistory();

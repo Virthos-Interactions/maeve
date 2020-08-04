@@ -217,6 +217,10 @@
    margin-top: 10px;
 }
 
+.detail details {
+   margin-bottom: 10px;
+}
+
 .detail details summary{
    border: 1px solid #cecece;
    padding: 8px;

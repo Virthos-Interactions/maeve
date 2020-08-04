@@ -10,7 +10,7 @@ export default function ActivityMonitor() {
       async function loadActivities() {
          const response = await api.get(`activities/partnerId`);
          
-         console.log(response.data);
+         setActivities(response.data) ;
       }
       loadActivities();
    }, []);
@@ -45,6 +45,21 @@ export default function ActivityMonitor() {
                   <p>Hoje 12:35:00</p>
                </div>
             </div>
+
+            {activities.map(activity => (
+               <div className="activity">
+                  <header>Novo Agendamento</header>
+                  <div className="activity-info">
+                     <p>{activity.description}</p>
+                     <p>{activity.time}</p>
+                  </div>
+
+                  <div className="date-time-activity activity-info">
+                     <p>Cliente: {activity.agent}</p>
+                     <p>Hoje {activity.time}</p>
+                  </div>
+               </div>
+            ))}
 
          </div>
       </div>
