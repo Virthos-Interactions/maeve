@@ -111,9 +111,9 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                                  e.target.value = e.target.value.replace(/\D/g, '');
 
                                  if(e.target.value.length === 4) {
-                                    const [a, b, c, d] = e.target.value;
 
-                                    e.target.value = `${a + b}:${c + d}`;
+                                    const regex = /(\d{2})(\d{2})/;
+                                    e.target.value = e.target.value.replace(regex, '$1:$2');
                                  }
 
                                  setHourStart(e.target.value);
@@ -135,9 +135,9 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                                  e.target.value = e.target.value.replace(/\D/g, '')
 
                                  if(e.target.value.length === 4) {
-                                    const [a, b, c, d] = e.target.value;
+                                    const regex = /(\d{2})(\d{2})/;
 
-                                    e.target.value = `${a + b}:${c + d}`;
+                                    e.target.value = e.target.value.replace(regex, '$1:$2');
                                  }
 
                                  setHourEnd(e.target.value);

@@ -1,0 +1,183 @@
+.chat,
+.chatbox {
+   position: absolute;
+   top: 50px;
+   right: 3px;
+   width: 300px;
+   background-color: white;
+}
+
+.chatbox .header {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   position: relative;
+   padding: 8px;
+   border-bottom: 2px solid #cecece;
+}
+
+.chatbox .header svg{
+   position: absolute;
+   right: 10px;  
+   top: 13px;
+   cursor: pointer;
+}
+
+.contacts {
+   overflow-y: scroll;
+   max-height: 80vh;
+   height: 80vh;
+   padding: 15px 20px;
+}
+
+.contacts .contact {
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+   cursor: pointer;
+}
+
+.contacts .contact img {
+   border-radius: 100%;
+   width: 50px;
+   height: 50px;
+   border: 1px solid black;
+}
+
+.contacts .contact p {
+   font-size: 14px;
+   margin-left: 10px;
+}
+
+.chat .header .header-content{
+   display: grid;
+   grid-template-columns: 50px 1fr 30px;
+   align-items: center;
+}
+
+.chat .header {
+   border-bottom: 2px solid #cecece;
+   padding: 8px; 
+}
+
+.chat .header h2 {
+   font-size: 16px;
+}
+
+.chat .header svg {
+   cursor: pointer;
+}
+
+.chat .header svg {
+   margin: 5px;
+}
+
+.contact-chat {
+   max-height: 80vh;
+   height: 80vh;  
+}
+
+.contact-chat .messages {
+   overflow-y: scroll;
+   max-height: 370px;
+   height: 370px;
+   padding: 10px;
+
+}
+
+.contact-chat .messages .message.me {
+   padding: 10px;
+   text-align: end;
+   border: 1px solid #cecece;
+   margin: 10px;
+   border-radius: 10px;
+   float: right;
+   font-size: 15px;
+}
+
+.contact-chat .messages .message.customer {
+   padding: 10px;
+   text-align: start;
+   background-color: #cecece;
+   border-radius: 10px;
+   float: left;
+   font-size: 15px;
+}
+
+.contact-chat .keyboard {
+   display: flex;
+   align-items: center;
+   padding: 20px;
+   border-bottom: 2px solid #cecece;
+}
+
+.contact-chat .keyboard input {
+   width: 200px;
+   border: none;
+   border-radius: 8px;
+   border: 1px solid #3867d6;
+   height: 26px;
+   padding: 10px;
+   min-height: 20px;
+   font-size: 13px;
+   line-height: 23px;
+}
+
+.contact-chat .keyboard button {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: none;
+   background-color: white;
+   float: right;
+   margin: 4px 5px;
+}
+
+.contact-chat .keyboard svg {
+   cursor: pointer;
+}
+
+.chat .event-duration {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: center;
+}
+
+.chat .event-duration p {
+   font-size: 18px;
+   margin: 5px;
+}
+
+.chat .event-duration .duration {
+   display: flex;
+   padding: 20px;
+}
+
+.chat .event-duration .duration button {
+   background-color: #3867d6;
+   margin-left: 10px;
+   padding: 5px 10px;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 200ms;
+}
+
+.chat .event-duration .duration button:hover {
+   filter: brightness(90%);
+}
+
+.chat .event-duration .duration input {
+   width: 50px;
+   border-radius: 8px;
+   border: none;
+   background-color: #cecece;
+   text-align: center;
+}
+
+.info {
+   color: #cecece;
+   text-align: center;
+}

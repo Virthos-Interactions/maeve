@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 
-import { isEqual } from 'date-fns';
+import api from '../../services/api';
 
+import { isEqual } from 'date-fns';
 import { getHours, timeRemain } from '../../Utils';
 export default function NextEvents({ data }) {
+   const [events, setEvents] = useState([]);
+
+   useEffect(() => {
+      async function getEvents() {
+         const response = await api.get(`appointments/partnerId`);
+
+         response.data.forEach(data => console.log(data.info));
+
+         setEvents(response.data);
+
+      } 
+
+      getEvents();
+
+   }, []);
+
    let currentEvent = 0;
+   let currentEventUseEffect = 0;
 
    const todayEvents = data.filter(event => {
 
@@ -20,6 +38,7 @@ export default function NextEvents({ data }) {
       if( event.end >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
          return event;
       }
+
    });
    return(
       <div className="next-events">
@@ -28,7 +47,7 @@ export default function NextEvents({ data }) {
 
             if(currentEvent === 1) {
                return(
-                  <div className="current-event">
+                  <div className="current-event" key={event.customer}>
                      <div className="event-all-content">
                         <div className="time-and-client-name">
                            <h4>{getHours(event.start)}</h4>
@@ -47,10 +66,43 @@ export default function NextEvents({ data }) {
             }
 
             return(
-               <div className="other-event">
+               <div className="other-event" key={event.customer}>
                   <div className="event-all-content">
                      <h3>{getHours(event.start)}</h3>
                      <p>{event.customer}</p>
+                  </div>
+               </div>
+            );
+         })}
+
+         {events.map(event => {
+            currentEventUseEffect++;
+
+            if(currentEventUseEffect == 1) {
+               return (
+                  <div className="current-event" key={event.info.id}>
+                     <div className="event-all-content">
+                        <div className="time-and-client-name">
+                           <h4>{getHours(event.info.appointmentStartHour)}</h4>
+                           <p>{event.info.customer.firstName} {event.info.customer.lastName}</p>
+                        </div>
+
+                        <div className="current-event-details">
+                           <h4>{event.info.craft.craftType}</h4>
+                           <h3>Tempo de atendimento:</h3>
+                           <p>{event.info.craft.duration}min</p>
+
+                        </div>
+                     </div>
+                  </div>
+               );
+            } 
+
+            return(
+               <div className="other-event" key={event.info.id}>
+                  <div className="event-all-content">
+                     <h3>{getHours(event.info.appointmentStartHour)}</h3>
+                     <p>{event.info.customer.firstName} {event.info.customer.lastName}</p>
                   </div>
                </div>
             );

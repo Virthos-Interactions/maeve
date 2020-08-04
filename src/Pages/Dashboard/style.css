@@ -29,6 +29,11 @@
 .dashboard header .header-config svg {
    margin: 0 10px;
    cursor: pointer;
+   transition: 200ms;
+}
+
+.dashboard header .header-config svg:hover {
+   filter: brightness(70%);
 }
 
 .dashboard header .header-config select {
@@ -38,4 +43,24 @@
    padding: 3px;
    font-family: Helvetica, sans-serif;
    border-radius: 5px;
+}
+
+.dashboard header .header-image {
+   position: relative;
+}
+
+.opacity {
+   width: 40px;
+   height: 40px;
+   background-color: transparent;
+   position: absolute;
+   top: 0;
+   right: 6px;
+   border-radius: 100%;
+   transition: 200ms;
+}
+
+.opacity:hover {
+   background-color: rgba(0, 0, 0, 0.3);
+   cursor: pointer;
 }

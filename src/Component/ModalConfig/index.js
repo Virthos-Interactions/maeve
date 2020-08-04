@@ -26,7 +26,7 @@ export default function ModalConfig({ onClose, logout }) {
 
             <div className="options-config-modal">
                <Link to="/settings/my-account">Minha Conta</Link>
-               <Link to="/settings/employees">Funcionários</Link>
+               <Link to="/settings/employees">Colaboradores</Link>
                <Link to="/settings/customers">Clientes</Link>
                <Link to="/settings/services">Serviços</Link>
                <Link to="/settings/configuration">Configurações</Link>

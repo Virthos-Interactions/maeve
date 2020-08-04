@@ -18,8 +18,9 @@ export default function CalendarComponent({ data, newEvent, dblClick, addEvent }
             backgroundColor: '#68aae2',
             border: 0,
             borderLeft: '6px solid #3867d6',
-            color: '#3742fa',
+            color: '#fff',
             padding: 8,
+            marginBottom: 5,
          }
       }
    }
@@ -47,7 +48,7 @@ export default function CalendarComponent({ data, newEvent, dblClick, addEvent }
             components={{ toolbar: CustomToolbar }}
             timeslots={1}
             min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-            max={new Date(2008, 0, 1, 22, 0)} // Max will be 6.00 PM!
+            max={new Date(2008, 0, 1, 23, 0)} // Max will be 6.00 PM!
             date={new Date()}
          />
       </div>

@@ -4,8 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import './style.css';
 
 export default function Home() {
+   
    const history = useHistory();
-
+   
    useEffect(() => {
 
       history.push('/login');

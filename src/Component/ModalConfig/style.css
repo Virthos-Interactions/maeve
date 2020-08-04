@@ -7,7 +7,7 @@
    height: 100%;
    position: absolute;
    right: 0;
-   top: -210px;
+   top: -190px;
    z-index: 5;
 }
 
@@ -72,6 +72,7 @@
    border: none;
    background-color: transparent;
    cursor: pointer;
+   margin-top: -18px;
 }
 
 .black-mask {

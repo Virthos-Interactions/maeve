@@ -61,3 +61,8 @@ export function getDayWeek(date) {
 export function formatedMonth(month) {
   return `${Number(month) - 1}`;
 }
+
+export function formatDate(date) {
+  const [year, month, day] = date.split('-');
+  return `${day}/${month}/${year}`;
+}
