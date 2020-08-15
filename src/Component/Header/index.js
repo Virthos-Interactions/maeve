@@ -11,7 +11,7 @@ export default function Header() {
    return(
       <div className="header">
          <header>
-            <img src={logo} alt="Logo"/>
+            <img src={logo} alt="Virthos"/>
             <FaCalendar size={20} color="#b71540" onClick={() => history.push('/dashboard')}/>  
          </header>
       </div>

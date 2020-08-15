@@ -1,6 +1,6 @@
 .activity-monitor {
-   height: 202px;
-   max-height: 300px;
+   height: 253px;
+   max-height: auto;
    background-color: white;
    overflow-y: scroll;
    padding: 8px;
@@ -28,17 +28,16 @@
 
 .activity {
    padding: 8px;
-   background-color: #3867d6;
+   background-color: #407cbf;
    margin-bottom: 10px;
    color: white;
    border-radius: 5px ;
    box-shadow: 3px 6px 4px 3px rgba(0, 0, 0, 0.1);
    font-size: 14px;
-
 }
 
 .activity header {
-   background-color: #3867d6;
+   background-color: #407cbf;
    display: flex;
    color: white;
    align-items: center;
@@ -60,7 +59,6 @@
    flex-direction: row!important;
    display: flex!important;
    margin-bottom: .5rem!important;
-   padding: 8px;
 }
 
 .activity .activity-info div:first-child {
@@ -71,16 +69,12 @@
    margin-bottom: 5px;
 }
 
-.activity .activity-info .date-time-activity {
-   font-size: 13px;
+.date-time-activity {
+   font-size: 15px;
 }
 
-.activity .activity-info .date-time-activity p:first-child {
-   margin-bottom: 10px;
-}
-
-.activity .activity-info .date-time-activity p:last-child {
+.date-time-activity p:last-child {
    float: right;
-   margin-right: 9px;
-   color: rgba(255, 255, 255, 0.4);
+   color: #cccccc;
+   font-size: 13px;
 }

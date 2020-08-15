@@ -1,13 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context';
+
 import Header from '../../../Component/Header';
 import '../style.css';
 import noUser from '../../../assets/default-user-image-365x365.png';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 export default function MyAccount() {
-   const [currentImage, setCurrentImage] = useState('');
-
+   const [currentImage, setCurrentImage] = useState(null);
+   const { signed } = useContext(AuthContext);
+   const history = useHistory();
    const inputFile = useRef();
+
+   useEffect(() => {
+      if(!signed) {
+         return history.push('/login');
+      }
+   }, []);
 
    function getFile(e) {
       let file = null;

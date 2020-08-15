@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 
-import api from '../../services/api';
+import api, { bernard } from '../../services/api';
 
 import { isEqual } from 'date-fns';
 import { getHours, timeRemain } from '../../Utils';
+
+
 export default function NextEvents({ data }) {
    const [events, setEvents] = useState([]);
 
@@ -18,7 +20,23 @@ export default function NextEvents({ data }) {
 
       } 
 
-      getEvents();
+      async function getEventsTeste() {
+         const partnerId = 'partner_1';
+
+         const response = await bernard.post(`maeve/appointmentsByPartner`, {
+            partnerId,
+         }, {
+            headers: {
+               Abernathy: process.env.REACT_APP_BERNARD_TOKEN
+            },
+         });
+
+         console.log(response.data);
+      }
+
+      // getEvents();
+      getEventsTeste();
+
 
    }, []);
 
@@ -47,7 +65,7 @@ export default function NextEvents({ data }) {
 
             if(currentEvent === 1) {
                return(
-                  <div className="current-event" key={event.customer}>
+                  <div className="current-event" key={event.id}>
                      <div className="event-all-content">
                         <div className="time-and-client-name">
                            <h4>{getHours(event.start)}</h4>
@@ -75,7 +93,7 @@ export default function NextEvents({ data }) {
             );
          })}
 
-         {events.map(event => {
+         {/* {events.map(event => {
             currentEventUseEffect++;
 
             if(currentEventUseEffect == 1) {
@@ -106,7 +124,7 @@ export default function NextEvents({ data }) {
                   </div>
                </div>
             );
-         })}
+         })} */}
       </div>
    );
 }
