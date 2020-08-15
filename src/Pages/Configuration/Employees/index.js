@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context';
 import api from '../../../services/api';
 import { FaTrash } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
@@ -9,6 +11,8 @@ import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 export default function Employees() {
    const [employees, setEmployees] = useState([]);
+   const { signed } = useContext(AuthContext);
+   const history = useHistory();
 
    useEffect(() => {
       async function getEmployess() {
@@ -16,6 +20,11 @@ export default function Employees() {
 
          setEmployees(response.data.result);
       }
+
+      if(!signed) {
+         return history.push('/login');
+      }
+
       getEmployess();
 
    }, []);

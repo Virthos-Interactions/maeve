@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../../services/api';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context';
+import { arnold } from '../../../services/api';
 import { FaTrash } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
 import Header from '../../../Component/Header';
@@ -10,14 +12,25 @@ import { formatDate } from '../../../Utils';
 
 export default function Customers() {
    const [customers, setCustomers] = useState([]);
+   const { signed } = useContext(AuthContext);
+   const history = useHistory();
 
    useEffect(() => {
       async function getCustomers() {
-         const response = await api.get(`customer/partnerId`);
+         const response = await arnold.post(`customer/get`, { email: 'teste1@teste.com', partnerId: ''}, {
+            headers: {
+               Abernathy : process.env.REACT_APP_ARNOLD_TOKEN,
+            }
+         });
 
-         console.log(response.data.result[0].customers);
-         setCustomers(response.data.result[0].customers);
-      }  
+         console.log(response.data);
+         setCustomers(response.data);
+      } 
+      
+      if(!signed) {
+         return history.push('/login');
+      }
+
       getCustomers();
 
    }, []);
@@ -36,7 +49,7 @@ export default function Customers() {
 
                   <div className="detail">
 
-                     {customers.map(customer => (
+                     {/* {customers.map(customer => (
                         <details key={customer._id}>
                            <summary>{customer.firstName} {customer.lastName}</summary>
 
@@ -54,7 +67,7 @@ export default function Customers() {
 
                            </div>
                         </details>
-                     ))}
+                     ))} */}
                      <details>
                         <summary>Raphael Capeto</summary>
 

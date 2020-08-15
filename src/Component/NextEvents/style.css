@@ -1,7 +1,7 @@
 .next-events{
    width: auto;
-   height: 202px;
-   max-height: 300px;
+   height: 253px;
+   max-height: auto;
    background-color: white;
    overflow-y: scroll;
    padding: 8px;
@@ -24,7 +24,7 @@
 }
 
 .current-event .event-all-content {
-   background-color: #e74c3c;
+   background-color: #ea3b2e;
    border-radius: 6px;
    padding: 10px;
    height: 120px;
@@ -45,6 +45,7 @@
 .current-event .event-all-content .time-and-client-name h4 {
    font-size: 25px;
    margin: 7px;
+   margin-top: 10px;
 }
 
 .current-event .event-all-content .time-and-client-name p {
@@ -79,6 +80,7 @@
    padding: 12px 20px;
    display: flex;
    width: auto;
+   font-size: 18px;
    align-items: center;
    justify-content: center;
 }
@@ -92,7 +94,7 @@
    align-items: center;
    justify-content: space-between;
    padding: 8px;
-   background-color: #c0392b;
+   background-color: #ce2026;
    color: white;
    border-radius: 5px;
    width: 300px;

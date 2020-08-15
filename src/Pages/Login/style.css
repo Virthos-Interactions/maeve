@@ -32,17 +32,18 @@ h1 {
 }
 
 .form-section img {
-   width: 200px;
+   width: 230px;
    height: auto;
-   margin-top: 2vh;
-   margin-bottom: 5vh;
+   margin-bottom: 75px;
 }
 
 .form-section p {
-   font-size: 60px;
+   font-size: 54px;
    font-family: Helvetica, sans-serif;
-   font-weight: normal;
-   margin-top: 5vh;
+   font-weight: 300;
+   margin-top: 3vh;
+   color: #626161;
+   margin-bottom: 14px;
 }
 
 form .icon {
@@ -66,13 +67,20 @@ form .input-block {
    display: flex;
 }
 
+form.form-login input {
+   color: #a6a6a6;
+   font-size: 14px;
+   background-color: #e6e6e6;
+}
+
 .text-center {
    text-align: center;
 }
 
 form .btn-login {
-   background-color: #b71540;
+   background-color: #ce2026;
    color: #fff;
+   font-size: 16px;
 }
 
 form .btn-login:hover {
@@ -88,9 +96,6 @@ section.form-section a {
    color: black;
    font-weight: bold;
    transition: 200ms;
-}
-
-section.form-section a:hover {
 }
 
 section.form-section a svg {

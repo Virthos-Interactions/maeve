@@ -9,7 +9,7 @@
    justify-content: space-between;
    align-items: center;
    background-color: white;
-   padding: 5px;
+   padding: 3px 6px;
 }
 
 .dashboard header .user-image {
@@ -63,4 +63,9 @@
 .opacity:hover {
    background-color: rgba(0, 0, 0, 0.3);
    cursor: pointer;
+}
+
+span.MuiCardHeader-title {
+   font-size: 22px;
+   margin: 1px 8px;
 }

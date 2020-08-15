@@ -43,7 +43,13 @@ export default function CalendarComponent({ data, newEvent, dblClick, addEvent }
             defaultView={Views.WEEK}
             onDoubleClickEvent={(e) => dblClick(e)}
             onSelectSlot={({ start, end }) => newEvent(start, end)}
-            style={{ height: 612, padding: 10 }}
+            style={{ 
+               height: 612, 
+               paddingRight: 20, 
+               paddingLeft: 20, 
+               paddingTop: 10, 
+               paddingBottom: 10,
+            }}
             eventPropGetter={(eventStyleGetter)}
             components={{ toolbar: CustomToolbar }}
             timeslots={1}

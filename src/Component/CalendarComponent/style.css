@@ -1,4 +1,3 @@
-
 .rbc-time-slot {
    border: none
 }
@@ -39,18 +38,46 @@
    margin-bottom: .5rem!important;
    margin: 4px 20px;
    padding: 5px;
+   background-color: white;
+}
+
+
+.rbc-header {
+   background-color: #CCCCCC;
+   color: #737373;
+}
+
+.rbc-header{
+   border-right: 1px solid #737373;
+   border-left: 1px solid #737373;
+}
+
+.rbc-header:first-child {
+   border-left: none;
+}
+
+.rbc-header:last-child {
+   border-right: none;
+}
+
+.rbc-time-content {
+   border-top: 0;
+}
+
+.rbc-time-header.rbc-overflowing {
+   margin-right: 0;
 }
 
 .rbc-toolbar button {
    cursor: pointer;
    background-color: white;
-   border: 1px solid #3498db;
+   border: 1px solid #0d79f2;
    border-radius: 5px;
    padding: 5px;
    width: 100px;
    max-width: 100px;
    transition: 200ms;
-   color: #3498db;
+   color: #0d79f2;
 }
 
 .rbc-toolbar button:first-child {
@@ -72,7 +99,7 @@
 
 .rbc-toolbar button:hover,
 .rbc-toolbar button:focus {
-   background-color: #3498db;
+   background-color: #0d79f2;
    color: white;
 }
 
@@ -83,7 +110,7 @@
 
 .rbc-toolbar button.add-button {
    color: white;
-   background-color: #3498db;
+   background-color: #0d79f2;
    border: none;
    border-radius: 3px;
    display: flex;
@@ -93,7 +120,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   
+   font-size: 14px;   
 }
 
 .rbc-toolbar button.add-button:hover {
@@ -102,6 +129,24 @@
    color: black;
 }
 
+.rbc-current-time-indicator {
+   height: 2px;
+   background-color: red;
+}
+
 button.add-button svg {
    margin-right: 5px;
+}
+
+div.rbc-time-slot span.rbc-label{
+   margin-left: -7px;
+   padding: 0 9px;
+}
+
+div.rbc-calendar {
+   padding: 0px !important;
+}
+
+div.makeStyles-calendar-8 {
+   max-height: auto;
 }

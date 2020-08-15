@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context';
 import api from '../../../services/api';
 import Header from '../../../Component/Header';
 import { FaTrash } from 'react-icons/fa';
@@ -9,6 +11,8 @@ import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 export default function Services() {
    const [services, setServices] = useState([]);
+   const { signed } = useContext(AuthContext);
+   const history = useHistory();
 
    useEffect(() => {
       async function loadServices() {
@@ -18,6 +22,11 @@ export default function Services() {
 
          setServices(response.data.result);
       }
+
+      if(!signed) {
+         return history.push('/login');
+      }
+      
       loadServices();
    }, []);
 

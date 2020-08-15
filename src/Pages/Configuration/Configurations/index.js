@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context';
 
 import { FaCalendar } from 'react-icons/fa';
 import Header from '../../../Component/Header';
@@ -7,6 +9,14 @@ import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 
 
 export default function Services() {
+   const { signed } = useContext(AuthContext);
+   const history = useHistory();
+
+   useEffect(() => {
+      if(!signed) {
+         return history.push('/login');
+      }
+   }, []);
 
    return(
       <div>

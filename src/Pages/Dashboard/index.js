@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaComment } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
@@ -26,6 +26,8 @@ import CardContent from '@material-ui/core/CardContent';
 // import Button from '@material-ui/core/Button';
 import CardHeader from '@material-ui/core/CardHeader';
 
+import { AuthContext } from '../../context';
+
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -38,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
    },
    calendar: {
       color: theme.palette.text.secondary,
-      padding: '0px 10px' 
+      padding: '0px 10px',
+      height: '633px' 
    },
    bullet: {
       display: 'inline-block',
@@ -58,8 +61,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Dashboard() {
-
    const classes = useStyles();
+
+   const { signed, logout, user } = useContext(AuthContext);
 
    const [currentEmployee, setCurrentEmployee] = useState('');
    const [employees, setEmployees] = useState([]);
@@ -68,31 +72,31 @@ export default function Dashboard() {
    const [events, setEvents] = useState([
       {
          title: 'Corte Feminino',
-         start: new Date(2020, 7, 3, 18),
-         end: new Date(2020, 7, 3, 19),
+         start: new Date(2020, 7, 9, 18),
+         end: new Date(2020, 7, 9, 19),
          id: 1,
          customer: 'Gabriela Santos',
          note: 'Cortar rápido'
       },
       {
          title: 'Corte Masculino',
-         start: new Date(2020, 7, 3, 19, 30),
-         end: new Date(2020, 7, 3, 20, 30),
+         start: new Date(2020, 7, 13, 19, 30),
+         end: new Date(2020, 7, 13, 20, 30),
          id: 2,
          customer: 'Raphael Capeto',
          note: 'Cortar o mais rápido que puder'
       },
       {
          title: 'Corte Infantil',
-         start: new Date(2020, 7, 3, 21, 30),
-         end: new Date(2020, 7, 3, 22),
+         start: new Date(2020, 7, 13, 21, 30),
+         end: new Date(2020, 7, 13, 22),
          id: 3,
          customer: 'Jonathan Souza'
       },
       {
          title: 'Corte Infantil-Masculino',
-         start: new Date(2020, 7, 3, 22, 30),
-         end: new Date(2020, 7, 3, 23),
+         start: new Date(2020, 7, 13, 22, 30),
+         end: new Date(2020, 7, 13, 23),
          id: 4,
          customer: 'Exemplo'
       },
@@ -111,6 +115,10 @@ export default function Dashboard() {
 
       }
 
+      if(!signed) {
+         return history.push('/login');
+      }
+
       getEmployees();
 
    }, [currentEmployee]);
@@ -127,7 +135,9 @@ export default function Dashboard() {
    }
 
    function logOut() {
+      logout();
       history.push('/login');
+
    }
 
    function showEvent(e) {
@@ -157,7 +167,7 @@ export default function Dashboard() {
       <div className="dashboard">
          <header>
             <div className="header-logo ">
-               <img src={logo} alt="Logo" className="logo-image" />
+               <img src={logo} alt="Virthos" className="logo-image" />
             </div>
             <div className="header-config">
                <select name="employees" onChange={changeEployee}>
@@ -171,7 +181,7 @@ export default function Dashboard() {
                   ))}
                  
                </select>
-               <FaComment size={28} color="#b71540" 
+               <FaComment size={28} color="#ce2026" 
                   onClick={() => setShowChatbox(!showChatbox)}
                />
 
@@ -228,8 +238,10 @@ export default function Dashboard() {
                         <Paper className={classes.paper}>
                            <CardHeader
                               title="Próximos Eventos"
+                              color="#737373"
+                              style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
                            />
-                           <CardContent>
+                           <CardContent style={{ marginTop: -15}}>
                               <NextEvents data={events} />
                            </CardContent>
                         </Paper>
@@ -238,8 +250,10 @@ export default function Dashboard() {
                         <Paper className={classes.paper}>
                            <CardHeader
                               title="Atividade"
+                              color="#737373"
+                              style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
                            />
-                           <CardContent>
+                           <CardContent style={{ marginTop: -15}}>
                               <ActivityMonitor />
                            </CardContent>
                         </Paper>

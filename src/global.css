@@ -23,14 +23,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+   -webkit-box-shadow: inset 0 0 6px #bfbfbf; 
    -webkit-border-radius: 10px;
    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
    border-radius: 5px;
-   background: #cecece; 
+   background: #d9d9d9; 
 }
 
 .row {
