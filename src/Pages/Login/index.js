@@ -35,7 +35,6 @@ export default function Login() {
   useEffect(() => {
    if(signed) {
       return history.push('/dashboard');
-      
    }
   }, []);
 
