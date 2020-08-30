@@ -13,8 +13,7 @@ import CalendarComponent from '../../Component/CalendarComponent';
 import ModalEventDetail from '../../Component/ModalEventDetail';
 import ModalAddEvent from '../../Component/ModalAddEvent';
 import Chatbox from '../../Component/Chatbox/index';
-
-
+import ModalEventEdit from '../../Component/ModalEditEvent';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -27,21 +26,22 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
-
+import { bernard } from '../../services/api';
 
 const useStyles = makeStyles((theme) => ({
    root: {
       flexGrow: 1,
       minWidth: 275,
-      padding: theme.spacing(4)
+      padding: theme.spacing(4),
+      height: '100% !important',
    },
    paper: {
       color: theme.palette.text.secondary,
+      height: '100% !important',
    },
    calendar: {
       color: theme.palette.text.secondary,
       padding: '0px 10px',
-      height: '633px' 
    },
    bullet: {
       display: 'inline-block',
@@ -62,6 +62,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
    const classes = useStyles();
+   const testEvents = [
+      {
+         title: 'Corte Feminino',
+         start: new Date(2020, 7, 29, 18),
+         end: new Date(2020, 7, 29, 19),
+         id: 1,
+         customer: 'Gabriela Santos',
+         note: 'Cortar rápido'
+      },
+      {
+         title: 'Corte Masculino',
+         start: new Date(2020, 7, 29, 18),
+         end: new Date(2020, 7, 29, 19),
+         id: 2,
+         customer: 'Raphael Capeto',
+         note: 'Cortar o mais rápido que puder'
+      }
+   ];
 
    const { signed, logout, user } = useContext(AuthContext);
 
@@ -69,59 +87,19 @@ export default function Dashboard() {
    const [employees, setEmployees] = useState([]);
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
-   const [events, setEvents] = useState([
-      {
-         title: 'Corte Feminino',
-         start: new Date(2020, 7, 9, 18),
-         end: new Date(2020, 7, 9, 19),
-         id: 1,
-         customer: 'Gabriela Santos',
-         note: 'Cortar rápido'
-      },
-      {
-         title: 'Corte Masculino',
-         start: new Date(2020, 7, 13, 19, 30),
-         end: new Date(2020, 7, 13, 20, 30),
-         id: 2,
-         customer: 'Raphael Capeto',
-         note: 'Cortar o mais rápido que puder'
-      },
-      {
-         title: 'Corte Infantil',
-         start: new Date(2020, 7, 13, 21, 30),
-         end: new Date(2020, 7, 13, 22),
-         id: 3,
-         customer: 'Jonathan Souza'
-      },
-      {
-         title: 'Corte Infantil-Masculino',
-         start: new Date(2020, 7, 13, 22, 30),
-         end: new Date(2020, 7, 13, 23),
-         id: 4,
-         customer: 'Exemplo'
-      },
-
-   ]);
+   const [events, setEvents] = useState([]);
    const [eventDetail, setEventDetail] = useState(null);
    const [showModalEventCreate, setShowModalEventCreate] = useState(false);
    const [addEventWithDetail, setAddEventWithDetail] = useState(null);
    const [showChatbox, setShowChatbox] = useState(false);
+   const [editEventDetail, setEditEventDetail] = useState(null);
+   const [modalEditEvent, setModalEventEdit] = useState(false);
 
    useEffect(() => {
-      async function getEmployees() {
-         const response = await api.get(`employee/partnerId`);
-
-         setEmployees(response.data.result);
-
-      }
-
       if(!signed) {
          return history.push('/login');
       }
-
-      getEmployees();
-
-   }, [currentEmployee]);
+   }, []);
 
 
    const history = useHistory();
@@ -137,7 +115,6 @@ export default function Dashboard() {
    function logOut() {
       logout();
       history.push('/login');
-
    }
 
    function showEvent(e) {
@@ -150,6 +127,12 @@ export default function Dashboard() {
          setEvents(events.filter(event => event.id !== data.id));
          setShowModalEventDetail(false);
       }
+   }
+
+   function editEvent(data) {
+      setEditEventDetail(data);
+      setShowModalEventDetail(false);
+      setModalEventEdit(true);
    }
 
    function handleSelect(start, end) {
@@ -171,15 +154,8 @@ export default function Dashboard() {
             </div>
             <div className="header-config">
                <select name="employees" onChange={changeEployee}>
-                  {employees.map(employee => (
-                     <option 
-                        value={employee._id} 
-                        key={employee._id}
-                     >
-                       {employee.firstName} {employee.lastName} 
-                     </option>
-                  ))}
-                 
+                  <option value="Raphael">Raphael Capeto</option>
+                  <option value="Pedro">Pedro Araujo</option>        
                </select>
                <FaComment size={28} color="#ce2026" 
                   onClick={() => setShowChatbox(!showChatbox)}
@@ -197,8 +173,17 @@ export default function Dashboard() {
          </header>
 
          <div className="app-system">
+            {modalEditEvent && 
+            <div className="black-mask"
+               onClick={() => setShowModalConfig(false)}
+            >
+               <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail}/>
+            </div>
+            }
             {showModalConfig &&
-               <div className="black-mask">
+               <div className="black-mask"
+                  onClick={() => setShowModalConfig(false)}
+               >
                   <ModalConfig onClose={onClose} logout={logOut} />
                </div>
             }
@@ -208,6 +193,7 @@ export default function Dashboard() {
                   <ModalAddEvent
                      onClose={() => setShowModalEventCreate(false)}
                      eventDetail={addEventWithDetail}
+                     editEventDetail={editEventDetail}
                   />
                </div>
             }
@@ -222,18 +208,21 @@ export default function Dashboard() {
             }
 
             {showModalEventDetail &&
-               <div className="black-mask">
+               <div className="black-mask"
+                  onClick={() => setShowModalEventDetail(false)}
+               >
                   <ModalEventDetail
                      data={eventDetail}
                      onClose={closeModalEventDetail}
                      deleteEvent={deleteEvent}
+                     onEdit={editEvent}
                   />
                </div>
             }
-
+         </div>
             <div className={classes.root}>
                <Grid container spacing={2}>
-                  <Grid item xs={3}>
+                  <Grid item container xs={3}>
                      <Grid item xs={12} style={{ paddingTop: 0 }} >
                         <Paper className={classes.paper}>
                            <CardHeader
@@ -242,7 +231,7 @@ export default function Dashboard() {
                               style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
                            />
                            <CardContent style={{ marginTop: -15}}>
-                              <NextEvents data={events} />
+                              <NextEvents />
                            </CardContent>
                         </Paper>
                      </Grid>
@@ -263,7 +252,6 @@ export default function Dashboard() {
                   <Grid item xs={9} style={{ paddingTop: 4 }}>
                      <Paper className={classes.calendar}>
                         <CalendarComponent
-                           data={events}
                            newEvent={handleSelect}
                            dblClick={showEvent}
                            addEvent={() => {
@@ -275,7 +263,6 @@ export default function Dashboard() {
                   </Grid>
                </Grid>
             </div>
-         </div>
       </div>
    );
 }

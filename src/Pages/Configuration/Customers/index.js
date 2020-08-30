@@ -12,26 +12,16 @@ import { formatDate } from '../../../Utils';
 
 export default function Customers() {
    const [customers, setCustomers] = useState([]);
+   const [customer, setCustomer] = useState(null);
    const { signed } = useContext(AuthContext);
    const history = useHistory();
 
    useEffect(() => {
-      async function getCustomers() {
-         const response = await arnold.post(`customer/get`, { email: 'teste1@teste.com', partnerId: ''}, {
-            headers: {
-               Abernathy : process.env.REACT_APP_ARNOLD_TOKEN,
-            }
-         });
-
-         console.log(response.data);
-         setCustomers(response.data);
-      } 
       
       if(!signed) {
          return history.push('/login');
       }
 
-      getCustomers();
 
    }, []);
 
@@ -49,7 +39,7 @@ export default function Customers() {
 
                   <div className="detail">
 
-                     {/* {customers.map(customer => (
+                     { customer &&  (
                         <details key={customer._id}>
                            <summary>{customer.firstName} {customer.lastName}</summary>
 
@@ -61,13 +51,14 @@ export default function Customers() {
                                     <FaTrash size={18} color="#131313" />
                                  </div>
                               </header>
+                              <p><strong>Endereço:</strong>{customer.address}</p>
                               <p><strong>E-mail:</strong> {customer.email}</p>
                               <p><strong>Número:</strong> {customer.mobileNumber}</p>
                               <p><strong>Aniversário:</strong> {formatDate(customer.birthday)}</p>
 
                            </div>
                         </details>
-                     ))} */}
+                     )}
                      <details>
                         <summary>Raphael Capeto</summary>
 

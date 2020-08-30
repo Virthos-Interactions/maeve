@@ -15,19 +15,9 @@ export default function Services() {
    const history = useHistory();
 
    useEffect(() => {
-      async function loadServices() {
-         const response = await api.get(`craft/parterId`);
-
-         console.log(response.data);
-
-         setServices(response.data.result);
-      }
-
       if(!signed) {
          return history.push('/login');
       }
-      
-      loadServices();
    }, []);
 
    return(

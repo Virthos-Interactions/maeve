@@ -10,9 +10,7 @@ import Customers from './Pages/Configuration/Customers';
 import Services from './Pages/Configuration/Services';
 import Configuration from './Pages/Configuration/Configurations';
 import Error from './Pages/Erro';
-
 import Home from './Pages/Home';
-import { AuthContext } from './context';
 
 export default function Routes() {   
    return(

@@ -1,51 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './style.css';
-
-import api, { bernard } from '../../services/api';
 
 import { isEqual } from 'date-fns';
 import { getHours, timeRemain } from '../../Utils';
+import { getEvents } from '../../Utils/request';
+import { AuthContext } from '../../context';
 
 
-export default function NextEvents({ data }) {
+export default function NextEvents() {
    const [events, setEvents] = useState([]);
+   const { user } = useContext(AuthContext);
+   const partnerId = user && user.partnerId; 
+   const employeeId = user && user._id;
 
    useEffect(() => {
-      async function getEvents() {
-         const response = await api.get(`appointments/partnerId`);
-
-         response.data.forEach(data => console.log(data.info));
-
-         setEvents(response.data);
-
-      } 
-
-      async function getEventsTeste() {
-         const partnerId = 'partner_1';
-
-         const response = await bernard.post(`maeve/appointmentsByPartner`, {
-            partnerId,
-         }, {
-            headers: {
-               Abernathy: process.env.REACT_APP_BERNARD_TOKEN
-            },
-         });
-
-         console.log(response.data);
-      }
-
-      // getEvents();
-      getEventsTeste();
-
+      getEvents(partnerId, employeeId, '2100-08-20').then(data => {
+         setTimeout(() => {
+            setEvents(data);
+        }, 10);
+      });
 
    }, []);
 
    let currentEvent = 0;
-   let currentEventUseEffect = 0;
 
-   const todayEvents = data.filter(event => {
+   const todayEvents = events.filter(event => {
 
-      const [dayEvent, monthEvent, yearEvent] = event.start.toLocaleDateString().split('/');
+      const [dayEvent, monthEvent, yearEvent] = new Date(Date.parse(event.info.appointmentStartHour))
+         .toLocaleDateString()
+         .split('/');  
       const formatDateEvent = new Date(`${yearEvent}/${monthEvent}/${dayEvent}`);
 
       const dateToday = new Date().toLocaleDateString().split('/');
@@ -53,78 +36,50 @@ export default function NextEvents({ data }) {
       const formatDateToday = new Date(`${yearToday}/${monthToday}/${dayToday}`);
 
 
-      if( event.end >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
+      if(new Date(Date.parse(event.info.appointmentEndHour)) >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
          return event;
       }
 
    });
+
+   console.log(todayEvents);
    return(
       <div className="next-events">
-         {todayEvents.sort((a, b) => a.end - b.end).map(event => {
+         {todayEvents.map(event => {
             currentEvent++;
 
-            if(currentEvent === 1) {
-               return(
-                  <div className="current-event" key={event.id}>
+            if(currentEvent == 1) {
+               return (
+                  <div className="current-event" key={event._id}>
                      <div className="event-all-content">
                         <div className="time-and-client-name">
-                           <h4>{getHours(event.start)}</h4>
-                           <p>{event.customer}</p>
+                           <h4>{getHours(event.info.appointmentStartHour)}</h4>
+                           <p>{event.info.customerName}</p>
                         </div>
 
                         <div className="current-event-details">
-                           <h4>{event.title}</h4>
+                           <h4>{event.info.craftName}</h4>
                            <h3>Tempo de atendimento:</h3>
-                           <p>{timeRemain(event.start, event.end)}</p>
+                           <p>{timeRemain(
+                               new Date(Date.parse(event.info.appointmentStartHour)),
+                               new Date(Date.parse(event.info.appointmentEndHour))
+                           )}</p>
 
                         </div>
                      </div>
                   </div>
                );
-            }
+         } 
 
             return(
-               <div className="other-event" key={event.customer}>
+               <div className="other-event" key={event._id}>
                   <div className="event-all-content">
-                     <h3>{getHours(event.start)}</h3>
-                     <p>{event.customer}</p>
+                     <h3>{getHours(event.info.appointmentStartHour)}</h3>
+                     <p>{event.info.customerName}</p>
                   </div>
                </div>
             );
          })}
-
-         {/* {events.map(event => {
-            currentEventUseEffect++;
-
-            if(currentEventUseEffect == 1) {
-               return (
-                  <div className="current-event" key={event.info.id}>
-                     <div className="event-all-content">
-                        <div className="time-and-client-name">
-                           <h4>{getHours(event.info.appointmentStartHour)}</h4>
-                           <p>{event.info.customer.firstName} {event.info.customer.lastName}</p>
-                        </div>
-
-                        <div className="current-event-details">
-                           <h4>{event.info.craft.craftType}</h4>
-                           <h3>Tempo de atendimento:</h3>
-                           <p>{event.info.craft.duration}min</p>
-
-                        </div>
-                     </div>
-                  </div>
-               );
-            } 
-
-            return(
-               <div className="other-event" key={event.info.id}>
-                  <div className="event-all-content">
-                     <h3>{getHours(event.info.appointmentStartHour)}</h3>
-                     <p>{event.info.customer.firstName} {event.info.customer.lastName}</p>
-                  </div>
-               </div>
-            );
-         })} */}
       </div>
    );
 }

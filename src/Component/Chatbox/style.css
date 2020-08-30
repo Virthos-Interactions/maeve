@@ -80,9 +80,8 @@
 
 .contact-chat .messages {
    overflow-y: scroll;
-   max-height: 370px;
-   height: 370px;
    padding: 10px;
+   height: 70%;
 
 }
 

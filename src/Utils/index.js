@@ -64,5 +64,5 @@ export function formatedMonth(month) {
 
 export function formatDate(date) {
   const [year, month, day] = date.split('-');
-  return `${day}/${month}/${year}`;
+  return `${day[0] + day[1]}/${month}/${year}`;
 }

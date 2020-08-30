@@ -1,9 +1,10 @@
 .activity-monitor {
-   height: 253px;
-   max-height: auto;
+   position: absolute;
+   width: 90%;
+   height: 80%;
    background-color: white;
    overflow-y: scroll;
-   padding: 8px;
+   padding: 0px 6px;
 }
 
 .activity-monitor header h3 {

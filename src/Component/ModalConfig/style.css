@@ -3,18 +3,29 @@
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   margin-top: 20px;
    height: 100%;
    position: absolute;
    right: 0;
-   top: -190px;
+   top: -22.5%;
    z-index: 5;
+}
+
+@media(min-height: 760px) {
+   .modal-config {
+      top: -27%;
+   }
+}
+
+@media(min-height: 900px) {
+   .modal-config {
+      top: -30%;
+   }
 }
 
 .modal {
    background-color: white;
    padding: 40px;
-   border-bottom-left-radius: 8px;
+   padding-bottom: 25px;
 }
 
 .modal-config .options-config-modal{
@@ -61,9 +72,9 @@
 }
 
 .modal .button-modal button:hover {
-   filter: brightness(90%);
-   color: black;
-   background-color: #cecece;
+   filter: brightness(70%);
+   background-color: #b71540 ;
+   color: white;
 }
 
 .btn-close-modal {
@@ -76,7 +87,7 @@
 }
 
 .black-mask {
-   position: absolute;
+   position: fixed;
    background-color: rgba(0, 0, 0, 0.4);
    width: 100%;
    height: 100%;

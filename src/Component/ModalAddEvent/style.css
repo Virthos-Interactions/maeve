@@ -8,6 +8,19 @@
    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
    border-radius: 8px;
 }
+
+.message {
+   color: red;
+   text-align: center;
+}
+
+@media(min-width: 1564px) {
+   .create-event {
+      top: 20vh;
+      right: 35%;
+   }
+}
+
 @media(max-width: 1300px) {
    .create-event {
       right: 300px;
@@ -31,11 +44,17 @@
 }
 
 .create-event .create-event-content .input-title input {
-   width: 84%;
+   width: 90%;
    padding: 10px 5px;
    border: none;
    border-bottom: 2px solid #cecece;
    font-size: 22px;
+   opacity: 0.7;
+}
+
+.create-event .create-event-content .input-title input:focus {
+   border-bottom: 2px solid #3498db;
+   opacity: 1;
 }
 
 .create-event .create-event-content .input-title svg {
@@ -72,6 +91,7 @@
    background-color: #cecece;
    font-size: 16px;
    width: 60px;
+   padding: 3px 0;
    text-align: center;
 }
 
@@ -99,7 +119,7 @@
 .input-customer-name input {
    border: none;
    background-color: #Cecece;
-   width: 77%;
+   width: 83%;
    padding: 5px;
    color: black;
    font-size: 17px;
@@ -117,7 +137,7 @@
 }
 
 .event-note textarea {
-   width: 77%;
+   width: 83%;
    min-height: 110px;
    border: none;
    background-color: #cecece;

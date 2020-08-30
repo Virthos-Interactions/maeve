@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { FaUser, FaLock } from 'react-icons/fa';
+import { FaUser, FaLock, FaWhatsapp, FaLinkedin } from 'react-icons/fa';
+import { AiOutlineMail, AiFillFacebook } from 'react-icons/ai';
 import './style.css';
 import logo from '../../assets/virthosLogo.png';
+import footerCircle from '../../assets/footer.png';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -20,23 +22,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
    const { signed, login } = useContext(AuthContext);
-   const [username, setUsername] = useState('');
+   const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const history = useHistory();
+   const [message, setMessage] = useState('');
 
    const classes = useStyles();
 
-   function handleSubmit() {
-      login();
-      history.push('/dashboard');
+   function handleSubmit(e) {
+      setMessage('');
+
+      e.preventDefault();
+
+      if(!email || !password) {
+         setMessage('Por favor preencha todos os campos');
+
+      } else {
+         login(email, password).then(() => {
+            setEmail('');
+            setPassword('');
+
+         }).catch(error => {
+            setMessage('Ops! Ocorreu um erro, tente novamente!');
+            setPassword('');
+            setEmail('');
+         });
+      }
    }
 
    
   useEffect(() => {
    if(signed) {
-      return history.push('/dashboard');
+      return history.push('/dashboard'); 
    }
-  }, []);
+  }, [signed]);
 
    return (
       <div className="container">
@@ -47,7 +66,7 @@ export default function Login() {
                <form className="form-login" onSubmit={handleSubmit} method="POST">
                   <div className="input-block">
                      <div className="icon">
-                        <FaUser size={22} color="#131313" />
+                        <FaUser size={20} color="#131313" />
                      </div>
                      <TextField
                         label="Nome do Usuário"
@@ -55,13 +74,13 @@ export default function Login() {
                         variant="outlined"
                         size="small"
                         color="secondary"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                      />
                   </div>
                   <div className="input-block">
                      <div className="icon">
-                        <FaLock size={22} color="#131313" />
+                        <FaLock size={20} color="#131313" />
                      </div>
                      <TextField
                         label="Senha"
@@ -76,6 +95,7 @@ export default function Login() {
                      />
                   </div>
                   <div className="text-center">
+                    <p>{message}</p>
                      <Button type="submit" variant="contained" className="btn-login">
                         Entrar
                      </Button>
@@ -83,6 +103,34 @@ export default function Login() {
                </form>
             </div>
          </section>
+         <div className="footer">
+            <footer>
+               <h3>Atenda seus clientes de maneira <br/>mais rápida, mais humanizada e mais moderna.</h3>
+               <div className="border-bottom">
+                  <img src={footerCircle} alt="Imagem do Rodapé"/>
+               </div>
+               
+               <p className="footer-explication">
+                  O Agendador Virthos utiliza inteligência artificial para 
+                  <br/>
+                  atender clientes e realizar agendamentos no seu calendário automaticamente.
+               </p>
+
+               <p className="contact-text">
+                  Quer saber mais? Fale com a gente!
+               </p>
+
+               <div className="social-midias">
+                  <FaWhatsapp color="white" size={25}/>
+                  <AiOutlineMail color="white" size={25}/>
+                  <FaLinkedin color="white" size={25}/>
+                  <AiFillFacebook color="white" size={25}/>
+               </div>
+
+               <p className="site">www.virthos.com.br</p>
+
+            </footer>
+         </div>
       </div>
    );
 }

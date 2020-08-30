@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { AuthContext } from '../../context';
+import { bernard } from '../../services/api';
 
 import { FaTimes, FaUser, FaClock, FaAlignLeft, FaCalendar  } from 'react-icons/fa';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
@@ -13,14 +15,49 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
    const [hourEnd, setHourEnd] = useState('');
    const [customer, setCustomer] = useState('');
    const [note, setNote] = useState('');
-
+   const [message, setMessage] = useState('');
+   const endHourinput = useRef(null);
+   const eventNameInput = useRef(null);
+   const monthInput = useRef(null);
+   const yearInput = useRef(null);
+   
+   const { user } = useContext(AuthContext);
 
    useEffect(() => {
       if(eventDetail) {
          setHourStart(getHours(eventDetail.start));
          setHourEnd(getHours(eventDetail.end));
       }
+
+      eventNameInput.current.focus();
    }, []);
+
+   function createEvent(start, end, title, employeeId, customer, information) {
+      return new Promise((resolve, reject) => {
+         bernard.post('/appointment/create', {
+            partnerId: user.partnerId,
+            info: {
+               appointmentStartHour: start,
+               appointmentEndHour: end,
+               craftName: title,
+               information: information ? information : '',
+               employee : {
+                  _id: employeeId,
+               },
+               customerName: customer,
+               partner: {
+                  _id: user.partnerId,
+               }
+            },           
+         }, {
+            headers: {
+               Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
+            }
+         })
+         .then(() => resolve())
+         .catch(err => reject(err));         
+      });
+   }
 
    async function handleSaveNewEvent(e) {
       e.preventDefault();
@@ -29,20 +66,22 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
          if(title && hourStart && hourEnd && customer) {
          
-            const newEvent = {
+            createEvent(
+               eventDetail.start,
+               eventDetail.end,
                title,
-               start: eventDetail.start,
-               end: eventDetail.end,
+               user._id,
                customer,
-               note
-            }
-   
-            console.log(newEvent); //dados do evento
-
-            onClose();
-   
+               note,
+            )
+            .then(() => {
+               onClose();
+               window.location.reload();
+            })
+            .catch(err => console.log(err));
+            
          } else {
-            alert('Por favor preencha todos os campos');
+            setMessage('Por favor preencha todos os campos');
          }
 
 
@@ -51,33 +90,36 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
          if(title && hourStart && hourEnd && customer && day && month && year) {
 
             if(!hourStart.includes(':') || !hourEnd.includes(':')) {
-               return alert('Por favor insira a hora corretamente');
+               return setMessage('Por favor insira a hora corretamente');
             }
 
-            if(month === '0' || Number(month) > 12) return alert('Por favor insira uma mês existente');
+            if(month === '0' || Number(month) > 12) return setMessage('Por favor insira uma mês existente');
 
-            if(Number(day) > 31) return alert('Por favor digite um dia existente');
-            if(year.length === 1) return alert('Por favor digite um ano com 2 dígitos');
+            if(Number(day) > 31) return setMessage('Por favor digite um dia existente');
+            if(year.length === 1) return setMessage('Por favor digite um ano com 2 dígitos');
 
             const formatedYear = (year.length === 2) ? `20${year}` : year;
 
             const [startH, startM] = hourStart.split(':');
             const [endH, endM] = hourEnd.split(':');
          
-            const newEvent = {
+            createEvent(
+               new Date(formatedYear, formatedMonth(month), day, startH, startM),
+               new Date(formatedYear, formatedMonth(month), day, startH, startM),
                title,
-               start: new Date(formatedYear, formatedMonth(month), day, startH, startM),
-               end: new Date(formatedYear, formatedMonth(month), day, endH, endM),
+               user._id,
                customer,
-               note
-            }
+               note,
+            )
+            .then(() => {
+               onClose();
+               window.location.reload();
+            })
+            .catch(err => console.log(err));
    
-            console.log(newEvent); //dados do evento
-
-            onClose();
    
          } else {
-            alert('Por favor preencha todos os campos');
+            setMessage('Por favor preencha todos os campos');
          }
       }   
    }
@@ -91,7 +133,9 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                      <input 
                         type="text" 
                         value={title}
+                        ref={eventNameInput}
                         name="title"
+                        autoComplete={false}
                         onChange={e => setTitle(e.target.value)}
                         placeholder="Nome do evento"
                      />
@@ -99,7 +143,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                   </div>
 
                   <div className="event-details">
-                     {eventDetail && (
+                     { eventDetail && (
                         <p>{`${getDayWeek(eventDetail.start)}, ${getDate(eventDetail.start)}`}</p>
                      )}
                      <div className="create-container">  
@@ -114,6 +158,8 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
                                     const regex = /(\d{2})(\d{2})/;
                                     e.target.value = e.target.value.replace(regex, '$1:$2');
+
+                                    endHourinput.current.focus();
                                  }
 
                                  setHourStart(e.target.value);
@@ -131,6 +177,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                               name="hourEnd"
                               disabled={eventDetail}
                               placeholder="00:00"
+                              ref={endHourinput}
                               value={hourEnd} onChange={e => {
                                  e.target.value = e.target.value.replace(/\D/g, '')
 
@@ -156,7 +203,12 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                                  maxLength="2"
                                  name="eventDay"
                                  value={day}
-                                 onChange={ e => setDay(e.target.value)}
+                                 onChange={ e => {
+                                    setDay(e.target.value);
+                                    if(e.target.value.length === 2) {
+                                       monthInput.current.focus();
+                                    }
+                                 }}
                               />
 
                               <p>/</p>
@@ -167,7 +219,14 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                                  maxLength="2"
                                  name="eventMonth"
                                  value={month}
-                                 onChange={ e => setMonth(e.target.value)}
+                                 ref={monthInput}
+                                 onChange={ e => {
+                                    setMonth(e.target.value);
+
+                                    if(e.target.value.length === 2) {
+                                       yearInput.current.focus();
+                                    }
+                                 }}
                               />
 
                               <p>/</p>
@@ -178,6 +237,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                                  maxLength="4"
                                  name="eventYear"
                                  value={year}
+                                 ref={yearInput}
                                  onChange={ e => setYear(e.target.value)}
                               />
 
@@ -201,6 +261,10 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                               name="note"
                            ></textarea>
                         </div>
+
+                        {message && (
+                           <p className="message">{message}</p>
+                        )}
 
                      <div className="btn-save-event">
                         <button type="submit">Salvar</button>

@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import moment from 'moment';
-import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Views, Navigate } from 'react-big-calendar';
 import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/pt-br';
 import './style.css';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
+import { getEvents } from '../../Utils/request';
+import { AuthContext } from '../../context';
 
 let handleAddEvent = null;
 
-export default function CalendarComponent({ data, newEvent, dblClick, addEvent }) {
+export default function CalendarComponent({newEvent, dblClick, addEvent }) {
    moment.locale('pt-br');
+   const [events, setEvents] = useState([]);
+   const { user } = useContext(AuthContext);
+
+   useEffect(() => {
+      const partnerId = user && user.partnerId; 
+      const employeeId = user && user._id;
+
+      getEvents(partnerId, employeeId, '2100-08-20').then(data => {
+         setEvents(data);
+      });
+   }, []);
+
+
+   const formatedEvents = events.map(event => {
+      return {
+         title: event.info.craftName,
+         start: new Date(Date.parse(event.info.appointmentStartHour)),
+         end: new Date(Date.parse(event.info.appointmentEndHour)),
+         id: event._id,
+         customer: event.info.customerName,
+         note: event.info.information
+      }
+   });
 
    const eventStyleGetter = (event, start, end, isSelected) => {
       return {
@@ -37,14 +62,14 @@ export default function CalendarComponent({ data, newEvent, dblClick, addEvent }
 
          <Calendar
             localizer={localizer}
-            events={data}
+            events={formatedEvents}
             views={{ month: true, week: true, day: true }}
             selectable
             defaultView={Views.WEEK}
             onDoubleClickEvent={(e) => dblClick(e)}
             onSelectSlot={({ start, end }) => newEvent(start, end)}
             style={{ 
-               height: 612, 
+               height: '87vh', 
                paddingRight: 20, 
                paddingLeft: 20, 
                paddingTop: 10, 
@@ -55,7 +80,6 @@ export default function CalendarComponent({ data, newEvent, dblClick, addEvent }
             timeslots={1}
             min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
             max={new Date(2008, 0, 1, 23, 0)} // Max will be 6.00 PM!
-            date={new Date()}
          />
       </div>
    );
@@ -67,8 +91,24 @@ class CustomToolbar extends Toolbar {
          <div>
             <div className='rbc-toolbar'>
 
-               <span className="calendar-info">{this.props.label}</span>
+               <div className="nav-buttons">
+                  <button
+                     onClick={() => this.navigate('PREV')}
+                  >
+                     <FaAngleLeft color="#737373" size={20}/>
+                  </button>
+                  <button
+                     onClick={() => this.navigate('TODAY')}
+                  >Hoje</button>
+                  <button
+                     onClick={() => this.navigate('NEXT')}
+                  >
+                     <FaAngleRight color="#737373" size={20}/>
+                  </button>
+                  <span className="calendar-info">{this.props.label}</span>
+               </div>
 
+              
                <span className="">
                   <button type="button" onClick={() => this.view('month')}>Mês</button>
                   <button type="button active" onClick={() => this.view('week')}>Semana</button>

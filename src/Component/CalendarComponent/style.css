@@ -120,13 +120,13 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   font-size: 14px;   
+   font-size: 14px; 
+   transition: 0.2s;  
 }
 
 .rbc-toolbar button.add-button:hover {
-   filter: brightness(90%);
-   background-color: #cecece;
-   color: black;
+   filter: brightness(70%);
+   color: white;
 }
 
 .rbc-current-time-indicator {
@@ -149,4 +149,26 @@ div.rbc-calendar {
 
 div.makeStyles-calendar-8 {
    max-height: auto;
+}
+
+.nav-buttons {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+}
+
+.rbc-toolbar .nav-buttons button {
+   color: #737373;
+   font-weight: bold;
+   font-size: 15px;
+   background-color: transparent;
+   border: none;
+   border-radius: 3px;
+   display: flex;
+   cursor: pointer;
+   transition: 200ms;
+   width: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

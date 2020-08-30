@@ -2,15 +2,17 @@ import React from 'react';
 
 import './style.css';
 import { getDate, getHours, getDayWeek } from '../../Utils';
-import { FaTimes, FaUser, FaClock, FaAlignLeft, FaTrash  } from 'react-icons/fa';
+import { FaTimes, FaUser, FaClock, FaAlignLeft, FaTrash, FaPencilAlt  } from 'react-icons/fa';
 
-export default function ModalEventDetail({ data, onClose, deleteEvent }) {
-   
+export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit }) {
    return(
-      <div className="modal-detail-event">
+      <div className="modal-detail-event"
+          
+      >
          <header>
             <p>{data.title}</p>
             <div className="modal-navigation">
+               <FaPencilAlt size={18} color="#cecece" onClick={() => onEdit(data)} />
                <FaTrash size={18} color="#cecece" onClick={() => deleteEvent(data)}/>
                <FaTimes size={22} color="#cecece" onClick={() => onClose()}/>
             </div>

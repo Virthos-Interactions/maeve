@@ -12,4 +12,8 @@ export const bernard = axios.create({
    baseURL: process.env.REACT_APP_BERNARD_URL
 });
 
+export const authentication = axios.create({
+   baseURL: process.env.REACT_APP_LOGIN_URL
+});
+
 export default api;

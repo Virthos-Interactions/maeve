@@ -1,10 +1,11 @@
 .next-events{
    width: auto;
-   height: 253px;
-   max-height: auto;
+   position: absolute;
+   width: 90%;
+   height: 80%;
    background-color: white;
    overflow-y: scroll;
-   padding: 8px;
+   padding: 8px 6px;
 }
 
 .next-events header h3 {
@@ -21,6 +22,7 @@
 
 .current-event {
    padding-right: 5px;
+   margin-bottom: 2px;
 }
 
 .current-event .event-all-content {
@@ -99,4 +101,8 @@
    border-radius: 5px;
    width: 300px;
    box-shadow: 3px 6px 4px 3px rgba(0, 0, 0, 0.1);
+}
+
+.other-event:last-child {
+   margin-top: -10px;
 }

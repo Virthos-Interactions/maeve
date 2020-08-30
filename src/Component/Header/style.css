@@ -9,10 +9,17 @@
    justify-content: space-between;
    align-items: center;
    background-color: white;
-   padding: 14px;
+   padding: 14px 25px;
 }
 
 .header header svg {
    margin-right: 10px;
    cursor: pointer;
+   transition: .2s;
+}
+
+.header header svg:hover {
+   margin-right: 10px;
+   cursor: pointer;
+   filter: brightness(70%);
 }

@@ -15,17 +15,10 @@ export default function Employees() {
    const history = useHistory();
 
    useEffect(() => {
-      async function getEmployess() {
-         const response = await api.get(`employee/partnerId`);
-
-         setEmployees(response.data.result);
-      }
-
+     
       if(!signed) {
          return history.push('/login');
       }
-
-      getEmployess();
 
    }, []);
    
