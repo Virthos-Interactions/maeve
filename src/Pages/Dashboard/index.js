@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
    paper: {
       color: theme.palette.text.secondary,
       height: '100% !important',
+      position: 'relative'
    },
    calendar: {
       color: theme.palette.text.secondary,
@@ -124,7 +125,6 @@ export default function Dashboard() {
 
    function deleteEvent(data) {
       if(window.confirm(`Você realmente deseja apagar ${data.title}?`)) {
-         setEvents(events.filter(event => event.id !== data.id));
          setShowModalEventDetail(false);
       }
    }

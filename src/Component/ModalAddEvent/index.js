@@ -21,7 +21,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
    const monthInput = useRef(null);
    const yearInput = useRef(null);
    
-   const { user } = useContext(AuthContext);
+   const { user, dispatch } = useContext(AuthContext);
 
    useEffect(() => {
       if(eventDetail) {
@@ -76,7 +76,22 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
             )
             .then(() => {
                onClose();
-               window.location.reload();
+
+               dispatch({
+                  type: 'reloadPage',
+                  payload: {
+                     reload: true,
+                  }
+               });
+
+               setTimeout(() => {
+                  dispatch({
+                     type: 'reloadPage',
+                     payload: {
+                        reload: false,
+                     }
+                  });
+               }, 100);
             })
             .catch(err => console.log(err));
             

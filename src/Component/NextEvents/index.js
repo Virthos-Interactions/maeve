@@ -9,18 +9,23 @@ import { AuthContext } from '../../context';
 
 export default function NextEvents() {
    const [events, setEvents] = useState([]);
-   const { user } = useContext(AuthContext);
+   const { user, state } = useContext(AuthContext);
    const partnerId = user && user.partnerId; 
    const employeeId = user && user._id;
 
    useEffect(() => {
-      getEvents(partnerId, employeeId, '2100-08-20').then(data => {
-         setTimeout(() => {
-            setEvents(data);
-        }, 10);
-      });
+      if(employeeId && partnerId) {
+         getEvents(partnerId, employeeId, '2100-08-20').then(data => {
+            setTimeout(() => {
+               if(data instanceof Array) {
+                  setEvents(data);
+               }
+               
+           }, 10);
+         });
+      }
 
-   }, []);
+   }, [state.reload]);
 
    let currentEvent = 0;
 
@@ -42,7 +47,6 @@ export default function NextEvents() {
 
    });
 
-   console.log(todayEvents);
    return(
       <div className="next-events">
          {todayEvents.map(event => {

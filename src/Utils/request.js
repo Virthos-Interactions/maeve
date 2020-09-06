@@ -1,6 +1,9 @@
 import { bernard } from '../services/api';
 
-export function getEvents(partnerId, employeeId, endDate) {
+export function getEvents(
+   partnerId, 
+   employeeId,  
+   endDate) {
    return new Promise(async (resolve, reject) => {
       const response = await bernard.post('/appointmentsByPeriod', {
          partnerId: partnerId,
@@ -13,7 +16,7 @@ export function getEvents(partnerId, employeeId, endDate) {
             Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
          }
       });
-
+      
       resolve(response.data);
    });
 }  

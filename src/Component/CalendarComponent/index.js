@@ -14,16 +14,20 @@ let handleAddEvent = null;
 export default function CalendarComponent({newEvent, dblClick, addEvent }) {
    moment.locale('pt-br');
    const [events, setEvents] = useState([]);
-   const { user } = useContext(AuthContext);
+   const { user, state } = useContext(AuthContext);
 
    useEffect(() => {
       const partnerId = user && user.partnerId; 
       const employeeId = user && user._id;
 
+     if(partnerId && employeeId) {
       getEvents(partnerId, employeeId, '2100-08-20').then(data => {
-         setEvents(data);
+         if(data instanceof Array) {
+            setEvents(data);
+         }
       });
-   }, []);
+     }
+   }, [state.reload]);
 
 
    const formatedEvents = events.map(event => {

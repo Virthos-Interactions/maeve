@@ -1,10 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useReducer } from 'react';
 import { authentication } from '../services/api';
+import { initialState, EventReducer } from '../reducer/EventReducer';
 
 export const AuthContext = createContext({});
 
 export default function Context({ children }) {
    const [user, setUser] = useState(null);
+   const [state, dispatch] = useReducer(EventReducer, initialState);
 
    useEffect(() => {
       const data = localStorage.getItem('user'); 
@@ -54,6 +56,8 @@ export default function Context({ children }) {
          signed: user ? true : false,
          logout,
          login,
+         state,
+         dispatch
       }}>
          { children }
       </AuthContext.Provider>
