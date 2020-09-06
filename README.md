@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 OLÁ
+
+sudo iptables -A PREROUTING -t nat -p tcp --dport 3000 -j REDIRECT --to-ports 443
+pm2 start app.config.json --name meave
+
 ## Available Scripts
 
 In the project directory, you can run:
