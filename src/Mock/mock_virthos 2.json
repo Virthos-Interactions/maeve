@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "9fe7733b-e218-4575-b187-4ddb2068b1e8",
+		"name": "Agendador Virthos Mock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Activities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/activities/partnerId",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"activities",
+						"partnerId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Appointments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/appointments/partnerId",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"appointments",
+						"partnerId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Crafts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/craft/parterId",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"craft",
+						"parterId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/employee/parterId",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"employee",
+						"parterId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/customer/partnerId",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"customer",
+						"partnerId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\": \"5f14774f77fee444a6787c01\",\n    \"firstName\": \"Customer 1\",\n    \"lastName\": \"Santos\",\n    \"address\": \"addr1\",\n    \"email\": \"customer@teste.com\",\n    \"mobileNumber\": \"5512987654321\",\n    \"birthday\": \"1999-03-08\",\n    \"numberOfSchedules\": 4,\n    \"numberOfCancelations\": 1,\n    \"numberOfAbsences\": 0,\n    \"dateOfFirstSchedule\": \"2020-10-01\",\n    \"dateOfLastSchedule\": \"2020-12-01\",\n    \"avgTicketCompetence\": 70.00,\n    \"avgTicketCash\": 70.00,\n    \"specifications\": [\n        {\n            \"craft\": {\n                \"_id\": \"5f14774f77fee444a6787c06\",\n                \"name\": \"Corte de cabelo\",\n                \"description\": \"Masculino\",\n                \"price\": 81,\n                \"priceQuestionList\": [\n\n                ],\n                \"duration\": null,\n                \"durationQuestionList\": [\n                    \"Qual corte você quer?\",\n                    \"Tem alguma foto para eu usar como referência?\"\n                ],\n                \"instructions\": \"Devido a pandemia, solicitamos que você lave bem o cabelo antes de vir fazer o corte.\",\n                \"recurrence\": 30,\n                \"__v\": 0\n            },\n            \"customPrice\": 100,\n            \"customDuration\": 60\n        }\n    ],\n    \"schedulesHistory\": [\n\n    ],\n    \"hasActiveSchedule\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/customer/update",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"customer",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\": \"5f14774f77fee444a6787c01\",\n    \"firstName\": \"Customer 1\",\n    \"lastName\": \"Santos\",\n    \"address\": \"addr1\",\n    \"email\": \"customer@teste.com\",\n    \"mobileNumber\": \"5512987654321\",\n    \"birthday\": \"1999-03-08\",\n    \"numberOfSchedules\": 4,\n    \"numberOfCancelations\": 1,\n    \"numberOfAbsences\": 0,\n    \"dateOfFirstSchedule\": \"2020-10-01\",\n    \"dateOfLastSchedule\": \"2020-12-01\",\n    \"avgTicketCompetence\": 70.00,\n    \"avgTicketCash\": 70.00,\n    \"specifications\": [\n        {\n            \"craft\": {\n                \"_id\": \"5f14774f77fee444a6787c06\",\n                \"name\": \"Corte de cabelo\",\n                \"description\": \"Masculino\",\n                \"price\": 81,\n                \"priceQuestionList\": [\n\n                ],\n                \"duration\": null,\n                \"durationQuestionList\": [\n                    \"Qual corte você quer?\",\n                    \"Tem alguma foto para eu usar como referência?\"\n                ],\n                \"instructions\": \"Devido a pandemia, solicitamos que você lave bem o cabelo antes de vir fazer o corte.\",\n                \"recurrence\": 30,\n                \"__v\": 0\n            },\n            \"customPrice\": 100,\n            \"customDuration\": 60\n        }\n    ],\n    \"schedulesHistory\": [\n\n    ],\n    \"hasActiveSchedule\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/customer",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Craft",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"ID\",\n    \"name\": \"NAME\",\n    \"description\": \"DESCRIPTION\",\n    \"craftType\": \"hair\",\n    \"price\": 10.00,\n    \"questionListPrice\": [\"Q1\", \"Q2\"],\n    \"duration\": 30,\n    \"questionListDuration\": [\"Q1\", \"Q2\"],\n    \"instructions\": \"I\",\n    \"recurence\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/craft/update",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"craft",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Craft",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"ID\",\n    \"name\": \"NAME\",\n    \"description\": \"DESCRIPTION\",\n    \"craftType\": \"hair\",\n    \"price\": 10.00,\n    \"questionListPrice\": [\"Q1\", \"Q2\"],\n    \"duration\": 30,\n    \"questionListDuration\": [\"Q1\", \"Q2\"],\n    \"instructions\": \"I\",\n    \"recurence\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/craft",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"craft"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"info\": {\n            \"day\": \"monday\",\n            \"appointmentStartHour\": \"2020-07-15T11:00:00Z\",\n            \"appointmentEndHour\": \"2020-07-15T12:00:00Z\",\n            \"craft\": {\n                \"id\": \"ID\",\n                \"name\": \"NAME\",\n                \"description\": \"DESCRIPTION\",\n                \"craftType\": \"hair\",\n                \"price\": 10,\n                \"questionListPrice\": [\n                    \"Q1\",\n                    \"Q2\"\n                ],\n                \"duration\": 30,\n                \"questionListDuration\": [\n                    \"Q1\",\n                    \"Q2\"\n                ],\n                \"instructions\": \"I\",\n                \"recurence\": 7\n            },\n            \"employee\": {\n                \"firstName\": \"FIRST NAME\",\n                \"lastName\": \"LAST NAME\",\n                \"craftList\": [\n                    \"C1\",\n                    \"C2\"\n                ],\n                \"jobTimeList\": [\n                    \"J1\",\n                    \"J2\"\n                ]\n            },\n            \"partner\": {\n                \"name\": \"PARTNER NAME\",\n                \"assistandId\": \"ABC123\",\n                \"assistantName\": \"Raimundo\",\n                \"employeeList\": [\n                    \"E1\",\n                    \"E2\"\n                ]\n            },\n            \"customer\": {\n                \"firstName\": \"euu\",\n                \"lastName\": \"mesmo\",\n                \"address\": \"aqui\",\n                \"email\": \"esse@x.com\",\n                \"mobileNumber\": \"1\",\n                \"birthday\": \"19940917\",\n                \"numberOfSchedules\": 0,\n                \"numberOfCancelations\": 0,\n                \"numberOfAbsences\": 0,\n                \"dateOfFirstSchedule\": null,\n                \"dateOfLastSchedule\": null,\n                \"avgTicketCompetence\": null,\n                \"avgTicketCash\": null,\n                \"specifications\": \"specifications\",\n                \"schedulesHistory\": null,\n                \"hasActiveSchedule\": false\n            }\n        }\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/createAppointment",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"createAppointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"employeeId\": \"id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/employee",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"FIRST NAME\",\n    \"lastName\": \"LAST NAME\",\n    \"craftList\": \"craftList\",\n    \"jobTimeList\": \"jobTimeList\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/employee",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"FIRST NAME\",\n    \"lastName\": \"LAST NAME\",\n    \"craftList\": \"craftList\",\n    \"jobTimeList\": \"jobTimeList\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/employee/update",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"employee",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"info\": {\n        \"day\": \"monday\",\n        \"appointmentStartHour\": \"2020-07-15T11:00:00Z\",\n        \"appointmentEndHour\": \"2020-07-15T12:00:00Z\",\n        \"craft\": {\n            \"id\": \"ID\", \n            \"name\": \"NAME\", \n            \"description\": \"DESCRIPTION\",\n            \"craftType\": \"hair\",  \n            \"price\": 10.00, \n            \"questionListPrice\":[\"Q1\", \"Q2\"], \n            \"duration\": 30, \n            \"questionListDuration\":[\"Q1\", \"Q2\"],\n            \"instructions\": \"I\",\n            \"recurence\": 7\n        },\n        \"employee\": {\n            \"firstName\": \"FIRST NAME\",\n            \"lastName\": \"LAST NAME\",\n            \"craftList\": [\"C1\",\"C2\"],\n            \"jobTimeList\":[\"J1\",\"J2\"]\n        },\n        \"partner\": {\n            \"name\": \"PARTNER NAME\",\n            \"assistandId\": \"ABC123\",\n            \"assistantName\": \"Raimundo\",\n            \"employeeList\": [\"E1\", \"E2\"]\n        },\n        \"customer\": {\n            \"firstName\" : \"euu\",\n            \"lastName\" : \"mesmo\",\n            \"address\" : \"aqui\",\n            \"email\" : \"esse@x.com\",\n            \"mobileNumber\" : \"1\",\n            \"birthday\" : \"19940917\",\n            \"numberOfSchedules\" : 0,\n            \"numberOfCancelations\" : 0,\n            \"numberOfAbsences\" : 0,\n            \"dateOfFirstSchedule\" : null,\n            \"dateOfLastSchedule\" : null,\n            \"avgTicketCompetence\" : null,\n            \"avgTicketCash\" : null,\n            \"specifications\" : \"specifications\",\n            \"schedulesHistory\" : null,\n            \"hasActiveSchedule\" : false\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/updateAppointment",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"updateAppointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Appointment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"appointmentId\": \"id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/deleteAppointment",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"deleteAppointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/customer",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Craft",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"craftId\": \"id\",\n    \"employeeId\": \"id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/craft",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"craft"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://agendador-virthos-mock-backend.mybluemix.net/updateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://agendador-virthos-mock-backend.mybluemix.net/updateAccount",
+					"protocol": "https",
+					"host": [
+						"agendador-virthos-mock-backend",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"updateAccount"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
