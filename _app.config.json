@@ -1,0 +1,10 @@
+{
+  apps : [
+    {
+      name      : "maeve",
+      script    : "npm",
+      interpreter: "none",
+      args: "start"
+    }
+  ]
+}
