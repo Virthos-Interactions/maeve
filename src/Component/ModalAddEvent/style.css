@@ -1,7 +1,4 @@
 .create-event {
-   position: absolute;
-   right: 420px;
-   top: 15vh;
    padding: 30px;
    width: 600px;
    background-color: white;
@@ -12,31 +9,6 @@
 .message {
    color: red;
    text-align: center;
-}
-
-@media(min-width: 1564px) {
-   .create-event {
-      top: 20vh;
-      right: 35%;
-   }
-}
-
-@media(max-width: 1300px) {
-   .create-event {
-      right: 300px;
-   }
-}
-
-@media(max-width: 980px) {
-   .create-event {
-      right: 150px;
-   }
-}
-
-@media(max-width: 780px) {
-   .create-event {
-      right: 90px;
-   }
 }
 
 .create-event .create-event-content {
@@ -105,6 +77,7 @@
    margin-top: 10px;
 }
 
+.input-customer-phone,
 .input-customer-name {
    display: flex;
    align-items: center;
@@ -112,10 +85,12 @@
    margin-top: 10px;
 }
 
+.input-customer-phone svg,
 .input-customer-name svg {
    margin-right: 20px;
 }
 
+.input-customer-phone input,
 .input-customer-name input {
    border: none;
    background-color: #Cecece;
@@ -129,7 +104,7 @@
    display: flex;
    align-items: center;
    flex-direction: row;
-   margin-top: 20px; 
+   margin-top: 10px; 
 }
 
 .event-note svg {

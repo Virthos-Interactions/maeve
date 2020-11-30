@@ -3,6 +3,7 @@ import { AuthContext } from '../../context';
 import { bernard } from '../../services/api';
 
 import { FaTimes, FaUser, FaClock, FaAlignLeft, FaCalendar  } from 'react-icons/fa';
+import { AiFillPhone } from 'react-icons/ai';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
 import './style.css';
 
@@ -10,6 +11,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
    const [title, setTitle] = useState('');
    const [hourStart, setHourStart] = useState('');
    const [month, setMonth] = useState('');
+   const [phone, setPhone] = useState('');
    const [day, setDay] = useState('');
    const [year, setYear] = useState('');
    const [hourEnd, setHourEnd] = useState('');
@@ -23,13 +25,31 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
    
    const { user, dispatch } = useContext(AuthContext);
 
+   function attFeed() {
+      dispatch({
+         type: 'reloadPage',
+         payload: {
+            reload: true,
+         }
+      });
+   
+      setTimeout(() => {
+         dispatch({
+            type: 'reloadPage',
+            payload: {
+               reload: false,
+            }
+         });
+      }, 100);
+   }
+
    useEffect(() => {
       if(eventDetail) {
          setHourStart(getHours(eventDetail.start));
          setHourEnd(getHours(eventDetail.end));
       }
 
-      eventNameInput.current.focus();
+      eventNameInput.current.focus();      
    }, []);
 
    function createEvent(start, end, title, employeeId, customer, information) {
@@ -39,12 +59,17 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
             info: {
                appointmentStartHour: start,
                appointmentEndHour: end,
-               craftName: title,
+               craft: {
+                  name: 'corte de cabelo'
+               },
                information: information ? information : '',
                employee : {
                   _id: employeeId,
                },
-               customerName: customer,
+               customer: {
+                  name: customer,
+                  mobileNumber: '5500987654322',
+               },
                partner: {
                   _id: user.partnerId,
                }
@@ -54,7 +79,11 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
             }
          })
-         .then(() => resolve())
+         .then(() => {
+            attFeed();
+
+            resolve();
+         })
          .catch(err => reject(err));         
       });
    }
@@ -75,23 +104,8 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                note,
             )
             .then(() => {
+               attFeed();
                onClose();
-
-               dispatch({
-                  type: 'reloadPage',
-                  payload: {
-                     reload: true,
-                  }
-               });
-
-               setTimeout(() => {
-                  dispatch({
-                     type: 'reloadPage',
-                     payload: {
-                        reload: false,
-                     }
-                  });
-               }, 100);
             })
             .catch(err => console.log(err));
             
@@ -127,8 +141,8 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                note,
             )
             .then(() => {
+               attFeed();
                onClose();
-               window.location.reload();
             })
             .catch(err => console.log(err));
    
@@ -150,7 +164,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                         value={title}
                         ref={eventNameInput}
                         name="title"
-                        autoComplete={false}
+                        autoComplete="false"
                         onChange={e => setTitle(e.target.value)}
                         placeholder="Nome do evento"
                      />
@@ -265,6 +279,24 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                               placeholder="Nome do Cliente"
                               value={customer} onChange={e => setCustomer(e.target.value)} 
                               name="customer"
+                           />
+                              
+                        </div>
+
+                        <div className="input-customer-phone">
+                           <AiFillPhone size={20} color="#cecece" />
+                           <input type="text" 
+                              placeholder="Telefone do Cliente"
+                              value={phone} onChange={e => {
+                                 e.target.value = e.target.value.replace(/\D/g, '');
+
+                                 if(e.target.value.length > 11) {
+                                    e.target.value.split(0, -1);
+                                 } else {
+                                    setPhone(e.target.value);
+                                 }
+                              }} 
+                              name="phone"
                            />
                               
                         </div>

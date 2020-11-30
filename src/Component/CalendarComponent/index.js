@@ -32,12 +32,13 @@ export default function CalendarComponent({newEvent, dblClick, addEvent }) {
 
    const formatedEvents = events.map(event => {
       return {
-         title: event.info.craftName,
+         title: event.info.craft.name,
          start: new Date(Date.parse(event.info.appointmentStartHour)),
          end: new Date(Date.parse(event.info.appointmentEndHour)),
          id: event._id,
-         customer: event.info.customerName,
-         note: event.info.information
+         customer: event.info.customer.firstName,
+         note: event.info.information,
+         customerNumber: event.info.customer.mobileNumber,
       }
    });
 

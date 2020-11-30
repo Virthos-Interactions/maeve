@@ -16,7 +16,41 @@ export function getEvents(
             Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
          }
       });
-      
+
       resolve(response.data);
    });
 }  
+
+export function deleteAppointmentEvent(id, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await bernard.delete('/appointment/delete', {
+         partnerId: partnerId,
+         appointmentId: id,
+      },{  
+         headers: {
+            Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
+         }
+      });        
+      resolve(response);
+   });
+}
+
+export function editAppointmentEvent(id, newHourStart, newHourEnd, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await bernard.post('/appointment/update', {
+         partnerId: partnerId,
+         info:
+            { 
+            appointmentStartHour: newHourStart,
+            appointmentEndHour: newHourEnd,
+            appointmentId: id
+         },
+      },{  
+         headers: {
+            Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
+         }
+      });  
+
+      resolve(response);
+   });
+}

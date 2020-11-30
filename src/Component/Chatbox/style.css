@@ -1,8 +1,5 @@
 .chat,
 .chatbox {
-   position: absolute;
-   top: 50px;
-   right: 3px;
    width: 300px;
    background-color: white;
 }
@@ -85,7 +82,7 @@
 
 }
 
-.contact-chat .messages .message.me {
+.contact-chat .messages .chat-message.me {
    padding: 10px;
    text-align: end;
    border: 1px solid #cecece;
@@ -95,7 +92,7 @@
    font-size: 15px;
 }
 
-.contact-chat .messages .message.customer {
+.contact-chat .messages .chat-message.customer {
    padding: 10px;
    text-align: start;
    background-color: #cecece;

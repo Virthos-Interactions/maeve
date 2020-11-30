@@ -28,14 +28,14 @@ export default function Chat({ data, onBack, onClose }) {
                   {data.messages.map(message => {
                      if(message.customer) {
                         return (
-                           <div className="message customer" key={message.id}>
+                           <div className="chat-message customer" key={message.id}>
                               <p>{message.text}</p>
                            </div>  
                         );
                      }
 
                      return (
-                        <div className="message me" key={message.id}>
+                        <div className="chat-message me" key={message.id}>
                            <p>{message.text}</p>
                         </div> 
                      );

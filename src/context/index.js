@@ -57,7 +57,7 @@ export default function Context({ children }) {
          logout,
          login,
          state,
-         dispatch
+         dispatch,
       }}>
          { children }
       </AuthContext.Provider>

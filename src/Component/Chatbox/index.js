@@ -41,7 +41,9 @@ export default function Chatbox({ onClose }) {
       <div>
          {showChat && 
             <div className="black-mask">
+              <div className="black-mask-left-content">
                <Chat data={contactDetail} onBack={backChatbox} onClose={() => setShowChat(false)}/>
+              </div>
             </div>
          }
          <div className="chatbox">

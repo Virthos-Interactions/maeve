@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 
 import { getHours, getDayWeek, getDate } from '../../Utils/index';
 import { FaTimes, FaUser, FaClock, FaAlignLeft  } from 'react-icons/fa';
+import { editAppointmentEvent } from '../../Utils/request';
+import { AuthContext } from '../../context';
 
 import './styles.css';
 
@@ -17,6 +19,25 @@ export default function ModalEventEdit({ data, onClose }) {
    const [message, setMessage] = useState('');
    const endHourinput = useRef(null);
    const titleInput = useRef(null);
+   const { user, dispatch } = useContext(AuthContext);
+
+   function attFeed() {
+      dispatch({
+         type: 'reloadPage',
+         payload: {
+            reload: true,
+         }
+      });
+   
+      setTimeout(() => {
+         dispatch({
+            type: 'reloadPage',
+            payload: {
+               reload: false,
+            }
+         });
+      }, 100);
+   }
 
    useEffect(() => {
       if(data.title) setTitle(data.title);
@@ -35,6 +56,11 @@ export default function ModalEventEdit({ data, onClose }) {
 
       if(!title || !hourStart || !hourEnd || !customer) {
          setMessage('Por favor preencha todos os campos');
+      } else {
+         editAppointmentEvent(data.id, hourStart, hourEnd, user.partnerId).then(() => {
+            attFeed();
+            onClose();
+         });
       }
    }
 
@@ -52,6 +78,7 @@ export default function ModalEventEdit({ data, onClose }) {
                         autoComplete={false}
                         onChange={e => setTitle(e.target.value)}
                         placeholder="Nome do evento"
+                        disabled
                      />
                      <FaTimes color="#cecece" size={20} onClick={() => onClose()}/>
                   </div>
@@ -109,6 +136,7 @@ export default function ModalEventEdit({ data, onClose }) {
                               placeholder="Nome do Cliente"
                               value={customer} onChange={e => setCustomer(e.target.value)} 
                               name="customer"
+                              disabled
                            />
                               
                         </div>
@@ -118,6 +146,7 @@ export default function ModalEventEdit({ data, onClose }) {
                            <textarea value={note} placeholder="Adicionar Observações"
                               onChange={e => setNote(e.target.value)}
                               name="note"
+                              disabled
                            ></textarea>
                         </div>
 

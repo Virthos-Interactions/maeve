@@ -58,7 +58,7 @@ export default function NextEvents() {
                      <div className="event-all-content">
                         <div className="time-and-client-name">
                            <h4>{getHours(event.info.appointmentStartHour)}</h4>
-                           <p>{event.info.customerName}</p>
+                           <p>{event.info.customer.firstName}</p>
                         </div>
 
                         <div className="current-event-details">
@@ -79,7 +79,7 @@ export default function NextEvents() {
                <div className="other-event" key={event._id}>
                   <div className="event-all-content">
                      <h3>{getHours(event.info.appointmentStartHour)}</h3>
-                     <p>{event.info.customerName}</p>
+                     <p>{event.info.customer.firstName}</p>
                   </div>
                </div>
             );

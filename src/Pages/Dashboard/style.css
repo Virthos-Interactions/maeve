@@ -72,3 +72,38 @@ span.MuiCardHeader-title {
    padding: 8px;
    margin: 1px 8px;
 }
+
+div.black-mask-content {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+div.black-mask {
+   position: fixed;
+   background-color: rgba(0, 0, 0, 0.4);
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: 5;
+}
+
+div.black-mask-left-content {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   justify-content: center;
+}
+
+
+div.black-mask-config {
+   position: absolute;
+   right: 0;
+   top: 0;
+}

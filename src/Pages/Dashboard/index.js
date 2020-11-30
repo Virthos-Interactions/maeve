@@ -26,7 +26,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
-import { bernard } from '../../services/api';
+import { deleteAppointmentEvent } from '../../Utils/request';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -82,7 +82,7 @@ export default function Dashboard() {
       }
    ];
 
-   const { signed, logout, user } = useContext(AuthContext);
+   const { signed, logout, user, dispatch } = useContext(AuthContext);
 
    const [currentEmployee, setCurrentEmployee] = useState('');
    const [employees, setEmployees] = useState([]);
@@ -95,6 +95,24 @@ export default function Dashboard() {
    const [showChatbox, setShowChatbox] = useState(false);
    const [editEventDetail, setEditEventDetail] = useState(null);
    const [modalEditEvent, setModalEventEdit] = useState(false);
+
+   function attFeed() {
+      dispatch({
+         type: 'reloadPage',
+         payload: {
+            reload: true,
+         }
+      });
+   
+      setTimeout(() => {
+         dispatch({
+            type: 'reloadPage',
+            payload: {
+               reload: false,
+            }
+         });
+      }, 100);
+   }
 
    useEffect(() => {
       if(!signed) {
@@ -120,13 +138,15 @@ export default function Dashboard() {
 
    function showEvent(e) {
       setShowModalEventDetail(true);
+      console.log(e);
       setEventDetail(e);
    }
 
-   function deleteEvent(data) {
-      if(window.confirm(`Você realmente deseja apagar ${data.title}?`)) {
+   function deleteEvent(data) {   
+      deleteAppointmentEvent(data.id, user.partnerId).then(() => {
          setShowModalEventDetail(false);
-      }
+         attFeed();
+      });
    }
 
    function editEvent(data) {
@@ -177,33 +197,42 @@ export default function Dashboard() {
             <div className="black-mask"
                onClick={() => setShowModalConfig(false)}
             >
-               <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail}/>
+               <div className="black-mask-content">
+                  <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail}/>
+               </div>
             </div>
             }
             {showModalConfig &&
                <div className="black-mask"
                   onClick={() => setShowModalConfig(false)}
                >
-                  <ModalConfig onClose={onClose} logout={logOut} />
+                  <div className="black-mask-config">
+                     <ModalConfig onClose={onClose} logout={logOut} />  
+                  </div>
                </div>
             }
 
             {showModalEventCreate &&
                <div className="black-mask">
-                  <ModalAddEvent
-                     onClose={() => setShowModalEventCreate(false)}
-                     eventDetail={addEventWithDetail}
-                     editEventDetail={editEventDetail}
-                  />
+                  <div className="black-mask-content">
+                     <ModalAddEvent
+                        onClose={() => setShowModalEventCreate(false)}
+                        eventDetail={addEventWithDetail}
+                        editEventDetail={editEventDetail}
+                     />
+                  </div>
                </div>
             }
 
             {showChatbox && 
             
                <div className="black-mask">
-                  <Chatbox 
-                     onClose={() => setShowChatbox(false)}
-                  />
+
+                  <div className="black-mask-left-content">
+                     <Chatbox 
+                        onClose={() => setShowChatbox(false)}
+                     />
+                  </div>
                </div>
             }
 
@@ -211,12 +240,14 @@ export default function Dashboard() {
                <div className="black-mask"
                   onClick={() => setShowModalEventDetail(false)}
                >
-                  <ModalEventDetail
-                     data={eventDetail}
-                     onClose={closeModalEventDetail}
-                     deleteEvent={deleteEvent}
-                     onEdit={editEvent}
-                  />
+                  <div className="black-mask-content">
+                     <ModalEventDetail
+                        data={eventDetail}
+                        onClose={closeModalEventDetail}
+                        deleteEvent={deleteEvent}
+                        onEdit={editEvent}
+                     />
+                  </div>
                </div>
             }
          </div>

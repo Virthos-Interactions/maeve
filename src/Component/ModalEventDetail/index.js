@@ -3,6 +3,7 @@ import React from 'react';
 import './style.css';
 import { getDate, getHours, getDayWeek } from '../../Utils';
 import { FaTimes, FaUser, FaClock, FaAlignLeft, FaTrash, FaPencilAlt  } from 'react-icons/fa';
+import { AiFillPhone } from 'react-icons/ai';
 
 export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit }) {
    return(
@@ -31,6 +32,11 @@ export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit })
             <div className="event-customer-name">
                <FaUser size={20} color="#cecece" />
                <span className="input">{data.customer}</span>
+            </div>
+
+            <div className="event-customer-phone">
+               <AiFillPhone size={20} color="#cecece" />
+               <span className="input">{data.customerNumber ? data.customerNumber : '1111111'}</span>
             </div>
 
             <div className="event-note">
