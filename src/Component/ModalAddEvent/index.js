@@ -52,15 +52,17 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
       eventNameInput.current.focus();      
    }, []);
 
-   function createEvent(start, end, title, employeeId, customer, information) {
+   function createEvent(start, end, title, phone, employeeId, customer, information) {
       return new Promise((resolve, reject) => {
+         console.log("title")
+         console.log(title)
          bernard.post('/appointment/create', {
             partnerId: user.partnerId,
             info: {
                appointmentStartHour: start,
                appointmentEndHour: end,
                craft: {
-                  name: 'corte de cabelo'
+                  name: title
                },
                information: information ? information : '',
                employee : {
@@ -68,7 +70,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                },
                customer: {
                   name: customer,
-                  mobileNumber: '5500987654322',
+                  mobileNumber: phone, // TODO - Generalizar.
                },
                partner: {
                   _id: user.partnerId,
@@ -93,12 +95,13 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
       if(eventDetail) {
 
-         if(title && hourStart && hourEnd && customer) {
+         if(title && hourStart && hourEnd && customer && phone) {
          
             createEvent(
                eventDetail.start,
                eventDetail.end,
                title,
+               phone,
                user._id,
                customer,
                note,
@@ -116,7 +119,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
       } else {
 
-         if(title && hourStart && hourEnd && customer && day && month && year) {
+         if(title && phone && hourStart && hourEnd && customer && day && month && year) {
 
             if(!hourStart.includes(':') || !hourEnd.includes(':')) {
                return setMessage('Por favor insira a hora corretamente');
@@ -136,6 +139,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
                title,
+               phone,
                user._id,
                customer,
                note,
@@ -289,12 +293,12 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
                               placeholder="Telefone do Cliente"
                               value={phone} onChange={e => {
                                  e.target.value = e.target.value.replace(/\D/g, '');
-
-                                 if(e.target.value.length > 11) {
-                                    e.target.value.split(0, -1);
-                                 } else {
-                                    setPhone(e.target.value);
-                                 }
+                                 setPhone(e.target.value);
+                                 // if(e.target.value.length > 11) {
+                                 //    e.target.value.split(0, -1);
+                                 // } else {
+                                 //    setPhone(e.target.value);
+                                 // }
                               }} 
                               name="phone"
                            />

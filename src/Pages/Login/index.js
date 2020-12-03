@@ -43,6 +43,7 @@ export default function Login() {
             setPassword('');
 
          }).catch(error => {
+            console.log(error);
             setMessage('Ops! Ocorreu um erro, tente novamente!');
             setPassword('');
             setEmail('');
