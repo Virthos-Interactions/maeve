@@ -22,7 +22,7 @@
     "start-server": "HTTPS=true SSL_CRT_FILE=/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem SSL_KEY_FILE=/etc/letsencrypt/archive/dash.virthos.com.br/privkey1.pem react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
