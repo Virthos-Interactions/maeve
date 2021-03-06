@@ -24,6 +24,21 @@
    opacity: 0.7;
 }
 
+.crafts-selection {
+   border: none;
+   background-color: #cecece;
+   color:rgb(121, 121, 121);
+   font-size: 22px;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+
+.crafts-selection:focus {
+   color: black;
+}
+
 .create-event .create-event-content .input-title input:focus {
    border-bottom: 2px solid #3498db;
    opacity: 1;
@@ -62,9 +77,15 @@
    border: none;
    background-color: #cecece;
    font-size: 16px;
-   width: 60px;
-   padding: 3px 0;
+   width: 55px;
    text-align: center;
+   padding-bottom: 3px;
+   padding-top: 3px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+   background: none;
+   display: none;
 }
 
 .create-event .event-date p,

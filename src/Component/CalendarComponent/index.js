@@ -11,22 +11,22 @@ import { AuthContext } from '../../context';
 
 let handleAddEvent = null;
 
-export default function CalendarComponent({newEvent, dblClick, addEvent }) {
+export default function CalendarComponent({ newEvent, dblClick, addEvent }) {
    moment.locale('pt-br');
    const [events, setEvents] = useState([]);
    const { user, state } = useContext(AuthContext);
 
    useEffect(() => {
-      const partnerId = user && user.partnerId; 
+      const partnerId = user && user.partnerId;
       const employeeId = user && user._id;
 
-     if(partnerId && employeeId) {
-      getEvents(partnerId, employeeId, '2100-08-20').then(data => {
-         if(data instanceof Array) {
-            setEvents(data);
-         }
-      });
-     }
+      if (partnerId && employeeId) {
+         getEvents(partnerId, employeeId, '2100-08-20').then(data => {
+            if (data instanceof Array) {
+               setEvents(data);
+            }
+         });
+      }
    }, [state.reload]);
 
 
@@ -44,7 +44,7 @@ export default function CalendarComponent({newEvent, dblClick, addEvent }) {
 
    const eventStyleGetter = (event, start, end, isSelected) => {
       return {
-         style: { 
+         style: {
             backgroundColor: '#68aae2',
             border: 0,
             borderLeft: '6px solid #3867d6',
@@ -62,7 +62,7 @@ export default function CalendarComponent({newEvent, dblClick, addEvent }) {
    return (
       <div className="calendar">
          <header className="calendar-header">
-           
+
          </header>
 
          <Calendar
@@ -73,11 +73,11 @@ export default function CalendarComponent({newEvent, dblClick, addEvent }) {
             defaultView={Views.WEEK}
             onDoubleClickEvent={(e) => dblClick(e)}
             onSelectSlot={({ start, end }) => newEvent(start, end)}
-            style={{ 
-               height: '87vh', 
-               paddingRight: 20, 
-               paddingLeft: 20, 
-               paddingTop: 10, 
+            style={{
+               height: '87vh',
+               paddingRight: 20,
+               paddingLeft: 20,
+               paddingTop: 10,
                paddingBottom: 10,
             }}
             eventPropGetter={(eventStyleGetter)}
@@ -100,7 +100,7 @@ class CustomToolbar extends Toolbar {
                   <button
                      onClick={() => this.navigate('PREV')}
                   >
-                     <FaAngleLeft color="#737373" size={20}/>
+                     <FaAngleLeft color="#737373" size={20} />
                   </button>
                   <button
                      onClick={() => this.navigate('TODAY')}
@@ -108,12 +108,12 @@ class CustomToolbar extends Toolbar {
                   <button
                      onClick={() => this.navigate('NEXT')}
                   >
-                     <FaAngleRight color="#737373" size={20}/>
+                     <FaAngleRight color="#737373" size={20} />
                   </button>
                   <span className="calendar-info">{this.props.label}</span>
                </div>
 
-              
+
                <span className="">
                   <button type="button" onClick={() => this.view('month')}>Mês</button>
                   <button type="button active" onClick={() => this.view('week')}>Semana</button>
@@ -124,7 +124,7 @@ class CustomToolbar extends Toolbar {
                <button className="add-button" onClick={() => handleAddEvent()}>
                   <FaPlus size={13} color="white" />
                   <p>Adicionar</p>
-               </button> 
+               </button>
 
             </div>
          </div>
