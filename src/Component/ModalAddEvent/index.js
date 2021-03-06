@@ -100,13 +100,16 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
    async function handleSaveNewEvent(e) {
       e.preventDefault();
 
+      let start = new Date(`${eventDetail.start.getMonth()+1}-${eventDetail.start.getDate()}-${eventDetail.start.getFullYear()} ${hourStart}:00`)
+      let end = new Date(`${eventDetail.end.getMonth()+1}-${eventDetail.end.getDate()}-${eventDetail.end.getFullYear()} ${hourEnd}:00`)
+
       if(eventDetail) {
 
          if(craftName && hourStart && hourEnd && customer && phone) {
-         
+                     
             createEvent(
-               eventDetail.start,
-               eventDetail.end,
+               start,
+               end,
                craftName,
                phone,
                user._id,
@@ -197,44 +200,28 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                            <FaClock size={20} color="#cecece"/>
                            <p>Início</p>
                            <input 
-                              value={hourStart} onChange={e => {
-                                 e.target.value = e.target.value.replace(/\D/g, '');
-
-                                 if(e.target.value.length === 4) {
-
-                                    const regex = /(\d{2})(\d{2})/;
-                                    e.target.value = e.target.value.replace(regex, '$1:$2');
-
-                                    endHourinput.current.focus();
-                                 }
-
+                              value={hourStart} 
+                              onChange={e => {
                                  setHourStart(e.target.value);
                               }}
-                              type="text"
+                              type="time"
                               name="hourStart"
                               maxLength="5"
                               placeholder="00:00"
-                              disabled={eventDetail}
+                              className="hour"
                            />
                            <p>às</p>
                            <input 
-                              type="text" 
+                              type="time" 
                               maxLength="5"
                               name="hourEnd"
-                              disabled={eventDetail}
                               placeholder="00:00"
                               ref={endHourinput}
-                              value={hourEnd} onChange={e => {
-                                 e.target.value = e.target.value.replace(/\D/g, '')
-
-                                 if(e.target.value.length === 4) {
-                                    const regex = /(\d{2})(\d{2})/;
-
-                                    e.target.value = e.target.value.replace(regex, '$1:$2');
-                                 }
-
+                              value={hourEnd} 
+                              onChange={e => {
                                  setHourEnd(e.target.value);
                               }} 
+                              className="hour"
                            />
                         </div>
 
