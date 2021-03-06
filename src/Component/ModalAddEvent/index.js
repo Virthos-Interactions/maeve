@@ -7,8 +7,18 @@ import { AiFillPhone } from 'react-icons/ai';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
 import './style.css';
 
-export default function ModalAddEvent({ onClose, eventDetail }) {
-   const [title, setTitle] = useState('');
+{/* <input 
+                        type="text" 
+                        value={title}
+                        ref={eventNameInput}
+                        name="title"
+                        autoComplete="false"
+                        onChange={e => setTitle(e.target.value)}
+                        placeholder="Nome do evento"
+                     /> */}
+
+export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
+   const [craftName, setCraftName] = useState('');
    const [hourStart, setHourStart] = useState('');
    const [month, setMonth] = useState('');
    const [phone, setPhone] = useState('');
@@ -48,21 +58,18 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
          setHourStart(getHours(eventDetail.start));
          setHourEnd(getHours(eventDetail.end));
       }
-
-      eventNameInput.current.focus();      
+      //eventNameInput.current.focus();      
    }, []);
 
-   function createEvent(start, end, title, phone, employeeId, customer, information) {
+   function createEvent(start, end, craftName, phone, employeeId, customer, information) {
       return new Promise((resolve, reject) => {
-         console.log("title")
-         console.log(title)
          bernard.post('/appointment/create', {
             partnerId: user.partnerId,
             info: {
                appointmentStartHour: start,
                appointmentEndHour: end,
                craft: {
-                  name: title
+                  name: craftName
                },
                information: information ? information : '',
                employee : {
@@ -95,12 +102,12 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
       if(eventDetail) {
 
-         if(title && hourStart && hourEnd && customer && phone) {
+         if(craftName && hourStart && hourEnd && customer && phone) {
          
             createEvent(
                eventDetail.start,
                eventDetail.end,
-               title,
+               craftName,
                phone,
                user._id,
                customer,
@@ -119,7 +126,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
 
       } else {
 
-         if(title && phone && hourStart && hourEnd && customer && day && month && year) {
+         if(craftName && phone && hourStart && hourEnd && customer && day && month && year) {
 
             if(!hourStart.includes(':') || !hourEnd.includes(':')) {
                return setMessage('Por favor insira a hora corretamente');
@@ -138,7 +145,7 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
             createEvent(
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
-               title,
+               craftName,
                phone,
                user._id,
                customer,
@@ -157,21 +164,27 @@ export default function ModalAddEvent({ onClose, eventDetail }) {
       }   
    }
 
+   const craftsList = crafts.map(craft => {
+      return (
+          <option value={craft.name}>{craft.name}</option>
+      )
+   })
+
    return(
       <div>
          <div className="create-event">
             <form onSubmit={handleSaveNewEvent}>
                <div className="create-event-content">
                   <div className="input-title">
-                     <input 
-                        type="text" 
-                        value={title}
-                        ref={eventNameInput}
-                        name="title"
-                        autoComplete="false"
-                        onChange={e => setTitle(e.target.value)}
-                        placeholder="Nome do evento"
-                     />
+                     <select 
+                        className="crafts-selection" 
+                        name="craftName" 
+                        id="crafts-selection"
+                        onChange={e => setCraftName(e.target.value)}
+                     >
+                        <option value="" disabled selected>Escolha um serviço</option>
+                        {craftsList}
+                     </select>
                      <FaTimes color="#cecece" size={20} onClick={() => onClose()}/>
                   </div>
 

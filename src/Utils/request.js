@@ -1,4 +1,4 @@
-import { bernard } from '../services/api';
+import { arnold, bernard } from '../services/api';
 
 export function getEvents(
    partnerId,
@@ -8,17 +8,30 @@ export function getEvents(
       const response = await bernard.post('/appointmentsByPeriod', {
          partnerId: partnerId,
          employeeId: employeeId,
-         startDate: new Date().toLocaleDateString(),
+         startDate: '1991-03-12',
          endDate: endDate,
       }, {
          headers: {
             Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
          }
       });
-      
-      console.log("RESPONSE")
-      console.log(response.data)
       resolve(response.data);
+   });
+}
+
+export function getCrafts(
+   partnerId,
+   employeeId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post(`/employee/get`,{
+         partnerId: partnerId,
+         employeeId: employeeId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data.craftList);
    });
 }
 

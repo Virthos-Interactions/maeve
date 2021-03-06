@@ -27,6 +27,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
+import { getCrafts } from '../../Utils/request';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -84,7 +85,9 @@ export default function Dashboard() {
 
    const { signed, logout, user, dispatch } = useContext(AuthContext);
 
-   const [currentEmployee, setCurrentEmployee] = useState('');
+   const [currentEmployee, setCurrentEmployee] = useState(user?._id);
+   const [crafts, setCrafts] = useState([]);
+   const [partnerId, setPartnerId] = useState(user?.partnerId);
    const [employees, setEmployees] = useState([]);
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
@@ -103,7 +106,7 @@ export default function Dashboard() {
             reload: true,
          }
       });
-   
+
       setTimeout(() => {
          dispatch({
             type: 'reloadPage',
@@ -115,13 +118,19 @@ export default function Dashboard() {
    }
 
    useEffect(() => {
-      if(!signed) {
+      if (!signed) {
          return history.push('/login');
       }
+      fetchCrafts();
    }, []);
 
 
    const history = useHistory();
+
+   async function fetchCrafts() {
+      const crafts = await getCrafts(partnerId, currentEmployee);
+      setCrafts(crafts);
+   }
 
    function changeEployee(e) {
       setCurrentEmployee(e.target.value);
@@ -142,7 +151,7 @@ export default function Dashboard() {
       setEventDetail(e);
    }
 
-   function deleteEvent(data) {   
+   function deleteEvent(data) {
       deleteAppointmentEvent(data.id, user.partnerId).then(() => {
          setShowModalEventDetail(false);
          attFeed();
@@ -175,39 +184,39 @@ export default function Dashboard() {
             <div className="header-config">
                <select name="employees" onChange={changeEployee}>
                   <option value="Raphael">Raphael Capeto</option>
-                  <option value="Pedro">Pedro Araujo</option>        
+                  <option value="Pedro">Pedro Araujo</option>
                </select>
-               <FaComment size={28} color="#ce2026" 
+               <FaComment size={28} color="#ce2026"
                   onClick={() => setShowChatbox(!showChatbox)}
                />
 
                <div className="header-image" >
-                  <img src={noUser} alt="Imagem do Usuário" className="user-image"/>
+                  <img src={noUser} alt="Imagem do Usuário" className="user-image" />
                   <div className="opacity"
                      onClick={() => setShowModalConfig(!showModalConfig)}
                   ></div>
                </div>
 
-               
+
             </div>
          </header>
 
          <div className="app-system">
-            {modalEditEvent && 
-            <div className="black-mask"
-               onClick={() => setShowModalConfig(false)}
-            >
-               <div className="black-mask-content">
-                  <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail}/>
+            {modalEditEvent &&
+               <div className="black-mask"
+                  onClick={() => setShowModalConfig(false)}
+               >
+                  <div className="black-mask-content">
+                     <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail} />
+                  </div>
                </div>
-            </div>
             }
             {showModalConfig &&
                <div className="black-mask"
                   onClick={() => setShowModalConfig(false)}
                >
                   <div className="black-mask-config">
-                     <ModalConfig onClose={onClose} logout={logOut} />  
+                     <ModalConfig onClose={onClose} logout={logOut} />
                   </div>
                </div>
             }
@@ -216,20 +225,21 @@ export default function Dashboard() {
                <div className="black-mask">
                   <div className="black-mask-content">
                      <ModalAddEvent
-                        onClose={() => setShowModalEventCreate(false)}
-                        eventDetail={addEventWithDetail}
+                        crafts={crafts}
                         editEventDetail={editEventDetail}
+                        eventDetail={addEventWithDetail}
+                        onClose={() => setShowModalEventCreate(false)}
                      />
                   </div>
                </div>
             }
 
-            {showChatbox && 
-            
+            {showChatbox &&
+
                <div className="black-mask">
 
                   <div className="black-mask-left-content">
-                     <Chatbox 
+                     <Chatbox
                         onClose={() => setShowChatbox(false)}
                      />
                   </div>
@@ -251,49 +261,46 @@ export default function Dashboard() {
                </div>
             }
          </div>
-            <div className={classes.root}>
-               <Grid container spacing={2}>
-                  <Grid item container xs={3}>
-                     <Grid item xs={12} style={{ paddingTop: 0 }} >
-                        <Paper className={classes.paper}>
-                           <CardHeader
-                              title="Próximos Eventos"
-                              color="#737373"
-                              style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
-                           />
-                           <CardContent style={{ marginTop: -15}}>
-                              <NextEvents />
-                           </CardContent>
-                        </Paper>
-                     </Grid>
-                     <Grid item xs={12} style={{ paddingTop: 10 }} >
-                        <Paper className={classes.paper}>
-                           <CardHeader
-                              title="Atividade"
-                              color="#737373"
-                              style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
-                           />
-                           <CardContent style={{ marginTop: -15}}>
-                              <ActivityMonitor />
-                           </CardContent>
-                        </Paper>
-                     </Grid>
+         <div className={classes.root}>
+            <Grid container spacing={2}>
+               <Grid item container xs={3}>
+                  <Grid item xs={12} style={{ paddingTop: 0 }} >
+                     <Paper className={classes.paper}>
+                        <CardHeader
+                           title="Próximos Eventos"
+                           color="#737373"
+                           style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
+                        />
+                        <CardContent style={{ marginTop: -15 }}>
+                           <NextEvents />
+                        </CardContent>
+                     </Paper>
                   </Grid>
-
-                  <Grid item xs={9} style={{ paddingTop: 4 }}>
-                     <Paper className={classes.calendar}>
-                        <CalendarComponent
-                           newEvent={handleSelect}
-                           dblClick={showEvent}
-                           addEvent={() => {
-                              setShowModalEventCreate(!showModalEventCreate);
-                              setAddEventWithDetail(null);
-                           }}
+                  <Grid item xs={12} style={{ paddingTop: 10 }} >
+                     <Paper className={classes.paper}>
+                        <CardHeader
+                           title="Atividade"
+                           color="#737373"
+                           style={{ padding: 1, marginLeft: 10, fontSize: '24px' }}
                         />
                      </Paper>
                   </Grid>
                </Grid>
-            </div>
+
+               <Grid item xs={9} style={{ paddingTop: 4 }}>
+                  <Paper className={classes.calendar}>
+                     <CalendarComponent
+                        newEvent={handleSelect}
+                        dblClick={showEvent}
+                        addEvent={() => {
+                           setShowModalEventCreate(!showModalEventCreate);
+                           setAddEventWithDetail(null);
+                        }}
+                     />
+                  </Paper>
+               </Grid>
+            </Grid>
+         </div>
       </div>
    );
 }
