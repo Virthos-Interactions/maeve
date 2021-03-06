@@ -7,21 +7,21 @@ import { AuthContext } from '../../context';
 
 export default function Home() {
    const { signed } = useContext(AuthContext);
-   
+
    const history = useHistory();
-   
+
    useEffect(() => {
-      if(signed) {
+      if (signed) {
          return history.push('/dashboard');
       }
-      
+
       history.push('/login');
-      
+
    }, []);
 
-   return(
+   return (
       <div className="home-content">
-         <img src={Logo} alt="Logo"/>
+         <img src={Logo} alt="Logo" />
          <Link to="/login">Logar</Link>
       </div>
    );

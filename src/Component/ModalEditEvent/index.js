@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 
 import { getHours, getDayWeek, getDate } from '../../Utils/index';
-import { FaTimes, FaUser, FaClock, FaAlignLeft  } from 'react-icons/fa';
+import { FaTimes, FaUser, FaClock, FaAlignLeft } from 'react-icons/fa';
 import { editAppointmentEvent } from '../../Utils/request';
 import { AuthContext } from '../../context';
 
@@ -28,7 +28,7 @@ export default function ModalEventEdit({ data, onClose }) {
             reload: true,
          }
       });
-   
+
       setTimeout(() => {
          dispatch({
             type: 'reloadPage',
@@ -40,21 +40,21 @@ export default function ModalEventEdit({ data, onClose }) {
    }
 
    useEffect(() => {
-      if(data.title) setTitle(data.title);
-      if(data.note) setNote(data.note); 
-      if(data.customer) setCustomer(data.customer);
-      if(data.start) setHourStart(getHours(data.start));
-      if(data.end) setHourEnd(getHours(data.end));
+      if (data.title) setTitle(data.title);
+      if (data.note) setNote(data.note);
+      if (data.customer) setCustomer(data.customer);
+      if (data.start) setHourStart(getHours(data.start));
+      if (data.end) setHourEnd(getHours(data.end));
 
       titleInput.current.focus();
       setMessage('Você está editando esse evento');
-      
+
    }, []);
 
    function handleEditEvent(e) {
       e.preventDefault();
 
-      if(!title || !hourStart || !hourEnd || !customer) {
+      if (!title || !hourStart || !hourEnd || !customer) {
          setMessage('Por favor preencha todos os campos');
       } else {
          editAppointmentEvent(data.id, hourStart, hourEnd, user.partnerId).then(() => {
@@ -64,14 +64,14 @@ export default function ModalEventEdit({ data, onClose }) {
       }
    }
 
-   return(
+   return (
       <div>
          <div className="edit-event">
             <form onSubmit={handleEditEvent}>
                <div className="edit-event-content">
                   <div className="input-title">
-                     <input 
-                        type="text" 
+                     <input
+                        type="text"
                         value={title}
                         ref={titleInput}
                         name="title"
@@ -80,7 +80,7 @@ export default function ModalEventEdit({ data, onClose }) {
                         placeholder="Nome do evento"
                         disabled
                      />
-                     <FaTimes color="#cecece" size={20} onClick={() => onClose()}/>
+                     <FaTimes color="#cecece" size={20} onClick={() => onClose()} />
                   </div>
 
                   <div className="event-detail">
@@ -88,57 +88,41 @@ export default function ModalEventEdit({ data, onClose }) {
 
                      <div className="edit-container">
                         <div className="input-time">
-                           <FaClock size={20} color="#cecece"/>
+                           <FaClock size={20} color="#cecece" />
                            <p>Início</p>
-                           <input 
-                              value={hourStart} onChange={e => {
-                                 e.target.value = e.target.value.replace(/\D/g, '');
-
-                                 if(e.target.value.length === 4) {
-
-                                    const regex = /(\d{2})(\d{2})/;
-                                    e.target.value = e.target.value.replace(regex, '$1:$2');
-
-                                    endHourinput.current.focus();
-                                 }
-
+                           <input
+                              value={hourStart}
+                              onChange={e => {
                                  setHourStart(e.target.value);
                               }}
-                              type="text"
+                              type="time"
                               name="hourStart"
                               maxLength="5"
                               placeholder="00:00"
                            />
                            <p>às</p>
-                           <input 
-                              type="text" 
+                           <input
+                              type="time"
                               maxLength="5"
                               name="hourEnd"
                               placeholder="00:00"
                               ref={endHourinput}
-                              value={hourEnd} onChange={e => {
-                                 e.target.value = e.target.value.replace(/\D/g, '')
-
-                                 if(e.target.value.length === 4) {
-                                    const regex = /(\d{2})(\d{2})/;
-
-                                    e.target.value = e.target.value.replace(regex, '$1:$2');
-                                 }
-
+                              value={hourEnd}
+                              onChange={e => {
                                  setHourEnd(e.target.value);
-                              }} 
+                              }}
                            />
                         </div>
 
                         <div className="input-customer-name">
                            <FaUser size={20} color="#cecece" />
-                           <input type="text" 
+                           <input type="text"
                               placeholder="Nome do Cliente"
-                              value={customer} onChange={e => setCustomer(e.target.value)} 
+                              value={customer} onChange={e => setCustomer(e.target.value)}
                               name="customer"
                               disabled
                            />
-                              
+
                         </div>
 
                         <div className="event-note">
@@ -157,9 +141,9 @@ export default function ModalEventEdit({ data, onClose }) {
                         <div className="btn-save-event">
                            <button type="submit">Salvar</button>
                         </div>
-                        </div>
                      </div>
                   </div>
+               </div>
             </form>
          </div>
       </div>

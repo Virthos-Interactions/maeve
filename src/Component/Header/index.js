@@ -8,11 +8,11 @@ import { useHistory } from 'react-router-dom';
 export default function Header() {
    const history = useHistory();
 
-   return(
+   return (
       <div className="header">
          <header>
-            <img src={logo} alt="Virthos"/>
-            <FaCalendar size={22} color="#b71540" onClick={() => history.push('/dashboard')}/>  
+            <img src={logo} alt="Virthos" />
+            <FaCalendar size={22} color="#b71540" onClick={() => history.push('/dashboard')} />
          </header>
       </div>
    );

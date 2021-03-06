@@ -23,7 +23,7 @@ export function getCrafts(
    partnerId,
    employeeId) {
    return new Promise(async (resolve, reject) => {
-      const response = await arnold.post(`/employee/get`,{
+      const response = await arnold.post(`/employee/get`, {
          partnerId: partnerId,
          employeeId: employeeId,
       }, {

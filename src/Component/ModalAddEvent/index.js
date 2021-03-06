@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AuthContext } from '../../context';
 import { bernard } from '../../services/api';
 
-import { FaTimes, FaUser, FaClock, FaAlignLeft, FaCalendar  } from 'react-icons/fa';
+import { FaTimes, FaUser, FaClock, FaAlignLeft, FaCalendar } from 'react-icons/fa';
 import { AiFillPhone } from 'react-icons/ai';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
 import './style.css';
@@ -32,7 +32,7 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
    const eventNameInput = useRef(null);
    const monthInput = useRef(null);
    const yearInput = useRef(null);
-   
+
    const { user, dispatch } = useContext(AuthContext);
 
    function attFeed() {
@@ -42,7 +42,7 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
             reload: true,
          }
       });
-   
+
       setTimeout(() => {
          dispatch({
             type: 'reloadPage',
@@ -54,7 +54,7 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
    }
 
    useEffect(() => {
-      if(eventDetail) {
+      if (eventDetail) {
          setHourStart(getHours(eventDetail.start));
          setHourEnd(getHours(eventDetail.end));
       }
@@ -72,7 +72,7 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                   name: craftName
                },
                information: information ? information : '',
-               employee : {
+               employee: {
                   _id: employeeId,
                },
                customer: {
@@ -82,31 +82,31 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                partner: {
                   _id: user.partnerId,
                }
-            },           
+            },
          }, {
             headers: {
                Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
             }
          })
-         .then(() => {
-            attFeed();
+            .then(() => {
+               attFeed();
 
-            resolve();
-         })
-         .catch(err => reject(err));         
+               resolve();
+            })
+            .catch(err => reject(err));
       });
    }
 
    async function handleSaveNewEvent(e) {
       e.preventDefault();
 
-      let start = new Date(`${eventDetail.start.getMonth()+1}-${eventDetail.start.getDate()}-${eventDetail.start.getFullYear()} ${hourStart}:00`)
-      let end = new Date(`${eventDetail.end.getMonth()+1}-${eventDetail.end.getDate()}-${eventDetail.end.getFullYear()} ${hourEnd}:00`)
+      let start = new Date(`${eventDetail.start.getMonth() + 1}-${eventDetail.start.getDate()}-${eventDetail.start.getFullYear()} ${hourStart}:00`)
+      let end = new Date(`${eventDetail.end.getMonth() + 1}-${eventDetail.end.getDate()}-${eventDetail.end.getFullYear()} ${hourEnd}:00`)
 
-      if(eventDetail) {
+      if (eventDetail) {
 
-         if(craftName && hourStart && hourEnd && customer && phone) {
-                     
+         if (craftName && hourStart && hourEnd && customer && phone) {
+
             createEvent(
                start,
                end,
@@ -116,12 +116,12 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                customer,
                note,
             )
-            .then(() => {
-               attFeed();
-               onClose();
-            })
-            .catch(err => console.log(err));
-            
+               .then(() => {
+                  attFeed();
+                  onClose();
+               })
+               .catch(err => console.log(err));
+
          } else {
             setMessage('Por favor preencha todos os campos');
          }
@@ -129,22 +129,22 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
 
       } else {
 
-         if(craftName && phone && hourStart && hourEnd && customer && day && month && year) {
+         if (craftName && phone && hourStart && hourEnd && customer && day && month && year) {
 
-            if(!hourStart.includes(':') || !hourEnd.includes(':')) {
+            if (!hourStart.includes(':') || !hourEnd.includes(':')) {
                return setMessage('Por favor insira a hora corretamente');
             }
 
-            if(month === '0' || Number(month) > 12) return setMessage('Por favor insira uma mês existente');
+            if (month === '0' || Number(month) > 12) return setMessage('Por favor insira uma mês existente');
 
-            if(Number(day) > 31) return setMessage('Por favor digite um dia existente');
-            if(year.length === 1) return setMessage('Por favor digite um ano com 2 dígitos');
+            if (Number(day) > 31) return setMessage('Por favor digite um dia existente');
+            if (year.length === 1) return setMessage('Por favor digite um ano com 2 dígitos');
 
             const formatedYear = (year.length === 2) ? `20${year}` : year;
 
             const [startH, startM] = hourStart.split(':');
             const [endH, endM] = hourEnd.split(':');
-         
+
             createEvent(
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
                new Date(formatedYear, formatedMonth(month), day, startH, startM),
@@ -154,53 +154,53 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                customer,
                note,
             )
-            .then(() => {
-               attFeed();
-               onClose();
-            })
-            .catch(err => console.log(err));
-   
-   
+               .then(() => {
+                  attFeed();
+                  onClose();
+               })
+               .catch(err => console.log(err));
+
+
          } else {
             setMessage('Por favor preencha todos os campos');
          }
-      }   
+      }
    }
 
    const craftsList = crafts.map(craft => {
       return (
-          <option value={craft.name}>{craft.name}</option>
+         <option value={craft.name}>{craft.name}</option>
       )
    })
 
-   return(
+   return (
       <div>
          <div className="create-event">
             <form onSubmit={handleSaveNewEvent}>
                <div className="create-event-content">
                   <div className="input-title">
-                     <select 
-                        className="crafts-selection" 
-                        name="craftName" 
+                     <select
+                        className="crafts-selection"
+                        name="craftName"
                         id="crafts-selection"
                         onChange={e => setCraftName(e.target.value)}
                      >
                         <option value="" disabled selected>Escolha um serviço</option>
                         {craftsList}
                      </select>
-                     <FaTimes color="#cecece" size={20} onClick={() => onClose()}/>
+                     <FaTimes color="#cecece" size={20} onClick={() => onClose()} />
                   </div>
 
                   <div className="event-details">
-                     { eventDetail && (
+                     {eventDetail && (
                         <p>{`${getDayWeek(eventDetail.start)}, ${getDate(eventDetail.start)}`}</p>
                      )}
-                     <div className="create-container">  
+                     <div className="create-container">
                         <div className="input-time">
-                           <FaClock size={20} color="#cecece"/>
+                           <FaClock size={20} color="#cecece" />
                            <p>Início</p>
-                           <input 
-                              value={hourStart} 
+                           <input
+                              value={hourStart}
                               onChange={e => {
                                  setHourStart(e.target.value);
                               }}
@@ -211,16 +211,16 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                               className="hour"
                            />
                            <p>às</p>
-                           <input 
-                              type="time" 
+                           <input
+                              type="time"
                               maxLength="5"
                               name="hourEnd"
                               placeholder="00:00"
                               ref={endHourinput}
-                              value={hourEnd} 
+                              value={hourEnd}
                               onChange={e => {
                                  setHourEnd(e.target.value);
-                              }} 
+                              }}
                               className="hour"
                            />
                         </div>
@@ -230,15 +230,15 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
 
                               <FaCalendar size={20} color="#Cecece" />
 
-                              <input 
-                                 type="text" 
+                              <input
+                                 type="text"
                                  placeholder="dd"
                                  maxLength="2"
                                  name="eventDay"
                                  value={day}
-                                 onChange={ e => {
+                                 onChange={e => {
                                     setDay(e.target.value);
-                                    if(e.target.value.length === 2) {
+                                    if (e.target.value.length === 2) {
                                        monthInput.current.focus();
                                     }
                                  }}
@@ -246,17 +246,17 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
 
                               <p>/</p>
 
-                              <input 
-                                 type="text" 
-                                 placeholder="mm" 
+                              <input
+                                 type="text"
+                                 placeholder="mm"
                                  maxLength="2"
                                  name="eventMonth"
                                  value={month}
                                  ref={monthInput}
-                                 onChange={ e => {
+                                 onChange={e => {
                                     setMonth(e.target.value);
 
-                                    if(e.target.value.length === 2) {
+                                    if (e.target.value.length === 2) {
                                        yearInput.current.focus();
                                     }
                                  }}
@@ -264,14 +264,14 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
 
                               <p>/</p>
 
-                              <input 
-                                 type="text" 
-                                 placeholder="aaaa" 
+                              <input
+                                 type="text"
+                                 placeholder="aaaa"
                                  maxLength="4"
                                  name="eventYear"
                                  value={year}
                                  ref={yearInput}
-                                 onChange={ e => setYear(e.target.value)}
+                                 onChange={e => setYear(e.target.value)}
                               />
 
                            </div>
@@ -279,17 +279,17 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
 
                         <div className="input-customer-name">
                            <FaUser size={20} color="#cecece" />
-                           <input type="text" 
+                           <input type="text"
                               placeholder="Nome do Cliente"
-                              value={customer} onChange={e => setCustomer(e.target.value)} 
+                              value={customer} onChange={e => setCustomer(e.target.value)}
                               name="customer"
                            />
-                              
+
                         </div>
 
                         <div className="input-customer-phone">
                            <AiFillPhone size={20} color="#cecece" />
-                           <input type="text" 
+                           <input type="text"
                               placeholder="Telefone do Cliente"
                               value={phone} onChange={e => {
                                  e.target.value = e.target.value.replace(/\D/g, '');
@@ -299,10 +299,10 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                                  // } else {
                                  //    setPhone(e.target.value);
                                  // }
-                              }} 
+                              }}
                               name="phone"
                            />
-                              
+
                         </div>
 
                         <div className="event-note">
@@ -317,9 +317,9 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                            <p className="message">{message}</p>
                         )}
 
-                     <div className="btn-save-event">
-                        <button type="submit">Salvar</button>
-                     </div>
+                        <div className="btn-save-event">
+                           <button type="submit">Salvar</button>
+                        </div>
                      </div>
                   </div>
                </div>

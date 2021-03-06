@@ -4,10 +4,10 @@ import { FaUserAlt, FaUserCog, FaUsers, FaCog } from 'react-icons/fa';
 import { MdBusinessCenter } from 'react-icons/md';
 
 export default function ModalConfigSettings({
-    myAccount, employees, customers, services, configuration
+   myAccount, employees, customers, services, configuration
 }) {
 
-   return(
+   return (
       <div>
          <div className="navigation-options">
             <div className={myAccount ? ' config-link active' : 'config-link'}>

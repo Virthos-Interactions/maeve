@@ -15,14 +15,14 @@ export default function Employees() {
    const history = useHistory();
 
    useEffect(() => {
-     
-      if(!signed) {
+
+      if (!signed) {
          return history.push('/login');
       }
 
    }, []);
-   
-   return(
+
+   return (
       <div>
          <Header />
 
@@ -52,10 +52,10 @@ export default function Employees() {
                               </p>
                               <p>{employee.email}</p>
                               <p><strong>Whatsapp:</strong> {employee.whatsNotificationNumber}</p>
-   
+
                            </div>
-                      </details>
-                   </div>  
+                        </details>
+                     </div>
                   ))}
                </div>
             </div>

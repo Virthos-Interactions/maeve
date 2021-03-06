@@ -1,13 +1,13 @@
 import moment from 'moment';
 
 export function getHours(date) {
-   let hour = moment(date).toDate().getHours();
-   let minute = moment(date).toDate().getMinutes();
+  let hour = moment(date).toDate().getHours();
+  let minute = moment(date).toDate().getMinutes();
 
-   if(hour < 10) hour = '0' + hour;
-   if(minute < 10) minute = '0' + minute;
+  if (hour < 10) hour = '0' + hour;
+  if (minute < 10) minute = '0' + minute;
 
-   return `${hour}:${minute}`;
+  return `${hour}:${minute}`;
 }
 
 export function getDate(date) {
@@ -19,11 +19,11 @@ export function getDate(date) {
   month = (month < 10) ? '0' + month : month;
 
   const monthArray = [
-     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-     'Outubro', 'Novembro', 'Dezembro'
-   ];
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+    'Outubro', 'Novembro', 'Dezembro'
+  ];
 
-   month = monthArray[Number(month)];
+  month = monthArray[Number(month)];
 
   return `${day} de ${month} de ${year}`;
 }
@@ -39,11 +39,11 @@ export function timeRemain(timeStart, timeEnd) {
   minutes = (minutes < 10) ? `0${minutes}` : minutes;
   hours = (hours < 10) ? `0${hours}` : hours;
 
-  if(hours > 0) {
+  if (hours > 0) {
     return `${hours}h${minutes}min`;
   }
 
-  if(minutes > 0) {
+  if (minutes > 0) {
     return `${minutes}min`;
   }
 }
