@@ -12,11 +12,11 @@ import Configuration from './Pages/Configuration/Configurations';
 import Error from './Pages/Erro';
 import Home from './Pages/Home';
 
-export default function Routes() {   
-   return(
+export default function Routes() {
+   return (
       <BrowserRouter>
          <Switch>
-            <Route exact component={Home} path="/"/>
+            <Route exact component={Home} path="/" />
             <Route component={Dashboard} path="/dashboard" />
             <Route component={MyAccount} path="/settings/my-account" />
             <Route component={Employees} path="/settings/employees" />
@@ -27,5 +27,5 @@ export default function Routes() {
             <Route component={Error} path="*" />
          </Switch>
       </BrowserRouter>
-   ); 
+   );
 }

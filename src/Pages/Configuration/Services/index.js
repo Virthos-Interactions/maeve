@@ -15,12 +15,12 @@ export default function Services() {
    const history = useHistory();
 
    useEffect(() => {
-      if(!signed) {
+      if (!signed) {
          return history.push('/login');
       }
    }, []);
 
-   return(
+   return (
       <div>
          <Header />
          <div className="config">
@@ -34,44 +34,44 @@ export default function Services() {
 
                   <div className="detail">
 
-                  {services.map(service => (
-                     <details key={service._id}>
-                        <summary>{service.name}</summary>
+                     {services.map(service => (
+                        <details key={service._id}>
+                           <summary>{service.name}</summary>
 
-                        <div className="current-detail services">
-                           <header>
-                              <p>{service.description}</p>
-                              <div>
-                                 <BsPencilSquare size={18} color="#131313" />
-                                 <FaTrash size={18} color="#131313" />
-                              </div>
-                           </header>
+                           <div className="current-detail services">
+                              <header>
+                                 <p>{service.description}</p>
+                                 <div>
+                                    <BsPencilSquare size={18} color="#131313" />
+                                    <FaTrash size={18} color="#131313" />
+                                 </div>
+                              </header>
 
-                           <form>
-                              <div className="service-settings">
-                                 <label>Pré-definir preço: R$</label>
-                                 <input type="text" id="price" maxLength="8"/>
-                              </div>
+                              <form>
+                                 <div className="service-settings">
+                                    <label>Pré-definir preço: R$</label>
+                                    <input type="text" id="price" maxLength="8" />
+                                 </div>
 
-                              <div className="service-settings">
-                                 <label>Pré-definir Duração:</label>
-                                 <input type="text" maxLength="2"/>
-                                 <label>:</label>
-                                 <input type="text" maxLength="2"/>
-                              </div>
+                                 <div className="service-settings">
+                                    <label>Pré-definir Duração:</label>
+                                    <input type="text" maxLength="2" />
+                                    <label>:</label>
+                                    <input type="text" maxLength="2" />
+                                 </div>
 
-                              <div className="service-settings client-details">
-                                 <p>Determinar detalhes com o cliente</p>
-                                 {service.durationQuestionList && service.durationQuestionList.map(question => {
-                                    return(
-                                       <div key={question}>{question}</div>
-                                    );
-                                 })}
-                              </div>
-                           </form>
-                        </div>
-                     </details>
-                  ))}
+                                 <div className="service-settings client-details">
+                                    <p>Determinar detalhes com o cliente</p>
+                                    {service.durationQuestionList && service.durationQuestionList.map(question => {
+                                       return (
+                                          <div key={question}>{question}</div>
+                                       );
+                                    })}
+                                 </div>
+                              </form>
+                           </div>
+                        </details>
+                     ))}
 
                      <details>
                         <summary>Corte Feminino</summary>
@@ -88,14 +88,14 @@ export default function Services() {
                            <form>
                               <div className="service-settings">
                                  <label>Pré-definir preço: R$</label>
-                                 <input type="text" id="price" maxLength="8"/>
+                                 <input type="text" id="price" maxLength="8" />
                               </div>
 
                               <div className="service-settings">
                                  <label>Pré-definir Duração:</label>
-                                 <input type="text" maxLength="2"/>
+                                 <input type="text" maxLength="2" />
                                  <label>:</label>
-                                 <input type="text" maxLength="2"/>
+                                 <input type="text" maxLength="2" />
                               </div>
 
                               <div className="service-settings client-details">
@@ -113,7 +113,7 @@ export default function Services() {
                </div>
             </div>
          </div>
-        
+
       </div>
    );
 }

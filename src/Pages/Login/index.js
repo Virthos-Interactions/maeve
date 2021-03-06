@@ -34,7 +34,7 @@ export default function Login() {
 
       e.preventDefault();
 
-      if(!email || !password) {
+      if (!email || !password) {
          setMessage('Por favor preencha todos os campos');
 
       } else {
@@ -51,12 +51,12 @@ export default function Login() {
       }
    }
 
-   
-  useEffect(() => {
-   if(signed) {
-      return history.push('/dashboard'); 
-   }
-  }, [signed]);
+
+   useEffect(() => {
+      if (signed) {
+         return history.push('/dashboard');
+      }
+   }, [signed]);
 
    return (
       <div className="container">
@@ -96,7 +96,7 @@ export default function Login() {
                      />
                   </div>
                   <div className="text-center">
-                    <p>{message}</p>
+                     <p>{message}</p>
                      <Button type="submit" variant="contained" className="btn-login">
                         Entrar
                      </Button>
@@ -106,14 +106,14 @@ export default function Login() {
          </section>
          <div className="footer">
             <footer>
-               <h3>Atenda seus clientes de maneira <br/>mais rápida, mais humanizada e mais moderna.</h3>
+               <h3>Atenda seus clientes de maneira <br />mais rápida, mais humanizada e mais moderna.</h3>
                <div className="border-bottom">
-                  <img src={footerCircle} alt="Imagem do Rodapé"/>
+                  <img src={footerCircle} alt="Imagem do Rodapé" />
                </div>
-               
+
                <p className="footer-explication">
-                  O Agendador Virthos utiliza inteligência artificial para 
-                  <br/>
+                  O Agendador Virthos utiliza inteligência artificial para
+                  <br />
                   atender clientes e realizar agendamentos no seu calendário automaticamente.
                </p>
 
@@ -122,10 +122,10 @@ export default function Login() {
                </p>
 
                <div className="social-midias">
-                  <FaWhatsapp color="white" size={25}/>
-                  <AiOutlineMail color="white" size={25}/>
-                  <FaLinkedin color="white" size={25}/>
-                  <AiFillFacebook color="white" size={25}/>
+                  <FaWhatsapp color="white" size={25} />
+                  <AiOutlineMail color="white" size={25} />
+                  <FaLinkedin color="white" size={25} />
+                  <AiFillFacebook color="white" size={25} />
                </div>
 
                <p className="site">www.virthos.com.br</p>

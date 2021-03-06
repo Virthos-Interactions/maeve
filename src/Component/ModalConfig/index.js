@@ -9,7 +9,7 @@ import noUser from '../../assets/default-user-image-365x365.png';
 
 export default function ModalConfig({ onClose, logout }) {
 
-   return(
+   return (
       <div className="modal-config">
          <div className="modal">
             <button className="btn-close-modal" onClick={() => onClose()}>
@@ -17,12 +17,12 @@ export default function ModalConfig({ onClose, logout }) {
             </button>
 
             <div className="image">
-               <img src={noUser} alt="Imagem do Usuário"/>
+               <img src={noUser} alt="Imagem do Usuário" />
             </div>
-            
+
             <h2>Raphael Capeto</h2>
 
-            <hr/>
+            <hr />
 
             <div className="options-config-modal">
                <Link to="/settings/my-account">Minha Conta</Link>
@@ -32,11 +32,11 @@ export default function ModalConfig({ onClose, logout }) {
                <Link to="/settings/configuration">Configurações</Link>
             </div>
 
-            <hr/>
+            <hr />
             <div className="button-modal">
                <button onClick={() => logout()}>Sair</button>
             </div>
          </div>
-   </div>
+      </div>
    );
 }

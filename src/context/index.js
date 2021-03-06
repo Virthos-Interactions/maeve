@@ -9,9 +9,9 @@ export default function Context({ children }) {
    const [state, dispatch] = useReducer(EventReducer, initialState);
 
    useEffect(() => {
-      const data = localStorage.getItem('user'); 
-      
-      if(data) {
+      const data = localStorage.getItem('user');
+
+      if (data) {
          setUser(JSON.parse(data));
       } else {
          setUser(null);
@@ -25,17 +25,17 @@ export default function Context({ children }) {
 
    function login(email, password) {
       return new Promise(async (resolve, reject) => {
-         const response = await authentication.post('/authentication',{
+         const response = await authentication.post('/authentication', {
             partnerId: '',
             email,
             password
          }, {
             headers: {
-               Abernathy: process.env.REACT_APP_LOGIN_TOKEN 
+               Abernathy: process.env.REACT_APP_LOGIN_TOKEN
             }
          });
 
-         if(response.data.errors) {
+         if (response.data.errors) {
             reject(response.data.errors);
          } else {
             saveInLocalStorage(response.data);
@@ -50,7 +50,7 @@ export default function Context({ children }) {
       localStorage.setItem('user', JSON.stringify(data));
    }
 
-   return(
+   return (
       <AuthContext.Provider value={{
          user,
          signed: user ? true : false,
@@ -59,7 +59,7 @@ export default function Context({ children }) {
          state,
          dispatch,
       }}>
-         { children }
+         { children}
       </AuthContext.Provider>
    );
 }

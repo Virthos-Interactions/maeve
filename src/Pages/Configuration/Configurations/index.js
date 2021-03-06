@@ -13,12 +13,12 @@ export default function Services() {
    const history = useHistory();
 
    useEffect(() => {
-      if(!signed) {
+      if (!signed) {
          return history.push('/login');
       }
    }, []);
 
-   return(
+   return (
       <div>
          <Header />
 
@@ -35,45 +35,45 @@ export default function Services() {
                      <h4>Dashboard</h4>
 
                      <div className="config">
-                       <p>Painel Atividade</p>
+                        <p>Painel Atividade</p>
 
                         <label className="switch">
-                           <input type="checkbox" name="activity-panel"/>
+                           <input type="checkbox" name="activity-panel" />
                            <span className="slider round"></span>
                         </label>
                      </div>
 
                      <div className="config">
-                       <p>Painel Calendário</p>
+                        <p>Painel Calendário</p>
 
                         <label className="switch">
-                           <input type="checkbox" name="calendar-panel"/>
+                           <input type="checkbox" name="calendar-panel" />
                            <span className="slider round"></span>
                         </label>
                      </div>
 
                      <div className="config">
-                       <p>Painel Próximos Eventos</p>
+                        <p>Painel Próximos Eventos</p>
 
                         <label className="switch">
-                           <input type="checkbox" name="next-events-panel"/>
+                           <input type="checkbox" name="next-events-panel" />
                            <span className="slider round"></span>
                         </label>
                      </div>
-                     
+
                   </div>
 
 
                   <div className="detail detail-config">
                      <h4>Antecedência de Lembrete</h4>
 
-                    <div className="hour-minute">
-                       <p>Lembrar clientes</p>
-                       <input type="text" name="hour" maxLength={2}/>
-                       <p>:</p>
-                       <input type="text" name="minute"maxLength={2}/>
-                       <p>antes do evento</p>
-                    </div>
+                     <div className="hour-minute">
+                        <p>Lembrar clientes</p>
+                        <input type="text" name="hour" maxLength={2} />
+                        <p>:</p>
+                        <input type="text" name="minute" maxLength={2} />
+                        <p>antes do evento</p>
+                     </div>
                   </div>
 
                   <div className="detail detail-config">
@@ -96,7 +96,7 @@ export default function Services() {
                   </div>
                </div>
             </div>
-         </div> 
+         </div>
       </div>
    );
 }

@@ -10,18 +10,18 @@ import { AuthContext } from '../../context';
 export default function NextEvents() {
    const [events, setEvents] = useState([]);
    const { user, state } = useContext(AuthContext);
-   const partnerId = user && user.partnerId; 
+   const partnerId = user && user.partnerId;
    const employeeId = user && user._id;
 
    useEffect(() => {
-      if(employeeId && partnerId) {
+      if (employeeId && partnerId) {
          getEvents(partnerId, employeeId, '2100-08-20').then(data => {
             setTimeout(() => {
-               if(data instanceof Array) {
+               if (data instanceof Array) {
                   setEvents(data);
                }
-               
-           }, 10);
+
+            }, 10);
          });
       }
 
@@ -33,7 +33,7 @@ export default function NextEvents() {
 
       const [dayEvent, monthEvent, yearEvent] = new Date(Date.parse(event.info.appointmentStartHour))
          .toLocaleDateString()
-         .split('/');  
+         .split('/');
       const formatDateEvent = new Date(`${yearEvent}/${monthEvent}/${dayEvent}`);
 
       const dateToday = new Date().toLocaleDateString().split('/');
@@ -41,18 +41,18 @@ export default function NextEvents() {
       const formatDateToday = new Date(`${yearToday}/${monthToday}/${dayToday}`);
 
 
-      if(new Date(Date.parse(event.info.appointmentEndHour)) >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
+      if (new Date(Date.parse(event.info.appointmentEndHour)) >= new Date() && isEqual(formatDateEvent, formatDateToday)) {
          return event;
       }
 
    });
 
-   return(
+   return (
       <div className="next-events">
          {todayEvents.map(event => {
             currentEvent++;
 
-            if(currentEvent == 1) {
+            if (currentEvent == 1) {
                return (
                   <div className="current-event" key={event._id}>
                      <div className="event-all-content">
@@ -65,17 +65,17 @@ export default function NextEvents() {
                            <h4>{event.info.craftName}</h4>
                            <h3>Tempo de atendimento:</h3>
                            <p>{timeRemain(
-                               new Date(Date.parse(event.info.appointmentStartHour)),
-                               new Date(Date.parse(event.info.appointmentEndHour))
+                              new Date(Date.parse(event.info.appointmentStartHour)),
+                              new Date(Date.parse(event.info.appointmentEndHour))
                            )}</p>
 
                         </div>
                      </div>
                   </div>
                );
-         } 
+            }
 
-            return(
+            return (
                <div className="other-event" key={event._id}>
                   <div className="event-all-content">
                      <h3>{getHours(event.info.appointmentStartHour)}</h3>

@@ -3,7 +3,7 @@ export const initialState = {
 }
 
 export const EventReducer = (state, action) => {
-   switch(action.type) {
+   switch (action.type) {
       case 'reloadPage':
          return {
             ...state,

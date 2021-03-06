@@ -17,15 +17,15 @@ export default function Customers() {
    const history = useHistory();
 
    useEffect(() => {
-      
-      if(!signed) {
+
+      if (!signed) {
          return history.push('/login');
       }
 
 
    }, []);
 
-   return(
+   return (
       <div>
          <Header />
          <div className="config">
@@ -39,7 +39,7 @@ export default function Customers() {
 
                   <div className="detail">
 
-                     { customer &&  (
+                     {customer && (
                         <details key={customer._id}>
                            <summary>{customer.firstName} {customer.lastName}</summary>
 

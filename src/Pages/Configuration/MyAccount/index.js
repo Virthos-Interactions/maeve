@@ -14,7 +14,7 @@ export default function MyAccount() {
    const inputFile = useRef();
 
    useEffect(() => {
-      if(!signed) {
+      if (!signed) {
          return history.push('/login');
       }
    }, []);
@@ -22,7 +22,7 @@ export default function MyAccount() {
    function getFile(e) {
       let file = null;
 
-      if(e.target.files.length > 0) {
+      if (e.target.files.length > 0) {
          file = e.target.files[0];
       }
 
@@ -37,7 +37,7 @@ export default function MyAccount() {
       e.preventDefault();
    }
 
-   return(
+   return (
       <div>
          <Header />
 
@@ -58,7 +58,7 @@ export default function MyAccount() {
                      <label>Foto</label>
 
                      <div className="user-photo">
-                        <img src={currentImage ? currentImage : noUser} alt="Imagem do Usuário"/>
+                        <img src={currentImage ? currentImage : noUser} alt="Imagem do Usuário" />
                         <button onClick={openChooseFile}>Alterar</button>
                         <input type="file" style={{ display: 'none' }}
                            name="user-photo"
@@ -71,18 +71,18 @@ export default function MyAccount() {
                   <div className="input-group">
                      <div>
                         <label>Nome</label>
-                        <input type="text" name="firstName"/>
+                        <input type="text" name="firstName" />
                      </div>
 
                      <div>
                         <label>Sobrenome</label>
-                        <input type="text" name="lastName"/>
+                        <input type="text" name="lastName" />
                      </div>
                   </div>
 
                   <div className="input">
                      <label>Email</label>
-                     <input type="text" name="userEmail"/>
+                     <input type="text" name="userEmail" />
                   </div>
 
                   <div className="change-password">
@@ -95,9 +95,9 @@ export default function MyAccount() {
                      <textarea name="address" ></textarea>
                   </div>
                </form>
-               
+
             </div>
-         </div>         
+         </div>
       </div>
    );
 }

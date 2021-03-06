@@ -6,16 +6,16 @@ import { FaRegSadCry } from 'react-icons/fa';
 import './styles.css';
 
 export default function Error() {
-   return(
+   return (
       <div className="page-error">
-        <div className="header">
+         <div className="header">
             <header>
-               <img src={logo} alt="Virthos"/>
+               <img src={logo} alt="Virthos" />
             </header>
          </div>
-         
+
          <div className="content-page-error">
-            <FaRegSadCry color="black" size={180}/>
+            <FaRegSadCry color="black" size={180} />
             <h2>Error 404, page not found!</h2>
             <p>Ir para <Link to="/">página inicial</Link></p>
          </div>

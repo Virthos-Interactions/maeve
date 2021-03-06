@@ -9,8 +9,8 @@ export default function ActivityMonitor() {
    useEffect(() => {
       async function loadActivities() {
          const response = await api.get(`activities/partnerId`);
-         
-         setActivities(response.data) ;
+
+         setActivities(response.data);
       }
       loadActivities();
    }, []);

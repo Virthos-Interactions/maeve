@@ -5,17 +5,17 @@ import { FaTimes, FaAngleLeft } from 'react-icons/fa';
 import { MdCheck } from 'react-icons/md';
 
 export default function Chat({ data, onBack, onClose }) {
-   return(
+   return (
       <div>
          <div className="chat">
             <div className="header">
                <div className="header-content">
-                  <FaAngleLeft size={20} color="#131313" onClick={() => onBack()}/>
+                  <FaAngleLeft size={20} color="#131313" onClick={() => onBack()} />
                   <h2>{data.name}</h2>
-                  <FaTimes size={18} color="#131313" onClick={() => onClose()}/>
+                  <FaTimes size={18} color="#131313" onClick={() => onClose()} />
                </div>
             </div>
-            
+
 
             <div className="contact-chat">
 
@@ -24,23 +24,23 @@ export default function Chat({ data, onBack, onClose }) {
                   {data.messages.length === 0 &&
                      <p className="info">Ainda não possui mensagens com esse contato</p>
                   }
-                  
+
                   {data.messages.map(message => {
-                     if(message.customer) {
+                     if (message.customer) {
                         return (
                            <div className="chat-message customer" key={message.id}>
                               <p>{message.text}</p>
-                           </div>  
+                           </div>
                         );
                      }
 
                      return (
                         <div className="chat-message me" key={message.id}>
                            <p>{message.text}</p>
-                        </div> 
+                        </div>
                      );
                   })}
-               
+
 
                </div>
 
@@ -58,9 +58,9 @@ export default function Chat({ data, onBack, onClose }) {
                <div className="event-duration">
                   <p>Duração do Evento:</p>
                   <div className="duration">
-                     <input type="text" name="hour" maxLength={2}/>
+                     <input type="text" name="hour" maxLength={2} />
                      <p>:</p>
-                     <input type="text" name="minute" maxLength={2}/>
+                     <input type="text" name="minute" maxLength={2} />
                      <button>
                         <MdCheck size={20} color="white" />
                      </button>

@@ -8,7 +8,7 @@ import Context from './context';
 const theme = createMuiTheme({
   palette: {
     primary: {
-     main: '#283593'
+      main: '#283593'
     }
   },
   spacing: 4
