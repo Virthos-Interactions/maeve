@@ -88,7 +88,7 @@ export default function Dashboard() {
    const [currentEmployee, setCurrentEmployee] = useState(user?._id);
    const [crafts, setCrafts] = useState([]);
    const [partnerId, setPartnerId] = useState(user?.partnerId);
-   const [employees, setEmployees] = useState([]);
+   const [employees, setEmployees] = useState([{ name: 'Elsie'}, { name: 'Fulano'}]);
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
    const [events, setEvents] = useState([]);
@@ -122,6 +122,7 @@ export default function Dashboard() {
          return history.push('/login');
       }
       fetchCrafts();
+      fetchEmployees();
    }, []);
 
 
@@ -130,6 +131,11 @@ export default function Dashboard() {
    async function fetchCrafts() {
       const crafts = await getCrafts(partnerId, currentEmployee);
       setCrafts(crafts);
+   }
+
+   async function fetchEmployees() {
+      const employees = await getEmployees(partnerId, currentEmployee);
+      setEmployees(employees);
    }
 
    function changeEployee(e) {
@@ -175,6 +181,12 @@ export default function Dashboard() {
       setEventDetail(null);
    }
 
+   const employeesList = employees.map(employee => {
+      return (
+         <option value={employee.name}>{employee.name}</option>
+      )
+   })
+
    return (
       <div className="dashboard">
          <header>
@@ -182,9 +194,14 @@ export default function Dashboard() {
                <img src={logo} alt="Virthos" className="logo-image" />
             </div>
             <div className="header-config">
-               <select name="employees" onChange={changeEployee}>
-                  <option value="Raphael">Raphael Capeto</option>
-                  <option value="Pedro">Pedro Araujo</option>
+               <select
+                  className="employees-selection"
+                  name="employees"
+                  id="employees-selection"
+                  onChange={changeEployee}
+               >
+                  <option value="" disabled selected>Escolha um prestador</option>
+                  {employeesList}
                </select>
                <FaComment size={28} color="#ce2026"
                   onClick={() => setShowChatbox(!showChatbox)}

@@ -7,16 +7,6 @@ import { AiFillPhone } from 'react-icons/ai';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
 import './style.css';
 
-{/* <input 
-                        type="text" 
-                        value={title}
-                        ref={eventNameInput}
-                        name="title"
-                        autoComplete="false"
-                        onChange={e => setTitle(e.target.value)}
-                        placeholder="Nome do evento"
-                     /> */}
-
 export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
    const [craftName, setCraftName] = useState('');
    const [hourStart, setHourStart] = useState('');
@@ -29,7 +19,6 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
    const [note, setNote] = useState('');
    const [message, setMessage] = useState('');
    const endHourinput = useRef(null);
-   const eventNameInput = useRef(null);
    const monthInput = useRef(null);
    const yearInput = useRef(null);
 
@@ -58,7 +47,6 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
          setHourStart(getHours(eventDetail.start));
          setHourEnd(getHours(eventDetail.end));
       }
-      //eventNameInput.current.focus();      
    }, []);
 
    function createEvent(start, end, craftName, phone, employeeId, customer, information) {
@@ -294,11 +282,6 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                               value={phone} onChange={e => {
                                  e.target.value = e.target.value.replace(/\D/g, '');
                                  setPhone(e.target.value);
-                                 // if(e.target.value.length > 11) {
-                                 //    e.target.value.split(0, -1);
-                                 // } else {
-                                 //    setPhone(e.target.value);
-                                 // }
                               }}
                               name="phone"
                            />

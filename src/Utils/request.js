@@ -35,6 +35,22 @@ export function getCrafts(
    });
 }
 
+export function getEmployees(
+   partnerId,
+   employeeId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post(`/employee/get`, {
+         partnerId: partnerId,
+         employeeId: employeeId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data.craftList);
+   });
+}
+
 export function deleteAppointmentEvent(id, partnerId) {
    return new Promise(async (resolve, reject) => {
       const response = await bernard.post('/appointment/deleteById', {
