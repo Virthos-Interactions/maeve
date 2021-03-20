@@ -86,9 +86,10 @@ export default function Dashboard() {
    const { signed, logout, user, dispatch } = useContext(AuthContext);
 
    const [currentEmployee, setCurrentEmployee] = useState(user?._id);
+   const [count, setCount] = useState(0);
    const [crafts, setCrafts] = useState([]);
    const [partnerId, setPartnerId] = useState(user?.partnerId);
-   const [employees, setEmployees] = useState([{ name: 'Elsie'}, { name: 'Fulano'}]);
+   const [employees, setEmployees] = useState([]);
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
    const [events, setEvents] = useState([]);
@@ -138,8 +139,8 @@ export default function Dashboard() {
       setEmployees(employees);
    }
 
-   function changeEployee(e) {
-      setCurrentEmployee(e.target.value);
+   const _changeEployee = (employeeId) => {
+      setCurrentEmployee(employeeId);
    }
 
    function onClose() {
@@ -183,7 +184,7 @@ export default function Dashboard() {
 
    const employeesList = employees.map(employee => {
       return (
-         <option value={employee.name}>{employee.name}</option>
+         <option value={employee._id}>{employee.firstName}</option>
       )
    })
 
@@ -198,7 +199,7 @@ export default function Dashboard() {
                   className="employees-selection"
                   name="employees"
                   id="employees-selection"
-                  onChange={changeEployee}
+                  onChange={e => _changeEployee(e.target.value)}
                >
                   <option value="" disabled selected>Escolha um prestador</option>
                   {employeesList}
