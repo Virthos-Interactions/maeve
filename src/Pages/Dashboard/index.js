@@ -27,7 +27,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
-import { getCrafts } from '../../Utils/request';
+import { getCrafts, getEmployees } from '../../Utils/request';
 
 const useStyles = makeStyles((theme) => ({
    root: {
