@@ -27,7 +27,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
-import { getCrafts } from '../../Utils/request';
+import { getCrafts, getEmployees } from '../../Utils/request';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -86,6 +86,7 @@ export default function Dashboard() {
    const { signed, logout, user, dispatch } = useContext(AuthContext);
 
    const [currentEmployee, setCurrentEmployee] = useState(user?._id);
+   const [count, setCount] = useState(0);
    const [crafts, setCrafts] = useState([]);
    const [partnerId, setPartnerId] = useState(user?.partnerId);
    const [employees, setEmployees] = useState([]);
@@ -122,6 +123,7 @@ export default function Dashboard() {
          return history.push('/login');
       }
       fetchCrafts();
+      fetchEmployees();
    }, []);
 
 
@@ -132,8 +134,13 @@ export default function Dashboard() {
       setCrafts(crafts);
    }
 
-   function changeEployee(e) {
-      setCurrentEmployee(e.target.value);
+   async function fetchEmployees() {
+      const employees = await getEmployees(partnerId, currentEmployee);
+      setEmployees(employees);
+   }
+
+   const _changeEployee = (employeeId) => {
+      setCurrentEmployee(employeeId);
    }
 
    function onClose() {
@@ -175,6 +182,12 @@ export default function Dashboard() {
       setEventDetail(null);
    }
 
+   const employeesList = employees.map(employee => {
+      return (
+         <option value={employee._id}>{employee.firstName}</option>
+      )
+   })
+
    return (
       <div className="dashboard">
          <header>
@@ -182,9 +195,14 @@ export default function Dashboard() {
                <img src={logo} alt="Virthos" className="logo-image" />
             </div>
             <div className="header-config">
-               <select name="employees" onChange={changeEployee}>
-                  <option value="Raphael">Raphael Capeto</option>
-                  <option value="Pedro">Pedro Araujo</option>
+               <select
+                  className="employees-selection"
+                  name="employees"
+                  id="employees-selection"
+                  onChange={e => _changeEployee(e.target.value)}
+               >
+                  <option value="" disabled selected>Escolha um prestador</option>
+                  {employeesList}
                </select>
                <FaComment size={28} color="#ce2026"
                   onClick={() => setShowChatbox(!showChatbox)}
