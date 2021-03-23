@@ -35,6 +35,20 @@ export function getCrafts(
    });
 }
 
+export function getCustomers(
+   partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post(`/customer/getByPartner`, {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
 export function deleteAppointmentEvent(id, partnerId) {
    return new Promise(async (resolve, reject) => {
       const response = await bernard.post('/appointment/deleteById', {

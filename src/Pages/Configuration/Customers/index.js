@@ -8,12 +8,14 @@ import Header from '../../../Component/Header';
 import '../style.css';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
 import { formatDate } from '../../../Utils';
+import { getCustomers } from '../../../Utils/request';
 
 
 export default function Customers() {
+   const { signed, logout, user, dispatch } = useContext(AuthContext);
+
+   const [partnerId, setPartnerId] = useState(user?.partnerId);
    const [customers, setCustomers] = useState([]);
-   const [customer, setCustomer] = useState(null);
-   const { signed } = useContext(AuthContext);
    const history = useHistory();
 
    useEffect(() => {
@@ -22,8 +24,20 @@ export default function Customers() {
          return history.push('/login');
       }
 
+      _fetchCustomers();
 
    }, []);
+
+   const _fetchCustomers = async () => {
+      console.log('partnerId')
+      console.log(partnerId)
+      const customers = await getCustomers(partnerId);
+      setCustomers(customers);
+   } 
+
+   const _getCustomersList = () => {
+      customers.map()
+   }
 
    return (
       <div>
@@ -71,6 +85,10 @@ export default function Customers() {
                               </div>
                            </header>
                            <p>Dados Cadastrados</p>
+                           <p><strong>Endereço:</strong>{'Endereço'}</p>
+                           <p><strong>E-mail:</strong> {'customer.email'}</p>
+                           <p><strong>Número:</strong> {'customer.mobileNumber'}</p>
+                           <p><strong>Aniversário:</strong> {'data'}</p>
 
                         </div>
                      </details>
