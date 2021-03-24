@@ -29,15 +29,35 @@ export default function Customers() {
    }, []);
 
    const _fetchCustomers = async () => {
-      console.log('partnerId')
-      console.log(partnerId)
       const customers = await getCustomers(partnerId);
+      console.log(customers)
       setCustomers(customers);
-   } 
-
-   const _getCustomersList = () => {
-      customers.map()
    }
+
+   const _getCustomersList = customers.map(customer => {
+      return (
+         <div className='detail'>
+            <details key={customer._id}>
+               <summary>{customer.firstName} {customer.lastName}</summary>
+
+               <div className="current-detail">
+                  <header>
+                     <p>{customer.firstName} {customer.lastName}</p>
+                     <div>
+                        <BsPencilSquare size={18} color="#131313" />
+                        <FaTrash size={18} color="#131313" />
+                     </div>
+                  </header>
+                  <p><strong>Endereço: </strong>{customer.address}</p>
+                  <p><strong>E-mail: </strong> {customer.email}</p>
+                  <p><strong>Número: </strong> {customer.mobileNumber}</p>
+                  <p><strong>Aniversário: </strong> {formatDate(customer.birthday)}</p>
+               </div>
+            </details>
+         </div>
+      )
+   })
+
 
    return (
       <div>
@@ -50,69 +70,7 @@ export default function Customers() {
                      <h3>Clientes</h3>
                      <button>Adicionar</button>
                   </header>
-
-                  <div className="detail">
-
-                     {customer && (
-                        <details key={customer._id}>
-                           <summary>{customer.firstName} {customer.lastName}</summary>
-
-                           <div className="current-detail">
-                              <header>
-                                 <p>{customer.firstName} {customer.lastName}</p>
-                                 <div>
-                                    <BsPencilSquare size={18} color="#131313" />
-                                    <FaTrash size={18} color="#131313" />
-                                 </div>
-                              </header>
-                              <p><strong>Endereço:</strong>{customer.address}</p>
-                              <p><strong>E-mail:</strong> {customer.email}</p>
-                              <p><strong>Número:</strong> {customer.mobileNumber}</p>
-                              <p><strong>Aniversário:</strong> {formatDate(customer.birthday)}</p>
-
-                           </div>
-                        </details>
-                     )}
-                     <details>
-                        <summary>Raphael Capeto</summary>
-
-                        <div className="current-detail">
-                           <header>
-                              <p>Raphael Capeto</p>
-                              <div>
-                                 <BsPencilSquare size={18} color="#131313" />
-                                 <FaTrash size={18} color="#131313" />
-                              </div>
-                           </header>
-                           <p>Dados Cadastrados</p>
-                           <p><strong>Endereço:</strong>{'Endereço'}</p>
-                           <p><strong>E-mail:</strong> {'customer.email'}</p>
-                           <p><strong>Número:</strong> {'customer.mobileNumber'}</p>
-                           <p><strong>Aniversário:</strong> {'data'}</p>
-
-                        </div>
-                     </details>
-                  </div>
-
-
-                  <div className="detail">
-                     <details>
-                        <summary>Pedro Araujo</summary>
-
-                        <div className="current-detail">
-                           <header>
-                              <p>Pedro Araujo</p>
-                              <div>
-                                 <BsPencilSquare size={18} color="#131313" />
-                                 <FaTrash size={18} color="#131313" />
-                              </div>
-                           </header>
-                           <p>Dados Cadastrados</p>
-                        </div>
-                     </details>
-                  </div>
-
-
+                  {_getCustomersList}
                </div>
             </div>
          </div>
