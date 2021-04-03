@@ -48,6 +48,20 @@ export function getEmployees(partnerId) {
    });
 }
 
+export function getCustomers(
+   partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post(`/customer/getByPartner`, {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
 export function deleteAppointmentEvent(id, partnerId) {
    return new Promise(async (resolve, reject) => {
       const response = await bernard.post('/appointment/deleteById', {
@@ -58,6 +72,21 @@ export function deleteAppointmentEvent(id, partnerId) {
             Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
          }
       });
+      resolve(response);
+   });
+}
+
+export function deleteCustomers(emails, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/customer/delete', {
+         partnerId: partnerId,
+         emails: emails,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      console.log(response);
       resolve(response);
    });
 }

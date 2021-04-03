@@ -107,3 +107,47 @@ div.black-mask-config {
    right: 0;
    top: 0;
 }
+
+.confirm-msg {
+   margin-left: 25px;
+}
+
+.confirm-box {
+   padding: 30px;
+   width: 300px;
+   height: 150px;
+   background-color: white;
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+   border-radius: 8px;
+   position: absolute;
+   left: 40%;
+   bottom: 40%;
+   font-size: 20px;
+   display: flex;
+   flex-direction: column;
+}
+
+.btn-no {
+   border: none;
+   border-radius: 5px;
+   background-color:rgba(61, 106, 207, 1);
+   color: white;
+   padding: 5px;
+   width: 50px;
+}
+
+.btn-yes {
+   border: none;
+   border-radius: 5px;
+   background-color: rgba(169, 43, 67, 1);
+   color: white;
+   padding: 5px;
+   width: 50px;
+}
+
+.btn-group {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   margin: 20px;
+}
