@@ -63,6 +63,21 @@ export function deleteAppointmentEvent(id, partnerId) {
    });
 }
 
+export function deleteCustomers(emails, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/customer/delete', {
+         partnerId: partnerId,
+         emails: emails,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      console.log(response);
+      resolve(response);
+   });
+}
+
 export function editAppointmentEvent(id, newHourStart, newHourEnd, partnerId) {
    return new Promise(async (resolve, reject) => {
       const response = await bernard.post('/appointment/update', {

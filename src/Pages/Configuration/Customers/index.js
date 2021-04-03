@@ -1,21 +1,25 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../context';
-import { arnold } from '../../../services/api';
 import { FaTrash } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
 import Header from '../../../Component/Header';
 import '../style.css';
 import ModalConfigSettings from '../../../Component/ModalConfigSettings';
+import ModalAddCustomer from '../../../Component/ModalAddCustomer';
+import ModalEditCustomer from '../../../Component/ModalEditCustomer';
 import { formatDate } from '../../../Utils';
-import { getCustomers } from '../../../Utils/request';
-
+import { getCustomers, deleteCustomers } from '../../../Utils/request';
+import { confirmAlert } from 'react-confirm-alert'; // Import
 
 export default function Customers() {
-   const { signed, logout, user, dispatch } = useContext(AuthContext);
+   const { signed, user, dispatch } = useContext(AuthContext);
 
    const [partnerId, setPartnerId] = useState(user?.partnerId);
    const [customers, setCustomers] = useState([]);
+   const [currentCustomer, setCurrentCustomer] = useState(undefined);
+   const [showModalAddCustomer, setModalAddCustomer] = useState(false);
+   const [showModalEditCustomer, setModalEditCustomer] = useState(false);
    const history = useHistory();
 
    useEffect(() => {
@@ -24,17 +28,59 @@ export default function Customers() {
          return history.push('/login');
       }
 
-      _fetchCustomers();
+      fetchCustomers();
 
    }, []);
 
-   const _fetchCustomers = async () => {
+   const fetchCustomers = async () => {
       const customers = await getCustomers(partnerId);
       console.log(customers)
       setCustomers(customers);
    }
 
+   const handleDeleteCustomer = (customer) => {
+      confirmAlert({
+         closeOnEscape: true,
+         closeOnClickOutside: true,
+         customUI: ({ onClose }) => {
+            return (
+               <div className='confirm-box'>
+                  <p className='confirm-msg'>Tem certeza que quer excluir esse cliente?</p>
+                  <div className='btn-group'>
+                     <button 
+                        className='btn-no'
+                        onClick={() => {
+                           onClose();
+                        }}
+                     >
+                        Não
+                     </button>
+                     <button
+                        className='btn-yes'
+                        onClick={() => {
+                           deleteCustomers([customer.email], partnerId).then(_ => {
+                              onClose();
+                              fetchCustomers();
+                           });
+                        }}
+                     >
+                        Sim
+                 </button>
+                  </div>
+               </div>
+            );
+         },
+         overlayClassName: "black-mask-box"
+      });
+   };
+
+   const handleEditCustomer = (customer) => {
+      setCurrentCustomer(customer);
+      setModalEditCustomer(true);
+   };
+
    const _getCustomersList = customers.map(customer => {
+
       return (
          <div className='detail'>
             <details key={customer._id}>
@@ -44,8 +90,8 @@ export default function Customers() {
                   <header>
                      <p>{customer.firstName} {customer.lastName}</p>
                      <div>
-                        <BsPencilSquare size={18} color="#131313" />
-                        <FaTrash size={18} color="#131313" />
+                        <BsPencilSquare size={18} color="#131313" onClick={() => handleEditCustomer(customer)} />
+                        <FaTrash size={18} color="#131313" onClick={() => handleDeleteCustomer(customer)} />
                      </div>
                   </header>
                   <p><strong>Endereço: </strong>{customer.address}</p>
@@ -68,9 +114,30 @@ export default function Customers() {
                <div className="details">
                   <header>
                      <h3>Clientes</h3>
-                     <button>Adicionar</button>
+                     <button onClick={() => setModalAddCustomer(!showModalAddCustomer)}>Adicionar</button>
                   </header>
                   {_getCustomersList}
+                  {showModalAddCustomer &&
+                     <div className="black-mask">
+                        <div className="black-mask-content">
+                           <ModalAddCustomer
+                              onClose={() => setModalAddCustomer(false)}
+                              fetchCustomers={fetchCustomers}
+                           />
+                        </div>
+                     </div>
+                  }
+                  {showModalEditCustomer &&
+                     <div className="black-mask">
+                        <div className="black-mask-content">
+                           <ModalEditCustomer
+                              currentCustomer={currentCustomer}
+                              fetchCustomers={fetchCustomers}
+                              onClose={() => setModalEditCustomer(false)}
+                           />
+                        </div>
+                     </div>
+                  }
                </div>
             </div>
          </div>
