@@ -5,11 +5,11 @@ export const initialState = {
 export const EventReducer = (state, action) => {
    switch (action.type) {
       case 'reloadPage':
+         console.log('ACTION')
          return {
             ...state,
             reload: action.payload.reload,
          }
-         break;
       default:
          return state;
    }
