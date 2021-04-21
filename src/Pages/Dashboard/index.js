@@ -27,7 +27,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
-import { getCrafts, getEmployees } from '../../Utils/request';
+import { getCraftsByEmployee, getEmployees } from '../../Utils/request';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -130,7 +130,7 @@ export default function Dashboard() {
    const history = useHistory();
 
    async function fetchCrafts() {
-      const crafts = await getCrafts(partnerId, currentEmployee);
+      const crafts = await getCraftsByEmployee(partnerId, currentEmployee);
       setCrafts(crafts);
    }
 
