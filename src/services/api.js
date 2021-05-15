@@ -8,12 +8,16 @@ export const arnold = axios.create({
    baseURL: process.env.REACT_APP_ARNOLD_URL
 });
 
+export const authentication = axios.create({
+   baseURL: process.env.REACT_APP_LOGIN_URL
+});
+
 export const bernard = axios.create({
    baseURL: process.env.REACT_APP_BERNARD_URL
 });
 
-export const authentication = axios.create({
-   baseURL: process.env.REACT_APP_LOGIN_URL
+export const chatpro = axios.create({
+   baseURL: process.env.REACT_APP_CHATPRO_URL
 });
 
 export default api;

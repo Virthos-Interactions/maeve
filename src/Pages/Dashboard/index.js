@@ -1,17 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { FaComment } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
+
 import api from '../../services/api';
 
 import './style.css';
 import logo from '../../assets/virthosLogo.png';
 import noUser from '../../assets/default-user-image-365x365.png';
+import zapVerde from '../../assets/ZapVerde.svg';
+import zapCinza from '../../assets/ZapCinza.svg';
 import ModalConfig from '../../Component/ModalConfig';
 import ActivityMonitor from '../../Component/ActivityMonitor';
 import NextEvents from '../../Component/NextEvents';
 import CalendarComponent from '../../Component/CalendarComponent';
 import ModalEventDetail from '../../Component/ModalEventDetail';
 import ModalAddEvent from '../../Component/ModalAddEvent';
+import ModalQRCode from '../../Component/ModalQRCode';
 import Chatbox from '../../Component/Chatbox/index';
 import ModalEventEdit from '../../Component/ModalEditEvent';
 
@@ -27,7 +31,35 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
-import { getCrafts, getEmployees } from '../../Utils/request';
+import 
+{ 
+   getCraftsByEmployee, 
+   getEmployees, 
+   getMobilePhoneStatus, 
+   getPartnerData,
+} from '../../Utils/request';
+
+const MOBILE_PHONE_CHECK_INTERVAL = 5000;
+
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -61,27 +93,8 @@ const useStyles = makeStyles((theme) => ({
    }
 }));
 
-
 export default function Dashboard() {
    const classes = useStyles();
-   const testEvents = [
-      {
-         title: 'Corte Feminino',
-         start: new Date(2020, 7, 29, 18),
-         end: new Date(2020, 7, 29, 19),
-         id: 1,
-         customer: 'Gabriela Santos',
-         note: 'Cortar rápido'
-      },
-      {
-         title: 'Corte Masculino',
-         start: new Date(2020, 7, 29, 18),
-         end: new Date(2020, 7, 29, 19),
-         id: 2,
-         customer: 'Raphael Capeto',
-         note: 'Cortar o mais rápido que puder'
-      }
-   ];
 
    const { signed, logout, user, dispatch } = useContext(AuthContext);
 
@@ -89,9 +102,12 @@ export default function Dashboard() {
    const [count, setCount] = useState(0);
    const [crafts, setCrafts] = useState([]);
    const [partnerId, setPartnerId] = useState(user?.partnerId);
+   const [partnerData, setPartnerData] = useState(null);
+   const [mobilePhoneConnected, setMobilePhoneConnected] = useState(false);
    const [employees, setEmployees] = useState([]);
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
+   const [showModalQRCode, setShowModalQRCode] = useState(false);
    const [events, setEvents] = useState([]);
    const [eventDetail, setEventDetail] = useState(null);
    const [showModalEventCreate, setShowModalEventCreate] = useState(false);
@@ -124,19 +140,37 @@ export default function Dashboard() {
       }
       fetchCrafts();
       fetchEmployees();
+      fetchPartnerData();
    }, []);
 
+   useInterval(() => {
+      if(partnerData) {
+         fetchPhoneConnectionStatus();
+      }
+   }, MOBILE_PHONE_CHECK_INTERVAL);
 
    const history = useHistory();
 
    async function fetchCrafts() {
-      const crafts = await getCrafts(partnerId, currentEmployee);
+      const crafts = await getCraftsByEmployee(partnerId, currentEmployee);
       setCrafts(crafts);
    }
 
    async function fetchEmployees() {
       const employees = await getEmployees(partnerId, currentEmployee);
       setEmployees(employees);
+   }
+
+   async function fetchPhoneConnectionStatus() {
+      const status = await getMobilePhoneStatus(partnerData.chatproInstanceId, partnerData.chatproInstanceToken);
+      console.log('phoneStatus')
+      console.log(status)
+      setMobilePhoneConnected(status);
+   }
+
+   async function fetchPartnerData() {
+      const partnerData = await getPartnerData(partnerId);
+      setPartnerData(partnerData);
    }
 
    const _changeEployee = (employeeId) => {
@@ -195,6 +229,14 @@ export default function Dashboard() {
                <img src={logo} alt="Virthos" className="logo-image" />
             </div>
             <div className="header-config">
+
+               <img 
+                  src={mobilePhoneConnected ? zapVerde : zapCinza} 
+                  width="30" 
+                  height="30"
+                  onClick={() => {setShowModalQRCode(true)}}
+               />
+
                <select
                   className="employees-selection"
                   name="employees"
@@ -204,9 +246,14 @@ export default function Dashboard() {
                   <option value="" disabled selected>Escolha um prestador</option>
                   {employeesList}
                </select>
-               <FaComment size={28} color="#ce2026"
-                  onClick={() => setShowChatbox(!showChatbox)}
-               />
+
+               
+               {/* 
+                  Disabled for now.
+                  <FaComment size={28} color="#ce2026"
+                     onClick={() => setShowChatbox(!showChatbox)}
+                  /> 
+               */}
 
                <div className="header-image" >
                   <img src={noUser} alt="Imagem do Usuário" className="user-image" />
@@ -234,7 +281,26 @@ export default function Dashboard() {
                   onClick={() => setShowModalConfig(false)}
                >
                   <div className="black-mask-config">
-                     <ModalConfig onClose={onClose} logout={logOut} />
+                     <ModalConfig 
+                        partnerData={partnerData}
+                        onClose={onClose} 
+                        logout={logOut} 
+                     />
+                  </div>
+               </div>
+            }
+
+            {showModalQRCode &&
+               <div className="black-mask"
+                  onClick={() => setShowModalQRCode(false)}
+               >
+                  <div className="black-mask-config">
+                     <ModalQRCode 
+                        authToken={partnerData.chatproInstanceToken}
+                        chatproInstanceId={partnerData.chatproInstanceId} 
+                        mobilePhoneConnected={mobilePhoneConnected}
+                        onClose={onClose} 
+                     />
                   </div>
                </div>
             }

@@ -1,0 +1,244 @@
+.qr-code-modal {
+   background-color: white;
+   position: fixed;
+   left: 40%;
+   bottom: 30%;
+   padding: 30px;
+   height: 450px;
+   width: 500px;
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+   border-radius: 8px;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+.qr-code-modal .header {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-evenly;  
+   align-items: center;
+   font-size: 30px;
+   color: rgb(161, 161, 161);
+   width: 500px;
+}
+
+.qr-code-modal .header .whatsapp-icon {
+   width: 46px;
+   height: 44px;
+   padding-right: 60x;
+}
+
+.qr-code-modal .header .close-icon {
+   position: absolute;
+   left: 465px;
+   top: 10px;
+}
+
+.qr-code-modal .header .header-text {
+   padding-bottom: 10px;
+   border-bottom: 2px solid rgb(202, 202, 202);
+}
+
+.qr-code-modal .qr-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   width: 300px;
+   padding-top: 20px;
+}
+
+.qr-code-modal .qr-container .container-text {
+   font-size: 20px;
+   color: rgb(112, 109, 109);
+   padding-bottom: 20px;
+}
+
+.qr-code-modal .qr-container  .loader-container {
+   display: flex;
+   justify-content: center;
+   width: 265px;
+   height: 265px;
+   align-items: center;
+}
+
+
+/* .create-customer .create-customer-content {
+   position: relative;
+}
+
+.create-customer .create-customer-content .input-title input {
+   width: 90%;
+   padding: 10px 5px;
+   border: none;
+   border-bottom: 2px solid #cecece;
+   font-size: 22px;
+   opacity: 0.7;
+}
+
+.crafts-selection {
+   border: none;
+   background-color: #cecece;
+   color:rgb(121, 121, 121);
+   font-size: 22px;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+
+.crafts-selection:focus {
+   color: black;
+}
+
+.create-customer .create-customer-content .input-title input:focus {
+   border-bottom: 2px solid #3498db;
+   opacity: 1;
+}
+
+.create-customer .create-customer-content .input-title svg {
+   position: absolute;
+   top: 0;
+   right: 0;
+   cursor: pointer;
+   transition: 400ms;
+}
+
+.create-customer .create-customer-content .input-title svg:hover {
+   filter: brightness(90%);
+}
+
+.create-customer .customer-date {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+}
+
+.create-customer .input-time svg {
+   margin-right: 20px;
+}
+
+.create-customer .input-time input {
+   border: none;
+   background-color: #cecece;
+   font-size: 16px;
+   width: 100px;
+   text-align: center;
+   padding-bottom: 3px;
+   padding-top: 3px;
+}
+
+.create-customer .customer-date svg {
+   margin-right: 20px;
+}
+
+.create-customer .customer-date input {
+   border: none;
+   background-color: #cecece;
+   font-size: 20px;
+   width: 55px;
+   text-align: center;
+}
+
+.create-customer .evcustomerent-date p {
+   margin: 10px;
+   font-size: 16px;
+}
+
+.create-customer .customer-details p {
+   margin-top: 10px;
+}
+
+.input-customer-phone,
+.input-customer-email {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+   width: 400px;
+   margin-bottom: 8px;
+}
+
+.input-customer-name {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   flex-wrap: wrap;
+   margin-top: 10px;
+   width: 400px;
+}
+
+.input-customer-first-name-field {
+   margin-bottom: 10px;
+}
+
+.input-customer-surname-field {
+   margin-left: 40px;
+}
+
+
+.input-customer-phone svg,
+.input-customer-email svg,
+.input-customer-name svg {
+   margin-right: 20px;
+}
+
+.input-customer-email input,
+.input-customer-phone input,
+.input-customer-name input {
+   border: none;
+   background-color: #Cecece;
+   width: 83%;
+   padding: 5px;
+   color: black;
+   font-size: 17px;
+}
+
+.customer-note {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px; 
+}
+
+.customer-note svg {
+   margin-right: 20px;
+}
+
+.customer-note textarea {
+   width: 83%;
+   min-height: 110px;
+   border: none;
+   background-color: #cecece;
+   resize: none;
+   font-size: 17px;
+   line-height: 27px;
+   padding: 10px;
+}
+
+.create-customer .btn-save-customer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.btn-save {
+   color: white;
+   border: none;
+   background-color: #3498db;
+   padding: 8px;
+   cursor: pointer;
+   width: 80px;
+   border-radius: 5px;
+   transition: 200ms;
+}
+
+.btn-save:hover {
+   filter: brightness(90%);
+}
+
+.create-container {
+   margin-left: 10px;
+} */
