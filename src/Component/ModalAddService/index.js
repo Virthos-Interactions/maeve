@@ -23,10 +23,17 @@ export default function ModalAddService({ onClose, fetchServices }) {
 
    function createService(serviceName, serviceDescription, price, duration ) {
       return new Promise((resolve, reject) => {
+
+         console.log('Adding craft')
+         console.log(serviceName)
+         console.log(serviceDescription)
+         console.log(price)
+         console.log(duration)
+
          arnold.post('/craft/create', {
             partnerId: user.partnerId,
-            serviceName: serviceName,
-            serviceDescription: serviceDescription,
+            name: serviceName,
+            description: serviceDescription,
             price: price,
             duration: duration
          }, {
