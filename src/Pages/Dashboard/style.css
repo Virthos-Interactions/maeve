@@ -50,6 +50,28 @@
    position: relative;
 }
 
+.employees-selection-div {
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.employees-selection {
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid 1px gray;
+  width: auto;
+}
+
+#employees-selection {
+   width: 200px;
+}
+
+#employees-selection option {
+   width: 200px;
+}
+
 .opacity {
    width: 40px;
    height: 40px;

@@ -140,8 +140,6 @@ export function getMobilePhoneStatus(chatproInstanceId, authToken) {
    }
    return new Promise(async (resolve, reject) => {
       chatpro.get(`/${chatproInstanceId}/api/v1/status`, options).then(response => {
-         console.log('Chatpro Mobile Status:')
-         console.log(response)
          if(response.data.connected) {
             resolve(true)
          } else {

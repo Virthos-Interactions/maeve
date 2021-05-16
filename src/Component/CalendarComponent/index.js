@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { Calendar, momentLocalizer, Views, Navigate } from 'react-big-calendar';
 import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
@@ -6,29 +6,11 @@ import 'moment/locale/pt-br';
 import './style.css';
 import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
-import { getEvents } from '../../Utils/request';
-import { AuthContext } from '../../context';
 
 let handleAddEvent = null;
 
-export default function CalendarComponent({ newEvent, dblClick, addEvent }) {
+export default function CalendarComponent({ addEvent, dblClick, events, newEvent }) {
    moment.locale('pt-br');
-   const [events, setEvents] = useState([]);
-   const { user, state } = useContext(AuthContext);
-
-   useEffect(() => {
-      const partnerId = user && user.partnerId;
-      const employeeId = user && user._id;
-
-      if (partnerId && employeeId) {
-         getEvents(partnerId, employeeId, '2100-08-20').then(data => {
-            if (data instanceof Array) {
-               setEvents(data);
-            }
-         });
-      }
-   }, [state.reload]);
-
 
    const formatedEvents = events.map(event => {
       return {
