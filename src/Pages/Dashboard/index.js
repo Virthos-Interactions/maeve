@@ -31,34 +31,34 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { AuthContext } from '../../context';
 import { deleteAppointmentEvent } from '../../Utils/request';
-import 
-{ 
-   getCraftsByEmployee, 
-   getEmployees, 
-   getMobilePhoneStatus, 
+import {
+   getCraftsByEmployee,
+   getEmployees,
+   getEvents,
+   getMobilePhoneStatus,
    getPartnerData,
 } from '../../Utils/request';
 
 const MOBILE_PHONE_CHECK_INTERVAL = 5000;
 
 const useInterval = (callback, delay) => {
-  const savedCallback = useRef();
+   const savedCallback = useRef();
 
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+   // Remember the latest callback.
+   useEffect(() => {
+      savedCallback.current = callback;
+   }, [callback]);
 
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
+   // Set up the interval.
+   useEffect(() => {
+      function tick() {
+         savedCallback.current();
+      }
+      if (delay !== null) {
+         let id = setInterval(tick, delay);
+         return () => clearInterval(id);
+      }
+   }, [delay]);
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -99,8 +99,8 @@ export default function Dashboard() {
    const { signed, logout, user, dispatch } = useContext(AuthContext);
 
    const [currentEmployee, setCurrentEmployee] = useState(user?._id);
-   const [count, setCount] = useState(0);
    const [crafts, setCrafts] = useState([]);
+   const [events, setEvents] = useState([]);
    const [partnerId, setPartnerId] = useState(user?.partnerId);
    const [partnerData, setPartnerData] = useState(null);
    const [mobilePhoneConnected, setMobilePhoneConnected] = useState(false);
@@ -108,7 +108,6 @@ export default function Dashboard() {
    const [showModalConfig, setShowModalConfig] = useState(false);
    const [showModalEventDetail, setShowModalEventDetail] = useState(false);
    const [showModalQRCode, setShowModalQRCode] = useState(false);
-   const [events, setEvents] = useState([]);
    const [eventDetail, setEventDetail] = useState(null);
    const [showModalEventCreate, setShowModalEventCreate] = useState(false);
    const [addEventWithDetail, setAddEventWithDetail] = useState(null);
@@ -139,12 +138,20 @@ export default function Dashboard() {
          return history.push('/login');
       }
       fetchCrafts();
+      fetchEventsForCurrentEmployee();
       fetchEmployees();
       fetchPartnerData();
    }, []);
 
+   useEffect(() => {
+      if (!signed) {
+         return history.push('/login');
+      }
+      fetchEventsForCurrentEmployee();
+   }, [currentEmployee]);
+
    useInterval(() => {
-      if(partnerData) {
+      if (partnerData) {
          fetchPhoneConnectionStatus();
       }
    }, MOBILE_PHONE_CHECK_INTERVAL);
@@ -156,6 +163,14 @@ export default function Dashboard() {
       setCrafts(crafts);
    }
 
+   async function fetchEventsForCurrentEmployee() {
+      getEvents(partnerId, currentEmployee, '2100-08-20').then(data => {
+         if (data instanceof Array) {
+            setEvents(data);
+         }
+      });
+   }
+
    async function fetchEmployees() {
       const employees = await getEmployees(partnerId, currentEmployee);
       setEmployees(employees);
@@ -163,8 +178,6 @@ export default function Dashboard() {
 
    async function fetchPhoneConnectionStatus() {
       const status = await getMobilePhoneStatus(partnerData.chatproInstanceId, partnerData.chatproInstanceToken);
-      console.log('phoneStatus')
-      console.log(status)
       setMobilePhoneConnected(status);
    }
 
@@ -173,8 +186,8 @@ export default function Dashboard() {
       setPartnerData(partnerData);
    }
 
-   const _changeEployee = (employeeId) => {
-      setCurrentEmployee(employeeId);
+   const _changeEmployee = (employeeId) => {
+         setCurrentEmployee(employeeId);
    }
 
    function onClose() {
@@ -230,24 +243,27 @@ export default function Dashboard() {
             </div>
             <div className="header-config">
 
-               <img 
-                  src={mobilePhoneConnected ? zapVerde : zapCinza} 
-                  width="30" 
+               <img
+                  src={mobilePhoneConnected ? zapVerde : zapCinza}
+                  width="30"
                   height="30"
-                  onClick={() => {setShowModalQRCode(true)}}
+                  onClick={() => { setShowModalQRCode(true) }}
                />
 
-               <select
-                  className="employees-selection"
-                  name="employees"
-                  id="employees-selection"
-                  onChange={e => _changeEployee(e.target.value)}
+               <div
+                  className="employees-selection-div"
                >
-                  <option value="" disabled selected>Escolha um prestador</option>
-                  {employeesList}
-               </select>
+                  <select
+                     className="employees-selection"
+                     name="employees"
+                     id="employees-selection"
+                     onChange={e => _changeEmployee(e.target.value)}
+                  >
+                     <option value="" disabled selected>Escolha um prestador</option>
+                     {employeesList}
+                  </select>
+               </div>
 
-               
                {/* 
                   Disabled for now.
                   <FaComment size={28} color="#ce2026"
@@ -281,10 +297,10 @@ export default function Dashboard() {
                   onClick={() => setShowModalConfig(false)}
                >
                   <div className="black-mask-config">
-                     <ModalConfig 
+                     <ModalConfig
                         partnerData={partnerData}
-                        onClose={onClose} 
-                        logout={logOut} 
+                        onClose={onClose}
+                        logout={logOut}
                      />
                   </div>
                </div>
@@ -295,11 +311,11 @@ export default function Dashboard() {
                   onClick={() => setShowModalQRCode(false)}
                >
                   <div className="black-mask-config">
-                     <ModalQRCode 
+                     <ModalQRCode
                         authToken={partnerData.chatproInstanceToken}
-                        chatproInstanceId={partnerData.chatproInstanceId} 
+                        chatproInstanceId={partnerData.chatproInstanceId}
                         mobilePhoneConnected={mobilePhoneConnected}
-                        onClose={onClose} 
+                        onClose={onClose}
                      />
                   </div>
                </div>
@@ -374,12 +390,13 @@ export default function Dashboard() {
                <Grid item xs={9} style={{ paddingTop: 4 }}>
                   <Paper className={classes.calendar}>
                      <CalendarComponent
-                        newEvent={handleSelect}
-                        dblClick={showEvent}
                         addEvent={() => {
                            setShowModalEventCreate(!showModalEventCreate);
                            setAddEventWithDetail(null);
                         }}
+                        dblClick={showEvent}
+                        events={events}
+                        newEvent={handleSelect} 
                      />
                   </Paper>
                </Grid>
