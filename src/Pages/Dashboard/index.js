@@ -35,6 +35,7 @@ import {
    getCraftsByEmployee,
    getEmployees,
    getEvents,
+   getEventsByPartnerId,
    getMobilePhoneStatus,
    getPartnerData,
 } from '../../Utils/request';
@@ -138,16 +139,20 @@ export default function Dashboard() {
          return history.push('/login');
       }
       fetchCrafts();
-      fetchEventsForCurrentEmployee();
       fetchEmployees();
       fetchPartnerData();
+      (currentEmployee === "all_employees") ?
+         fetchEventsForAllEmployees() :
+         fetchEventsForCurrentEmployee();
    }, []);
 
    useEffect(() => {
       if (!signed) {
          return history.push('/login');
       }
-      fetchEventsForCurrentEmployee();
+      (currentEmployee === "all_employees") ?
+         fetchEventsForAllEmployees() :
+         fetchEventsForCurrentEmployee();
    }, [currentEmployee]);
 
    useInterval(() => {
@@ -171,6 +176,17 @@ export default function Dashboard() {
       });
    }
 
+   async function fetchEventsForAllEmployees() {
+      console.log('partnerId');
+      console.log(partnerId);
+      getEventsByPartnerId(partnerId).then(data => {
+         console.log(data);
+         if (data instanceof Array) {
+            setEvents(data);
+         }
+      });
+   }
+
    async function fetchEmployees() {
       const employees = await getEmployees(partnerId, currentEmployee);
       setEmployees(employees);
@@ -187,7 +203,7 @@ export default function Dashboard() {
    }
 
    const _changeEmployee = (employeeId) => {
-         setCurrentEmployee(employeeId);
+      setCurrentEmployee(employeeId);
    }
 
    function onClose() {
@@ -201,7 +217,6 @@ export default function Dashboard() {
 
    function showEvent(e) {
       setShowModalEventDetail(true);
-      console.log(e);
       setEventDetail(e);
    }
 
@@ -230,9 +245,11 @@ export default function Dashboard() {
    }
 
    const employeesList = employees.map(employee => {
-      return (
-         <option value={employee._id}>{employee.firstName}</option>
-      )
+      if(employee._id === currentEmployee) {
+         return <option value={employee._id} selected>{employee.firstName}</option>
+      } else {
+         return <option value={employee._id}>{employee.firstName}</option>
+      }
    })
 
    return (
@@ -259,8 +276,8 @@ export default function Dashboard() {
                      id="employees-selection"
                      onChange={e => _changeEmployee(e.target.value)}
                   >
-                     <option value="" disabled selected>Escolha um prestador</option>
                      {employeesList}
+                     <option value="all_employees">Todos os colaboradores</option>
                   </select>
                </div>
 
@@ -299,8 +316,10 @@ export default function Dashboard() {
                   <div className="black-mask-config">
                      <ModalConfig
                         partnerData={partnerData}
+                        employeesList={employees}
                         onClose={onClose}
                         logout={logOut}
+                        setEmployees={setEmployees}
                      />
                   </div>
                </div>

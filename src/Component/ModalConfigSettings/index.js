@@ -4,7 +4,7 @@ import { FaUserAlt, FaUserCog, FaUsers, FaCog } from 'react-icons/fa';
 //import { MdBusinessCenter } from 'react-icons/md';
 
 export default function ModalConfigSettings({
-   myAccount, employees, customers, services, configuration
+   myAccount, employees, employeesList, customers, services, configuration, partnerData
 }) {
 
    return (
@@ -20,14 +20,34 @@ export default function ModalConfigSettings({
             <div className={employees ? ' config-link active' : 'config-link'}>
                <div className="background">
                   <FaUserCog size={20} color="#131313" />
-                  <Link to="/settings/employees">Colaboradores</Link>
+                  <Link 
+                     to={{
+                        pathname: "/settings/employees",
+                        state: { 
+                           employeesList: employeesList,
+                           partnerData: partnerData
+                        },
+                     }}
+                  >
+                     Colaboradores
+                  </Link>
                </div>
             </div>
 
             <div className={customers ? ' config-link active' : 'config-link'}>
                <div className="background">
                   <FaUsers size={20} color="#131313" />
-                  <Link to="/settings/customers">Clientes</Link>
+                  <Link 
+                     to={{
+                        pathname: "/settings/customers",
+                        state: { 
+                           employeesList: employeesList,
+                           partnerData: partnerData
+                        },
+                     }}
+                  >
+                     Clientes
+                  </Link>
                </div>
             </div>
 

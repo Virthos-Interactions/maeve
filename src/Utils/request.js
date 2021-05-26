@@ -19,6 +19,19 @@ export function getEvents(
    });
 }
 
+export function getEventsByPartnerId(partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await bernard.post('/appointmentsByPartner', {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
 export function getCraftsByEmployee(
    partnerId,
    employeeId) {
@@ -112,6 +125,22 @@ export function deleteCustomers(emails, partnerId) {
             Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
          }
       });
+      console.log(response);
+      resolve(response);
+   });
+}
+
+export function deleteEmployees(emails, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/employee/delete', {
+         partnerId: partnerId,
+         emails: emails,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      console.log('delete employee');
       console.log(response);
       resolve(response);
    });

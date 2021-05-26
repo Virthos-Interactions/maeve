@@ -1,0 +1,202 @@
+.create-employee {
+   padding: 30px;
+   width: 500px;
+   background-color: white;
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+   border-radius: 8px;
+   position: absolute;
+   left: 40%;
+   bottom: 40%;
+}
+
+.create-employee-label {
+   font-size: 22px;
+   font-weight: bold;
+   padding-bottom: 10px;
+}
+
+.create-employee .create-employee-content {
+   position: relative;
+}
+
+.create-employee .create-employee-content .input-title input {
+   width: 90%;
+   padding: 10px 5px;
+   border: none;
+   border-bottom: 2px solid #cecece;
+   font-size: 22px;
+   opacity: 0.7;
+}
+
+.crafts-selection {
+   border: none;
+   background-color: #cecece;
+   color:rgb(121, 121, 121);
+   font-size: 22px;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+
+.crafts-selection:focus {
+   color: black;
+}
+
+.create-employee .create-employee-content .input-title input:focus {
+   border-bottom: 2px solid #3498db;
+   opacity: 1;
+}
+
+.create-employee .create-employee-content .input-title svg {
+   position: absolute;
+   top: 0;
+   right: 0;
+   cursor: pointer;
+   transition: 400ms;
+}
+
+.create-employee .create-employee-content .input-title svg:hover {
+   filter: brightness(90%);
+}
+
+.create-employee .customer-date {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+}
+
+.create-employee .input-time svg {
+   margin-right: 20px;
+}
+
+.create-employee .input-time input {
+   border: none;
+   background-color: #cecece;
+   font-size: 16px;
+   width: 100px;
+   text-align: center;
+   padding-bottom: 3px;
+   padding-top: 3px;
+}
+
+.create-employee .customer-date svg {
+   margin-right: 20px;
+}
+
+.create-employee .customer-date input {
+   border: none;
+   background-color: #cecece;
+   font-size: 20px;
+   width: 55px;
+   text-align: center;
+}
+
+.create-employee .evcustomerent-date p {
+   margin: 10px;
+   font-size: 16px;
+}
+
+.create-employee .employee-details p {
+   margin-top: 10px;
+}
+
+.input-employee-phone,
+.input-employee-password,
+.input-employee-password2,
+.input-employee-email {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px;
+   width: 400px;
+   margin-bottom: 8px;
+}
+
+.input-employee-name {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   flex-wrap: wrap;
+   margin-top: 10px;
+   width: 400px;
+}
+
+.input-employee-first-name-field {
+   margin-bottom: 10px;
+}
+
+.input-employee-surname-field {
+   margin-left: 40px;
+}
+
+
+.input-employee-phone svg,
+.input-employee-email svg,
+.input-employee-password svg,
+.input-employee-password2 svg,
+.input-employee-name svg {
+   margin-right: 20px;
+}
+
+.input-employee-email input,
+.input-employee-password input,
+.input-employee-password2 input,
+.input-employee-phone input,
+.input-employee-name input {
+   border: none;
+   background-color: #Cecece;
+   width: 83%;
+   padding: 5px;
+   color: black;
+   font-size: 17px;
+}
+
+.customer-note {
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   margin-top: 10px; 
+}
+
+.customer-note svg {
+   margin-right: 20px;
+}
+
+.customer-note textarea {
+   width: 83%;
+   min-height: 110px;
+   border: none;
+   background-color: #cecece;
+   resize: none;
+   font-size: 17px;
+   line-height: 27px;
+   padding: 10px;
+}
+
+.create-employee .btn-save-employee {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.btn-save {
+   color: white;
+   border: none;
+   background-color: #3498db;
+   padding: 8px;
+   cursor: pointer;
+   width: 80px;
+   border-radius: 5px;
+   transition: 200ms;
+}
+
+.btn-save:hover {
+   filter: brightness(90%);
+}
+
+.create-container {
+   margin-left: 10px;
+}

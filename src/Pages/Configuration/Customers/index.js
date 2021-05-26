@@ -12,7 +12,15 @@ import { formatDate } from '../../../Utils';
 import { getCustomers, deleteCustomers } from '../../../Utils/request';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 
-export default function Customers() {
+const Customers = props => {
+   console.log('State on Customers')
+   console.log(props.location.state)
+
+   const { 
+      employeesList, 
+      partnerData
+   } = props.location.state;
+
    const { signed, user, dispatch } = useContext(AuthContext);
 
    const [partnerId, setPartnerId] = useState(user?.partnerId);
@@ -109,7 +117,11 @@ export default function Customers() {
       <div>
          <Header />
          <div className="config">
-            <ModalConfigSettings customers />
+            <ModalConfigSettings 
+               customers 
+               employeesList={employeesList}
+               partnerData={partnerData}
+            />
             <div className="content">
                <div className="details">
                   <header>
@@ -144,3 +156,5 @@ export default function Customers() {
       </div>
    );
 }
+
+export default Customers;

@@ -8,9 +8,10 @@ import './style.css';
 import noUser from '../../assets/default-user-image-365x365.png';
 
 export default function ModalConfig({ 
+   employeesList,
    partnerData,
    onClose, 
-   logout 
+   logout,
 }) {
 
    return (
@@ -28,8 +29,28 @@ export default function ModalConfig({
 
             <div className="options-config-modal">
                {/* <Link to="/settings/my-account">Minha Conta</Link> */}
-               <Link to="/settings/employees">Colaboradores</Link>
-               <Link to="/settings/customers">Clientes</Link>
+               <Link 
+                  to={{
+                     pathname: "/settings/employees",
+                     state: { 
+                        employeesList: employeesList,
+                        partnerData: partnerData
+                     },
+                  }}
+               >
+                  Colaboradores
+               </Link>
+               <Link 
+                  to={{
+                     pathname: "/settings/customers",
+                     state: { 
+                        employeesList: employeesList,
+                        partnerData: partnerData
+                     },
+                  }}
+               >
+                  Clientes
+               </Link>
                {/* <Link to="/settings/services">Serviços</Link> */}
                {/* <Link to="/settings/configuration">Configurações</Link> */}
             </div>
