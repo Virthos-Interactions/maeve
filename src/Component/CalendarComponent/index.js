@@ -53,7 +53,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
             views={{ month: true, week: true, day: true }}
             selectable
             defaultView={Views.WEEK}
-            onDoubleClickEvent={(e) => dblClick(e)}
+            onSelectEvent={(e) => dblClick(e)}
             onSelectSlot={({ start, end }) => newEvent(start, end)}
             style={{
                height: '87vh',
