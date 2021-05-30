@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { FaComment } from 'react-icons/fa';
+import Loader from "react-loader-spinner";
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -115,6 +116,7 @@ export default function Dashboard() {
    const [showChatbox, setShowChatbox] = useState(false);
    const [editEventDetail, setEditEventDetail] = useState(null);
    const [modalEditEvent, setModalEventEdit] = useState(false);
+   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
 
    function attFeed() {
       dispatch({
@@ -169,9 +171,11 @@ export default function Dashboard() {
    }
 
    async function fetchEventsForCurrentEmployee() {
+      setIsLoadingEvents(true);
       getEvents(partnerId, currentEmployee, '2100-08-20').then(data => {
          if (data instanceof Array) {
             setEvents(data);
+            setIsLoadingEvents(false);
          }
       });
    }
@@ -179,10 +183,12 @@ export default function Dashboard() {
    async function fetchEventsForAllEmployees() {
       console.log('partnerId');
       console.log(partnerId);
+      setIsLoadingEvents(true);
       getEventsByPartnerId(partnerId).then(data => {
          console.log(data);
          if (data instanceof Array) {
             setEvents(data);
+            setIsLoadingEvents(false);
          }
       });
    }
@@ -221,10 +227,12 @@ export default function Dashboard() {
    }
 
    function deleteEvent(data) {
-      deleteAppointmentEvent(data.id, user.partnerId).then(() => {
-         setShowModalEventDetail(false);
-         attFeed();
-      });
+      return new Promise((resolve) => {
+         deleteAppointmentEvent(data.id, user.partnerId).then(() => {
+            setShowModalEventDetail(false);
+            resolve(true);
+         });
+      })
    }
 
    function editEvent(data) {
@@ -245,7 +253,7 @@ export default function Dashboard() {
    }
 
    const employeesList = employees.map(employee => {
-      if(employee._id === currentEmployee) {
+      if (employee._id === currentEmployee) {
          return <option value={employee._id} selected>{employee.firstName}</option>
       } else {
          return <option value={employee._id}>{employee.firstName}</option>
@@ -305,7 +313,11 @@ export default function Dashboard() {
                   onClick={() => setShowModalConfig(false)}
                >
                   <div className="black-mask-content">
-                     <ModalEventEdit onClose={() => setModalEventEdit(false)} data={editEventDetail} />
+                     <ModalEventEdit 
+                        data={editEventDetail} 
+                        fetchEvents={fetchEventsForCurrentEmployee}
+                        onClose={() => setModalEventEdit(false)}    
+                     />
                   </div>
                </div>
             }
@@ -347,6 +359,7 @@ export default function Dashboard() {
                         crafts={crafts}
                         editEventDetail={editEventDetail}
                         eventDetail={addEventWithDetail}
+                        fetchEvents={fetchEventsForCurrentEmployee}
                         onClose={() => setShowModalEventCreate(false)}
                      />
                   </div>
@@ -374,6 +387,7 @@ export default function Dashboard() {
                         data={eventDetail}
                         onClose={closeModalEventDetail}
                         deleteEvent={deleteEvent}
+                        fetchEvents={fetchEventsForCurrentEmployee}
                         onEdit={editEvent}
                      />
                   </div>
@@ -408,15 +422,29 @@ export default function Dashboard() {
 
                <Grid item xs={9} style={{ paddingTop: 4 }}>
                   <Paper className={classes.calendar}>
-                     <CalendarComponent
-                        addEvent={() => {
-                           setShowModalEventCreate(!showModalEventCreate);
-                           setAddEventWithDetail(null);
-                        }}
-                        dblClick={showEvent}
-                        events={events}
-                        newEvent={handleSelect} 
-                     />
+                     {isLoadingEvents ?
+                        (
+                           <div className="loader-container">
+                              <Loader
+                                 type="TailSpin"
+                                 color="#C0091E"
+                                 height={100}
+                                 width={100}
+                              />
+                           </div>
+                        ) :
+                        (
+                           <CalendarComponent
+                              addEvent={() => {
+                                 setShowModalEventCreate(!showModalEventCreate);
+                                 setAddEventWithDetail(null);
+                              }}
+                              dblClick={showEvent}
+                              events={events}
+                              newEvent={handleSelect}
+                           />
+                        )
+                     }
                   </Paper>
                </Grid>
             </Grid>
