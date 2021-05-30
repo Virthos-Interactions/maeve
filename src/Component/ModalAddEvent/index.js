@@ -7,7 +7,7 @@ import { AiFillPhone } from 'react-icons/ai';
 import { getHours, getDayWeek, getDate, formatedMonth } from '../../Utils/index';
 import './style.css';
 
-export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
+export default function ModalAddEvent({ crafts, eventDetail, onClose, fetchEvents }) {
    const [craftName, setCraftName] = useState('');
    const [hourStart, setHourStart] = useState('');
    const [month, setMonth] = useState('');
@@ -77,8 +77,6 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
             }
          })
             .then(() => {
-               attFeed();
-
                resolve();
             })
             .catch(err => reject(err));
@@ -105,7 +103,8 @@ export default function ModalAddEvent({ crafts, eventDetail, onClose }) {
                note,
             )
                .then(() => {
-                  attFeed();
+                  console.log("Created Event!")
+                  fetchEvents();
                   onClose();
                })
                .catch(err => console.log(err));

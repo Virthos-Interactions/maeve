@@ -1,11 +1,74 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './style.css';
+import Loader from "react-loader-spinner";
 import { getDate, getHours, getDayWeek } from '../../Utils';
 import { FaTimes, FaUser, FaClock, FaAlignLeft, FaTrash, FaPencilAlt } from 'react-icons/fa';
 import { AiFillPhone } from 'react-icons/ai';
+import { confirmAlert } from 'react-confirm-alert';
 
-export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit }) {
+export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit, fetchEvents }) {
+   const [isDeleting, setIsDeleting] = useState(false);
+
+   const handleDeleteEvent = () => {
+      confirmAlert({
+         closeOnEscape: true,
+         closeOnClickOutside: true,
+         customUI: ({ onClose }) => {
+            return (
+               <div className='confirm-box'>
+                  {isDeleting ?
+                     (
+                        <div className="loader-container">
+                           <Loader
+                              type="TailSpin"
+                              color="#C0091E"
+                              height={100}
+                              width={100}
+                           />
+                        </div>
+                     ) :
+                     (
+                        <p className='confirm-msg'>
+                           Tem certeza que quer excluir esse evento?
+                        </p>
+                     )
+                  }
+                  <div className='btn-group'>
+                     <button
+                        className='btn-no'
+                        onClick={() => {
+                           setIsDeleting(false);
+                           onClose();
+                        }}
+                     >
+                        Não
+                     </button>
+                     <button
+                        className='btn-yes'
+                        onClick={() => {
+                           if(!isDeleting) {
+                              setIsDeleting(true);
+                              console.log('setting deeleting')
+                              deleteEvent(data).then(_ => {
+                                 console.log('Deleted event')
+                                 setIsDeleting(false);
+                                 fetchEvents();
+                                 onClose();
+                              });
+                           } 
+                        }}
+                     >
+                        Sim
+                 </button>
+                  </div>
+               </div>
+            );
+         },
+         overlayClassName: "black-mask-box"
+      });
+   }
+
    return (
       <div className="modal-detail-event"
 
@@ -14,7 +77,7 @@ export default function ModalEventDetail({ data, onClose, deleteEvent, onEdit })
             <p>{data.title}</p>
             <div className="modal-navigation">
                <FaPencilAlt size={18} color="#cecece" onClick={() => onEdit(data)} />
-               <FaTrash size={18} color="#cecece" onClick={() => deleteEvent(data)} />
+               <FaTrash size={18} color="#cecece" onClick={() => handleDeleteEvent(data)} />
                <FaTimes size={22} color="#cecece" onClick={() => onClose()} />
             </div>
          </header>

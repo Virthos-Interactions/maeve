@@ -7,7 +7,7 @@ import { AuthContext } from '../../context';
 
 import './styles.css';
 
-export default function ModalEventEdit({ data, onClose }) {
+export default function ModalEventEdit({ data, onClose, fetchEvents }) {
    const [title, setTitle] = useState('');
    const [hourStart, setHourStart] = useState('');
    const [month, setMonth] = useState('');
@@ -58,7 +58,8 @@ export default function ModalEventEdit({ data, onClose }) {
          setMessage('Por favor preencha todos os campos');
       } else {
          editAppointmentEvent(data.id, hourStart, hourEnd, user.partnerId).then(() => {
-            attFeed();
+            console.log('Edited event')
+            fetchEvents();
             onClose();
          });
       }
