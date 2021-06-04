@@ -9,6 +9,13 @@
    flex: 1;
 }
 
+form .btn-login .loader-container {
+   width: 25px;
+   height: 25px;
+   display: flex;
+   margin-top: 10px;
+}
+
 section {
    display: flex;
    flex-direction: column;

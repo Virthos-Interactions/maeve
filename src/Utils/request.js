@@ -1,4 +1,4 @@
-import { arnold, bernard } from '../services/api';
+import { arnold, bernard, chatpro } from '../services/api';
 
 export function getEvents(
    partnerId,
@@ -19,7 +19,20 @@ export function getEvents(
    });
 }
 
-export function getCrafts(
+export function getEventsByPartnerId(partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await bernard.post('/appointmentsByPartner', {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_BERNARD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
+export function getCraftsByEmployee(
    partnerId,
    employeeId) {
    return new Promise(async (resolve, reject) => {
@@ -35,9 +48,35 @@ export function getCrafts(
    });
 }
 
+export function getCraftsByPartner(partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post(`/partner/getCrafts`, {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
 export function getEmployees(partnerId) {
    return new Promise(async (resolve, reject) => {
       const response = await arnold.post(`/employee/getEmployeesByPartnerId`, {
+         partnerId: partnerId,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      resolve(response.data);
+   });
+}
+
+export function getPartnerData(partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/partner/get', {
          partnerId: partnerId,
       }, {
          headers: {
@@ -88,6 +127,81 @@ export function deleteCustomers(emails, partnerId) {
       });
       console.log(response);
       resolve(response);
+   });
+}
+
+export function deleteEmployees(emails, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/employee/delete', {
+         partnerId: partnerId,
+         emails: emails,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      console.log('delete employee');
+      console.log(response);
+      resolve(response);
+   });
+}
+
+export function deleteServices(ids, partnerId) {
+   return new Promise(async (resolve, reject) => {
+      const response = await arnold.post('/craft/delete', {
+         partnerId: partnerId,
+         ids: ids,
+      }, {
+         headers: {
+            Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
+         }
+      });
+      console.log(response);
+      resolve(response);
+   });
+}
+
+export function getMobilePhoneStatus(chatproInstanceId, authToken) {
+   let options = {
+      headers: {
+         Authorization: authToken
+      }
+   }
+   return new Promise(async (resolve, reject) => {
+      chatpro.get(`/${chatproInstanceId}/api/v1/status`, options).then(response => {
+         if(response.data.connected) {
+            resolve(true)
+         } else {
+            resolve(false)
+         }
+      }).catch(err => {
+         console.log('err')
+         console.log(err)
+         resolve(false)
+      })
+
+   });
+}
+
+export function getQRCode(chatproInstanceId, authToken) {
+   let options = {
+      headers: {
+         Authorization: authToken
+      }
+   }
+   return new Promise(async (resolve, reject) => {
+      chatpro.get(`/${chatproInstanceId}/api/v1/generate_qrcode`, options).then(response => {
+         if(response.data.qr) {
+            resolve(response.data.qr)
+         } else {
+            resolve(null)
+         }
+      }).catch(err => {
+         console.log('err')
+         console.log(err)
+         resolve(false)
+      })
+
    });
 }
 

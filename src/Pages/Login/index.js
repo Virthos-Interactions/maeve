@@ -7,6 +7,7 @@ import footerCircle from '../../assets/footer.png';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Loader from "react-loader-spinner";
 
 import { AuthContext } from '../../context';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +27,7 @@ export default function Login() {
    const [password, setPassword] = useState('');
    const history = useHistory();
    const [message, setMessage] = useState('');
+   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
    const classes = useStyles();
 
@@ -38,15 +40,17 @@ export default function Login() {
          setMessage('Por favor preencha todos os campos');
 
       } else {
+         setIsLoggingIn(true);
          login(email, password).then(() => {
             setEmail('');
             setPassword('');
-
+            setIsLoggingIn(false);
          }).catch(error => {
             console.log(error);
             setMessage('Ops! Ocorreu um erro, tente novamente!');
             setPassword('');
             setEmail('');
+            setIsLoggingIn(false);
          });
       }
    }
@@ -97,9 +101,25 @@ export default function Login() {
                   </div>
                   <div className="text-center">
                      <p>{message}</p>
-                     <Button type="submit" variant="contained" className="btn-login">
-                        Entrar
-                     </Button>
+                     {isLoggingIn ? 
+                        (
+                           <Button disabled type="submit" variant="contained" className="btn-login">
+                              <div className="loader-container">
+                                 <Loader
+                                    type="TailSpin"
+                                    color="white"
+                                    height={20}
+                                    width={20}
+                                 />
+                              </div>
+                           </Button>
+                        ) : 
+                        (
+                           <Button type="submit" variant="contained" className="btn-login">
+                              Entrar
+                           </Button>
+                        )  
+                     } 
                   </div>
                </form>
             </div>

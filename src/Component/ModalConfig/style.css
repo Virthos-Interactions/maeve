@@ -7,16 +7,23 @@
    z-index: 5;
 }
 
-.modal {
+.modal-config .modal {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
    background-color: white;
-   padding: 40px;
-   padding-bottom: 25px;
+   width: 400px;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   border-radius: 5px;
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .modal-config .options-config-modal{
    display: flex;
    flex-direction: column;
    margin: 10px;
+   width: 400px;
    text-align: center;
 }
 
@@ -68,7 +75,7 @@
    border: none;
    background-color: transparent;
    cursor: pointer;
-   margin-top: -18px;
+   margin-top: -10px;
 }
 
 .modal-config .image {
@@ -78,8 +85,7 @@
    display: flex;
    align-items: center;
    justify-content: center;
-   margin-left: 45px;
-   margin-bottom: 5px;
+   margin-bottom: 10px;
 }
 
 .modal-config img {
