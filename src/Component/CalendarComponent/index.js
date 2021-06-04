@@ -52,6 +52,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
             events={formatedEvents}
             views={{ month: true, week: true, day: true }}
             selectable
+            scrollToTime={new Date(new Date().setHours(8, 0, 0, 0))}
             defaultView={Views.WEEK}
             onSelectEvent={(e) => dblClick(e)}
             onSelectSlot={({ start, end }) => newEvent(start, end)}
@@ -65,7 +66,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
             eventPropGetter={(eventStyleGetter)}
             components={{ toolbar: CustomToolbar }}
             timeslots={1}
-            min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
+            min={new Date(2008, 0, 1, 0, 0)} // 8.00 AM
             max={new Date(2008, 0, 1, 23, 0)} // Max will be 6.00 PM!
          />
       </div>
