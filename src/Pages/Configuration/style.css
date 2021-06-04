@@ -1,3 +1,11 @@
+.details .loader-container {
+   width: 660px;
+   height: 700px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 .config-link {
    padding: 10px;
    grid-template-columns: 1fr 100px;
