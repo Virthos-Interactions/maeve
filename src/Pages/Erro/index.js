@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/virthosLogo.png';
 import { FaRegSadCry } from 'react-icons/fa';
 
-import './styles.css';
-
 export default function Error() {
    return (
       <div className="page-error">

@@ -1,0 +1,16 @@
+ .error-screen-container {
+    background: url('../../assets/loginBackground.svg') fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 850px;
+    background-color: white;
+    color: rgb(121, 33, 33);
+ }
+ 
+ .error-message {
+    font-size: 45px;
+    margin: 60px;
+ }
