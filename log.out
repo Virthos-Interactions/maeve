@@ -1,0 +1,128 @@
+(node:73501) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73501) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73501) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73519) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73519) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73519) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73535) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73535) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73535) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73551) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73551) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73551) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73567) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73567) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73567) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73583) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73583) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73583) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73599) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73599) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73599) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73615) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73615) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73615) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73631) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73631) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73631) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73647) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73647) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73647) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73663) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73663) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73663) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73679) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73679) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73679) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73695) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73695) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73695) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73711) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73711) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73711) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73727) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73727) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73727) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:73743) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, open '/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem '
+    at Object.openSync (fs.js:476:3)
+    at Object.readFileSync (fs.js:377:35)
+    at startEndpoint (/usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:206:13)
+    at /usr/local/share/.config/yarn/global/node_modules/serve/bin/serve.js:445:3
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73743) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:73743) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
