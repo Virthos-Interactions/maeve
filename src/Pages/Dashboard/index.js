@@ -204,8 +204,12 @@ export default function Dashboard() {
    }
 
    async function fetchPartnerData() {
-      const partnerData = await getPartnerData(partnerId);
-      setPartnerData(partnerData);
+      const fetchedPartnerData = await getPartnerData(partnerId);
+      console.log('Partner Id')
+      console.log(partnerId);
+      console.log('Partner Data')
+      console.log(fetchedPartnerData);
+      setPartnerData(fetchedPartnerData);
    }
 
    const _changeEmployee = (employeeId) => {
