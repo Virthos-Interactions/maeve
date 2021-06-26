@@ -142,6 +142,7 @@ export default function Dashboard() {
       }
       fetchCrafts();
       fetchEmployees();
+      console.log('Calling Partner Data')
       fetchPartnerData();
       (currentEmployee === "all_employees") ?
          fetchEventsForAllEmployees() :
@@ -204,6 +205,7 @@ export default function Dashboard() {
    }
 
    async function fetchPartnerData() {
+      console.log('Fetching')
       const fetchedPartnerData = await getPartnerData(partnerId);
       console.log('Partner Id')
       console.log(partnerId);

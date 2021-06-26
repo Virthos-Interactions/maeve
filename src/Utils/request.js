@@ -76,6 +76,7 @@ export function getEmployees(partnerId) {
 
 export function getPartnerData(partnerId) {
    return new Promise(async (resolve, reject) => {
+      console.log('Getting Partner Data')
       const response = await arnold.post('/partner/get', {
          partnerId: partnerId,
       }, {
