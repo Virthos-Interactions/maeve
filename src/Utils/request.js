@@ -84,6 +84,7 @@ export function getPartnerData(partnerId) {
             Abernathy: process.env.REACT_APP_ARNOLD_TOKEN,
          }
       });
+      console.log('Returning Partner Data')
       resolve(response.data);
    });
 }
