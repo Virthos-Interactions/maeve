@@ -6,6 +6,14 @@
    justify-content: center;
 }
 
+.notification-badge {
+   z-index: 1000;
+}
+
+.notification:hover {
+  color: blue;
+}
+
 .dashboard header .logo-image {
    width: 100px;
    height: auto;

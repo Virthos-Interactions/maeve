@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { FaComment } from 'react-icons/fa';
 import Loader from "react-loader-spinner";
 import { useHistory } from 'react-router-dom';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+import NotificationBadge from 'react-notification-badge';
+import { Effect } from 'react-notification-badge';
 
 import api from '../../services/api';
 
@@ -95,6 +98,8 @@ const useStyles = makeStyles((theme) => ({
    }
 }));
 
+const client = new W3CWebSocket('ws://127.0.0.1:8080');
+
 export default function Dashboard() {
    const classes = useStyles();
 
@@ -117,6 +122,9 @@ export default function Dashboard() {
    const [editEventDetail, setEditEventDetail] = useState(null);
    const [modalEditEvent, setModalEventEdit] = useState(false);
    const [isLoadingEvents, setIsLoadingEvents] = useState(false);
+   const [notificationCount, setNotificationCount] = useState(0);
+   const [hectorConnectionId, setHectorConnectionId] = useState('');
+   const [notifications, setNotifications] = useState([]);
 
    function attFeed() {
       dispatch({
@@ -158,6 +166,17 @@ export default function Dashboard() {
          fetchEventsForCurrentEmployee();
    }, [currentEmployee]);
 
+   useEffect(() => {
+      if(hectorConnectionId!='') {
+         console.log('Sending confirmation to Hector.')
+         client.send(JSON.stringify({
+            type: 'connection-confirmed',
+            connectionId: hectorConnectionId,
+            partnerMobileNumber: partnerData.mobileNumber
+         }));
+      }
+   }, [partnerData]);
+
    useInterval(() => {
       if (partnerData) {
          fetchPhoneConnectionStatus();
@@ -165,6 +184,16 @@ export default function Dashboard() {
    }, MOBILE_PHONE_CHECK_INTERVAL);
 
    const history = useHistory();
+
+   async function fetchPartnerData() {
+      console.log('Fetching')
+      const fetchedPartnerData = await getPartnerData(partnerId);
+      console.log('Partner Id')
+      console.log(partnerId);
+      console.log('Partner Data')
+      console.log(fetchedPartnerData);
+      setPartnerData(fetchedPartnerData);
+   }
 
    async function fetchCrafts() {
       const crafts = await getCraftsByEmployee(partnerId, currentEmployee);
@@ -202,16 +231,6 @@ export default function Dashboard() {
    async function fetchPhoneConnectionStatus() {
       const status = await getMobilePhoneStatus(partnerData.chatproInstanceId, partnerData.chatproInstanceToken);
       setMobilePhoneConnected(status);
-   }
-
-   async function fetchPartnerData() {
-      console.log('Fetching')
-      const fetchedPartnerData = await getPartnerData(partnerId);
-      console.log('Partner Id')
-      console.log(partnerId);
-      console.log('Partner Data')
-      console.log(fetchedPartnerData);
-      setPartnerData(fetchedPartnerData);
    }
 
    const _changeEmployee = (employeeId) => {
@@ -258,6 +277,20 @@ export default function Dashboard() {
       setEventDetail(null);
    }
 
+   function onCheckNotification(notificationId) {
+      client.send(JSON.stringify({
+         type: 'checked-notification',
+         notificationId: notificationId
+      }));
+
+      let updatedNotifications = notifications.filter((notification) => {
+         return notification.notificationId != notificationId
+      })
+
+      setNotifications(updatedNotifications)
+      setNotificationCount(notifications.length-1)
+   }
+
    const employeesList = employees.map(employee => {
       if (employee._id === currentEmployee) {
          return <option value={employee._id} selected>{employee.firstName}</option>
@@ -265,6 +298,32 @@ export default function Dashboard() {
          return <option value={employee._id}>{employee.firstName}</option>
       }
    })
+
+   client.onopen = () => {
+      console.log('WebSocket Client Connected');
+   };
+
+   client.onmessage = (message) => {
+
+      const data = JSON.parse(message.data);
+      if (data.type === 'photo-notification') {
+         console.log('Notification Arrived:');
+         console.log(data);
+         setNotificationCount(notificationCount + 1);
+         setNotifications([
+            ...notifications,
+            data
+         ]);
+      } else if (data.type === 'connection-confirmed') {
+         console.log('Hector connection confirmed.')
+         console.log(data)
+         setHectorConnectionId(data.connectionId)
+      } else {
+         console.log('Message not supported arrived.')
+         console.log(data)
+      }
+
+   };
 
    return (
       <div className="dashboard">
@@ -295,12 +354,14 @@ export default function Dashboard() {
                   </select>
                </div>
 
-               {/* 
-                  Disabled for now.
+               <div>
+                  <div className="notification-badge">
+                     <NotificationBadge count={notificationCount} effect={Effect.SCALE} />
+                  </div>
                   <FaComment size={28} color="#ce2026"
                      onClick={() => setShowChatbox(!showChatbox)}
-                  /> 
-               */}
+                  />
+               </div>
 
                <div className="header-image" >
                   <img src={noUser} alt="Imagem do Usuário" className="user-image" />
@@ -319,10 +380,10 @@ export default function Dashboard() {
                   onClick={() => setShowModalConfig(false)}
                >
                   <div className="black-mask-content">
-                     <ModalEventEdit 
-                        data={editEventDetail} 
+                     <ModalEventEdit
+                        data={editEventDetail}
                         fetchEvents={fetchEventsForCurrentEmployee}
-                        onClose={() => setModalEventEdit(false)}    
+                        onClose={() => setModalEventEdit(false)}
                      />
                   </div>
                </div>
@@ -379,6 +440,8 @@ export default function Dashboard() {
                   <div className="black-mask-left-content">
                      <Chatbox
                         onClose={() => setShowChatbox(false)}
+                        onCheckNotification={onCheckNotification}
+                        notifications={notifications}
                      />
                   </div>
                </div>

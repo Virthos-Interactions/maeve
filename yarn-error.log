@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add react-time-picker.
+  /usr/local/bin/node /usr/local/bin/yarn add websocket
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -8,23 +8,14 @@ Yarn version:
   1.22.10
 
 Node version: 
-  14.16.1
+  14.17.1
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/react-time-picker.: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:140749:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:141721:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:141643:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (internal/streams/readable.js:1327:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: connect ECONNREFUSED 104.16.21.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1148:16)
 
 npm manifest: 
   {
@@ -58,8 +49,12 @@ npm manifest:
       "react-native-reanimated": "^2.1.0",
       "react-native-safe-area-context": "^3.2.0",
       "react-native-screens": "^3.2.0",
+      "react-notification-badge": "^1.5.1",
       "react-router-dom": "^5.2.0",
-      "react-scripts": "3.4.1"
+      "react-scripts": "3.4.1",
+      "react-time-picker": "^4.2.1",
+      "react-use-is-online": "^1.0.3",
+      "typescript": "^4.3.2"
     },
     "scripts": {
       "start-server": "HTTPS=true SSL_CRT_FILE=/etc/letsencrypt/archive/dash.virthos.com.br/cert1.pem SSL_KEY_FILE=/etc/letsencrypt/archive/dash.virthos.com.br/privkey1.pem react-scripts start",
@@ -2073,6 +2068,13 @@ Lockfile:
     dependencies:
       "@babel/types" "^7.3.0"
   
+  "@types/cheerio@^0.22.22":
+    version "0.22.29"
+    resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.29.tgz#7115e9688bfc9e2f2730327c674b3d6a7e753e09"
+    integrity sha512-rNX1PsrDPxiNiyLnRKiW2NXHJFHqx0Fl3J2WsZq0MTBspa/FgwlqhXJE2crIcc+/2IglLHtSWw7g053oUR8fOg==
+    dependencies:
+      "@types/node" "*"
+  
   "@types/eslint-visitor-keys@^1.0.0":
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -2418,6 +2420,11 @@ Lockfile:
       "@webassemblyjs/ast" "1.8.5"
       "@webassemblyjs/wast-parser" "1.8.5"
       "@xtuc/long" "4.2.2"
+  
+  "@wojtekmaj/date-utils@^1.0.0":
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz#2dcfd92881425c5923e429c2aec86fb3609032a1"
+    integrity sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==
   
   "@xtuc/ieee754@^1.2.0":
     version "1.2.0"
@@ -4540,6 +4547,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
     integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
   
+  detect-element-overflow@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/detect-element-overflow/-/detect-element-overflow-1.2.0.tgz#86e504292ffedc3aef813395fbdf0261aaf6afa9"
+    integrity sha512-Jtr9ivYPhpd9OJux+hjL0QjUKiS1Ghgy8tvIufUjFslQgIWvgGr4mn57H190APbKkiOmXnmtMI6ytaKzMusecg==
+  
   detect-newline@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
@@ -4823,6 +4835,15 @@ Lockfile:
     version "7.8.1"
     resolved "https://registry.yarnpkg.com/envinfo/-/envinfo-7.8.1.tgz#06377e3e5f4d379fea7ac592d5ad8927e0c4d475"
     integrity sha512-/o+BXHmB7ocbHEAs6F2EnG0ogybVVUdkRunTT2glZU9XAaGmhqskrvKwqXuDfNjEO0LZKWdejEEpnq8aM0tOaw==
+  
+  enzyme-to-json@^3.4.4:
+    version "3.6.2"
+    resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.6.2.tgz#94f85c413bcae8ab67be53b0a94b69a560e27823"
+    integrity sha512-Ynm6Z6R6iwQ0g2g1YToz6DWhxVnt8Dy1ijR2zynRKxTyBGA8rCDXU3rs2Qc4OKvUvc2Qoe1bcFK6bnPs20TrTg==
+    dependencies:
+      "@types/cheerio" "^0.22.22"
+      lodash "^4.17.21"
+      react-is "^16.12.0"
   
   errno@^0.1.3, errno@~0.1.7:
     version "0.1.8"
@@ -5779,6 +5800,13 @@ Lockfile:
     integrity sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==
     dependencies:
       pump "^3.0.0"
+  
+  get-user-locale@^1.2.0:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-1.4.0.tgz#a2c4b5da46feec9f03c9b07d197b1620490a5370"
+    integrity sha512-gQo03lP1OArHLKlnoglqrGGl7b04u2EP9Xutmp72cMdtrrSD7ZgIsCsUKZynYWLDkVJW33Cj3pliP7uP0UonHQ==
+    dependencies:
+      lodash.once "^4.1.1"
   
   get-value@^2.0.3, get-value@^2.0.6:
     version "2.0.6"
@@ -7817,6 +7845,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
     integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
   
+  lodash.once@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+    integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
+  
   lodash.sortby@^4.7.0:
     version "4.7.0"
     resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -7847,7 +7880,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
     integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
   
-  "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
+  "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
     version "4.17.21"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
     integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -7920,6 +7953,11 @@ Lockfile:
     integrity sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
     dependencies:
       semver "^6.0.0"
+  
+  make-event-props@^1.1.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/make-event-props/-/make-event-props-1.2.0.tgz#96b87d88919533b8f8934b58b4c3d5679459a0cf"
+    integrity sha512-BmWFkm/jZzVH9A0tEBdkjAARUz/eha+5IRyfOndeSMKRadkgR5DawoBHoRwLxkYmjJOI5bHkXKpaZocxj+dKgg==
   
   makeerror@1.0.x:
     version "1.0.11"
@@ -8005,6 +8043,11 @@ Lockfile:
     dependencies:
       errno "^0.1.3"
       readable-stream "^2.0.1"
+  
+  merge-class-names@^1.1.1:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.4.0.tgz#02edcdd5ff677fbb03b47ecd4586df89d697b81b"
+    integrity sha512-xNdBM7s+6uD+vNZJEymqrFbMBCDGzoA8clZTcj2F1XIy1QQKF+wjFVv7iDZFfdCBnViTdt54A4Ye2lmBsXrBjQ==
   
   merge-deep@^3.0.2:
     version "3.0.3"
@@ -10152,7 +10195,7 @@ Lockfile:
       kleur "^3.0.3"
       sisteransi "^1.0.5"
   
-  prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10358,6 +10401,15 @@ Lockfile:
       react-overlays "^2.0.0-0"
       uncontrollable "^7.0.0"
   
+  react-clock@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/react-clock/-/react-clock-3.0.0.tgz#0d29f8e682ef516574061d1d24b1a286cb2da89b"
+    integrity sha512-D3K82D3YGcDtzxZCfiACLcDTL8cJXSgpdrzTY9ff3H5vflxlLzTSLF8apZRo6JZzOFrZQvw5mrS7TkQzj9nG0A==
+    dependencies:
+      "@wojtekmaj/date-utils" "^1.0.0"
+      merge-class-names "^1.1.1"
+      prop-types "^15.6.0"
+  
   react-confirm-alert@^2.7.0:
     version "2.7.0"
     resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.7.0.tgz#7cdbf2e052e03554ac6a7d8956c9c227010c8a53"
@@ -10431,6 +10483,14 @@ Lockfile:
     version "6.0.9"
     resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
     integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+  
+  react-fit@^1.0.3:
+    version "1.3.1"
+    resolved "https://registry.yarnpkg.com/react-fit/-/react-fit-1.3.1.tgz#850cb5d554fdfa4b27891f62a9d290d3e7eda57b"
+    integrity sha512-MmVk/SXyVbxiz9peAeD7fWxFdGLoy/sCxte01M3w74regPIVkLqc2yT0wUAGRd1MNP1fQ40MqYKNBLpbK/aI1w==
+    dependencies:
+      detect-element-overflow "^1.2.0"
+      prop-types "^15.6.0"
   
   react-icons@^3.10.0:
     version "3.11.0"
@@ -10669,6 +10729,20 @@ Lockfile:
     optionalDependencies:
       fsevents "2.1.2"
   
+  react-time-picker@^4.2.1:
+    version "4.2.1"
+    resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-4.2.1.tgz#b27f0bbc2e58534f20dbf10b14d0b8f3334fcb07"
+    integrity sha512-T0aEabJ3bz54l8LV3pdpB5lOZuO3pRIbry5STcUV58UndlrWLcHpdpvS1IC8JLNXhbLxzGs1MmpASb5k1ddlsg==
+    dependencies:
+      "@wojtekmaj/date-utils" "^1.0.0"
+      get-user-locale "^1.2.0"
+      make-event-props "^1.1.0"
+      merge-class-names "^1.1.1"
+      prop-types "^15.6.0"
+      react-clock "^3.0.0"
+      react-fit "^1.0.3"
+      update-input-width "^1.1.1"
+  
   react-transition-group@^4.4.0, react-transition-group@^4.4.1:
     version "4.4.1"
     resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
@@ -10678,6 +10752,13 @@ Lockfile:
       dom-helpers "^5.0.1"
       loose-envify "^1.4.0"
       prop-types "^15.6.2"
+  
+  react-use-is-online@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/react-use-is-online/-/react-use-is-online-1.0.3.tgz#e5822a3be577a794e2f01e6720f5e4f0706ccd04"
+    integrity sha512-uQyHg4L4bq6id5+6r/n5zOBO1RRRykmYOoYy8WI2x3mowo++BQBYCyNf30WvJJqLB/lCjPnqn1vCl8LOov3EEA==
+    dependencies:
+      enzyme-to-json "^3.4.4"
   
   react@^16.13.1:
     version "16.14.0"
@@ -12334,6 +12415,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
     integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   
+  typescript@^4.3.2:
+    version "4.3.2"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
+    integrity sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==
+  
   ua-parser-js@^0.7.18:
     version "0.7.28"
     resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
@@ -12456,6 +12542,11 @@ Lockfile:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
     integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
+  
+  update-input-width@^1.1.1:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/update-input-width/-/update-input-width-1.2.1.tgz#769d6182413590c3b50b52ffa9c65d79e2c17f95"
+    integrity sha512-zygDshqDb2C2/kgfoD423n5htv/3OBF7aTaz2u2zZy998EJki8njOHOeZjKEd8XSYeDziIX1JXfMsKaIRJeJ/Q==
   
   uri-js@^4.2.2:
     version "4.4.1"
