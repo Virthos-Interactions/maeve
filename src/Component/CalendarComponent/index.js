@@ -8,12 +8,12 @@ import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
 
 let handleAddEvent = null;
-let eventBackgroundColourMatch = new Map()
+let eventBackgroundColorMatch = new Map()
 let eventBorderLeftMatch = new Map()
 
-eventBackgroundColourMatch["Pending"] = '#93badb'
+eventBackgroundColorMatch["Pending"] = '#93badb'
 eventBorderLeftMatch["Pending"] = '6px solid #525866'
-eventBackgroundColourMatch["Confirmed"] = '#68aae2'
+eventBackgroundColorMatch["Confirmed"] = '#68aae2'
 eventBorderLeftMatch["Confirmed"] = '6px solid #3867d6'
 
 
@@ -32,7 +32,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
          customer: event.info.customer.firstName,
          note: event.info.information,
          customerNumber: event.info.customer.mobileNumber,
-         backgroundColor: eventBackgroundColourMatch[event.info.confirmationStatus ?? "Pending"],
+         backgroundColor: eventBackgroundColorMatch[event.info.confirmationStatus ?? "Pending"],
          boderLeft: eventBorderLeftMatch[event.info.confirmationStatus ?? "Pending"]
       }
    });
@@ -40,7 +40,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
    const eventStyleGetter = (event, start, end, isSelected) => {
       return {
          style: {
-            backgroundColor: event.colour,
+            backgroundColor: event.backgroundColor,
             border: 0,
             borderLeft: event.boderLeft,
             color: '#fff',
