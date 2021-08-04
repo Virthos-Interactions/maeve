@@ -20,9 +20,6 @@ eventBorderLeftMatch["Confirmed"] = '6px solid #3867d6'
 export default function CalendarComponent({ addEvent, dblClick, events, newEvent }) {
    moment.locale('pt-br');
 
-
-
-
    const formatedEvents = events.map(event => {
       return {
          title: event.info.craft.name,
