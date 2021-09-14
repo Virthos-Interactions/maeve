@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment'; 
+import moment from 'moment';
 import { Calendar, momentLocalizer, Views, Navigate } from 'react-big-calendar';
 import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/pt-br';
