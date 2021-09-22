@@ -6,16 +6,9 @@ import 'moment/locale/pt-br';
 import './style.css';
 import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
+const appointmentStatus = require('./AppointmentStatus')
 
 let handleAddEvent = null;
-let eventBackgroundColorMatch = new Map()
-let eventBorderLeftMatch = new Map()
-
-eventBackgroundColorMatch["Pending"] = '#93badb'
-eventBorderLeftMatch["Pending"] = '6px solid #525866'
-eventBackgroundColorMatch["Confirmed"] = '#68aae2'
-eventBorderLeftMatch["Confirmed"] = '6px solid #3867d6'
-
 
 export default function CalendarComponent({ addEvent, dblClick, events, newEvent }) {
    moment.locale('pt-br');
@@ -29,8 +22,7 @@ export default function CalendarComponent({ addEvent, dblClick, events, newEvent
          customer: event.info.customer.firstName,
          note: event.info.information,
          customerNumber: event.info.customer.mobileNumber,
-         backgroundColor: eventBackgroundColorMatch[event.info.confirmationStatus ?? "Pending"],
-         boderLeft: eventBorderLeftMatch[event.info.confirmationStatus ?? "Pending"]
+         ... getEventStyle(event)
       }
    });
 
@@ -121,5 +113,15 @@ class CustomToolbar extends Toolbar {
             </div>
          </div>
       );
+   }
+}
+
+function getEventStyle(event){
+
+   let eventInfo = appointmentStatus.find( _ => _.code == event.info.status.code) ?? appointmentStatus.find( _ => _.isUndefined )
+   
+   return {
+      backgroundColor: eventInfo.eventBackgroundColor,
+      boderLeft: eventInfo.eventBorderLeft
    }
 }
